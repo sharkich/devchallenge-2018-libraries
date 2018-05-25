@@ -1,11 +1,13 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatAutocompleteModule, MatCardModule, MatInputModule, MatToolbarModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {AppComponent} from './app.component';
 import {LibrariesService} from './-shared/services/libraries.service';
 import {BooksService} from './-shared/services/books.service';
-import {MatToolbarModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -14,8 +16,14 @@ import {MatToolbarModule} from '@angular/material';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
 
-    MatToolbarModule
+    MatCardModule,
+    MatToolbarModule,
+    MatAutocompleteModule,
+    MatInputModule
   ],
   providers: [
     LibrariesService,
