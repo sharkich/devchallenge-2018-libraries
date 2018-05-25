@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpModule} from '@angular/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatAutocompleteModule, MatButtonModule, MatCardModule, MatInputModule, MatToolbarModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -21,7 +21,7 @@ import {PopularBooksComponent} from './popular-books/popular-books.component';
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpClientModule,
+    HttpModule,
     ReactiveFormsModule,
 
     MatCardModule,

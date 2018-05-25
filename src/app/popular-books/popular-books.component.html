@@ -1,15 +1,14 @@
 <div class="app-popular-books">
 
-  <mat-card>
+  <mat-card *ngFor="let book of books;">
 
     <mat-card-title-group>
-      <mat-card-title>JavaScript для детей. Самоучитель по программированию</mat-card-title>
-      <mat-card-subtitle>Ник Морган</mat-card-subtitle>
-      <!--<img mat-card-md-image src="https://kniga.biz.ua/images/all/6453_b.jpg">-->
+      <mat-card-title>{{book.name}}</mat-card-title>
+      <mat-card-subtitle>{{book.author}}</mat-card-subtitle>
     </mat-card-title-group>
 
     <mat-card-content>
-      <img mat-card-image src="https://kniga.biz.ua/images/all/6453_b.jpg">
+      <img mat-card-image [src]="book.thumbnail">
       Available in
     </mat-card-content>
 
