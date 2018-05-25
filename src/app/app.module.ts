@@ -3,6 +3,9 @@ import {NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {AppComponent} from './app.component';
+import {LibrariesService} from './-shared/services/libraries.service';
+import {BooksService} from './-shared/services/books.service';
+import {MatToolbarModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -10,9 +13,14 @@ import {AppComponent} from './app.component';
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+
+    MatToolbarModule
   ],
-  providers: [],
+  providers: [
+    LibrariesService,
+    BooksService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

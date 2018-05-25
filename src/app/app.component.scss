@@ -1,0 +1,12 @@
+.app-root {
+  .title, .login {
+    min-width: 190px;
+  }
+  .space {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+  .login {
+    text-align: right;
+  }
+}
