@@ -1,0 +1,106 @@
+[
+  {
+    "id": "id-book-1",
+    "name": "JavaScript для детей. Самоучитель по программированию",
+    "author": "Ник Морган",
+    "year": 2016,
+    "ISBN": "978-5-00100-295-6",
+    "thumbnail": "https://kniga.biz.ua/images/all/6453_b.jpg"
+  },
+  {
+    "id": "id-book-2",
+    "name": "7 звичок надзвичайно ефективних людей",
+    "author": "Стивен Кови (Stephen Covey)",
+    "year": 2014,
+    "ISBN": "978-966-14-2945-0",
+    "thumbnail": "https://kniga.biz.ua/images/all/5126_b.jpg"
+  },
+  {
+    "id": "id-book-3",
+    "name": "Iгри, у якi грають люди. Світовий бестселер із психології стосунків",
+    "author": "Эрик Берн",
+    "year": 256,
+    "ISBN": "978-617-120-454-6",
+    "thumbnail": "https://kniga.biz.ua/images/all/5879_b.jpg"
+  },
+  {
+    "id": "id-book-4",
+    "name": "Історія Starbucks. Все почалося з чашки кави...",
+    "author": "Говард Шульц, Джоанна Гордон",
+    "year": 2017,
+    "ISBN": "978-617-7388-73-8",
+    "thumbnail": "https://kniga.biz.ua/images/all/6993_b.jpg"
+  },
+  {
+    "id": "id-book-5",
+    "name": "Від нуля до одиниці!",
+    "author": "Питер Тиль",
+    "year": 2015,
+    "ISBN": "978-617-7279-14-2",
+    "thumbnail": "https://kniga.biz.ua/images/all/5595_b.jpg"
+  },
+  {
+    "id": "id-book-6",
+    "name": "Дика гонка. Як Uber підкорював світ",
+    "author": "Адам Лашински",
+    "year": 2017,
+    "ISBN": "978-617-7544-01-1",
+    "thumbnail": "https://kniga.biz.ua/images/all/7407_b.jpg"
+  },
+  {
+    "id": "id-book-7",
+    "name": "Компанії майбутнього",
+    "author": "Фредерик Лалу",
+    "year": 2017,
+    "ISBN": "978-617-12-2469-8",
+    "thumbnail": "https://kniga.biz.ua/images/all/6772_b.jpg"
+  },
+  {
+    "id": "id-book-8",
+    "name": "Культ предків. Нетуристичні звичаї України",
+    "author": "Наталья Фицич",
+    "year": 2017,
+    "ISBN": "978-966-03-7958-9",
+    "thumbnail": "https://kniga.biz.ua/images/all/7552_b.jpg"
+  },
+  {
+    "id": "id-book-9",
+    "name": "Кримінальний кодекс України",
+    "author": "Анна Копылова, Никита Кравцов",
+    "year": 2016,
+    "ISBN": "978-966-500-780-7",
+    "thumbnail": "https://kniga.biz.ua/images/all/6097_b.jpg"
+  },
+  {
+    "id": "id-book-10",
+    "name": "Продається все. Джефф Безос та ера Amazon",
+    "author": "Брэд Стоун (Brad Stone)",
+    "year": 2017,
+    "ISBN": "978-617-7552-03-0",
+    "thumbnail": "https://kniga.biz.ua/images/all/6420_b.jpg"
+  },
+  {
+    "id": "id-book-11",
+    "name": "Успішні виступи TED. Рецепти від найкращих спікерів",
+    "author": "Крис Андерсон",
+    "year": 2016,
+    "ISBN": "978-617-7279-80-7",
+    "thumbnail": "https://kniga.biz.ua/images/all/6651_b.jpg"
+  },
+  {
+    "id": "id-book-12",
+    "name": "Харизма лідера. Феномен харизми від А до Я",
+    "author": "Радислав Гандапас",
+    "year": 2017,
+    "ISBN": "978-617-577-119-8",
+    "thumbnail": "https://kniga.biz.ua/images/all/7487_b.jpg"
+  },
+  {
+    "id": "id-book-13",
+    "name": "Чорний лебідь. Про (не)ймовірне у реальному житті",
+    "author": "	Нассим Николас Талеб (Nassim Nicholas Taleb)",
+    "year": 2017,
+    "ISBN": "978-617-7279-56-2",
+    "thumbnail": "https://kniga.biz.ua/images/all/5869_b.jpg"
+  }
+]
