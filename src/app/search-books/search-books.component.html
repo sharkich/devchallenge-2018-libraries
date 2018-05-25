@@ -1,0 +1,28 @@
+<div class="app-search-books">
+  <form class="search-form">
+    <mat-form-field class="full-width">
+
+      <input
+        type="text"
+        placeholder="Search books in libraries"
+        aria-label="Number"
+        matInput
+        [formControl]="myControl"
+        [matAutocomplete]="auto">
+
+      <mat-autocomplete
+        autoActiveFirstOption
+        #auto="matAutocomplete">
+
+        <mat-option
+          *ngFor="let option of filteredOptions | async"
+          [value]="option">
+          <img src="/assets/ukraine_now_logo.png" height="10" alt="">
+          {{ option }}
+        </mat-option>
+
+      </mat-autocomplete>
+
+    </mat-form-field>
+  </form>
+</div>

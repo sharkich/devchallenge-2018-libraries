@@ -1,6 +1,13 @@
 .app-root {
   .title, .login {
-    min-width: 190px;
+    min-width: 300px;
+  }
+  .title {
+    display: flex;
+
+    span {
+      line-height: 48px;
+    }
   }
   .space {
     flex: 1 1 auto;
@@ -10,13 +17,8 @@
     text-align: right;
   }
 
-  .search-form {
-    min-width: 350px;
-    width: 100%;
-
-    .full-width {
-      width: 100%;
-    }
+  .mat-card {
+    margin-bottom: 24px;
   }
 
 }
