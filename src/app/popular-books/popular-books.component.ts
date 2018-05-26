@@ -15,7 +15,7 @@ export class PopularBooksComponent implements OnInit {
 
   ngOnInit() {
     this.booksService.list()
-      .then((books) => {
+      .then((books: BooksModel[]) => {
         this.books = books;
       });
   }

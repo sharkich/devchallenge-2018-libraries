@@ -4,7 +4,9 @@
 
   <div class="books">
 
-    <mat-card *ngFor="let book of books;" class="book"><!--  book--not-available -->
+    <mat-card
+      *ngFor="let book of books"
+      class="book"><!--  book--not-available -->
 
       <mat-card-content>
         <img mat-card-image [src]="book.thumbnail">
@@ -16,8 +18,8 @@
           <!--Not available in libraries-->
           <!--</div>-->
           <div class="available">
-            Available in 2 libraries.<br>
-            The nearest is 2 kilometers away.
+            Available in <b>2</b> libraries.<br>
+            <i>The nearest is <b>5 km</b> away.</i>
           </div>
         </div>
 

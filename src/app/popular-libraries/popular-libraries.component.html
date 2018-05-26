@@ -1,0 +1,22 @@
+<div class="app-popular-libraries">
+
+  <h2>Libraries</h2>
+
+  <div class="libraries">
+
+    <mat-expansion-panel *ngFor="let library of libraries">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{library.name}}</mat-panel-title>
+        <mat-panel-description>
+          {{library.address}}
+          <i><b>2 km</b> to you</i>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <p>This is the primary content of the panel.</p>
+
+    </mat-expansion-panel>
+
+  </div>
+
+</div>
