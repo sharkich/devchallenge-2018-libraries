@@ -18,13 +18,15 @@ import {BooksService} from './-shared/services/books.service';
 import {SearchBooksComponent} from './search-books/search-books.component';
 import {PopularBooksComponent} from './popular-books/popular-books.component';
 import {PopularLibrariesComponent} from './popular-libraries/popular-libraries.component';
+import { BookComponent } from './-shared/components/book/book.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchBooksComponent,
     PopularBooksComponent,
-    PopularLibrariesComponent
+    PopularLibrariesComponent,
+    BookComponent
   ],
   imports: [
     BrowserModule,

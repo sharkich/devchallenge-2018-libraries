@@ -1,41 +1,12 @@
 <div class="app-popular-books">
 
-  <h2>Books</h2>
+  <h2>Available Books</h2>
 
   <div class="books">
 
-    <mat-card
+    <app-book
       *ngFor="let book of books"
-      class="book"><!--  book--not-available -->
-
-      <mat-card-content>
-        <img mat-card-image [src]="book.thumbnail">
-        <mat-card-subtitle>{{book.author}}</mat-card-subtitle>
-        <mat-card-title>{{book.name}}</mat-card-title>
-
-        <div class="book-availability">
-          <!--<div class="not-available">-->
-          <!--Not available in libraries-->
-          <!--</div>-->
-          <div class="available">
-            Available in <b>2</b> libraries.<br>
-            <i>The nearest is <b>5 km</b> away.</i>
-          </div>
-        </div>
-
-      </mat-card-content>
-
-      <mat-card-actions>
-
-        <button
-          mat-raised-button
-          color="primary"
-          type="button">
-          book a book
-        </button>
-
-      </mat-card-actions>
-    </mat-card>
+      [book]="book"></app-book>
 
   </div>
 
