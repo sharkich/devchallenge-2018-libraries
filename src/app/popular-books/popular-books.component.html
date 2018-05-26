@@ -1,27 +1,40 @@
 <div class="app-popular-books">
 
-  <mat-card *ngFor="let book of books;">
+  <h2>Books</h2>
 
-    <mat-card-title-group>
-      <mat-card-title>{{book.name}}</mat-card-title>
-      <mat-card-subtitle>{{book.author}}</mat-card-subtitle>
-    </mat-card-title-group>
+  <div class="books">
 
-    <mat-card-content>
-      <img mat-card-image [src]="book.thumbnail">
-      Available in
-    </mat-card-content>
+    <mat-card *ngFor="let book of books;" class="book"><!--  book--not-available -->
 
-    <mat-card-actions>
+      <mat-card-content>
+        <img mat-card-image [src]="book.thumbnail">
+        <mat-card-subtitle>{{book.author}}</mat-card-subtitle>
+        <mat-card-title>{{book.name}}</mat-card-title>
 
-      <button
-        mat-raised-button
-        color="primary"
-        type="button">
-        book a book
-      </button>
+        <div class="book-availability">
+          <!--<div class="not-available">-->
+          <!--Not available in libraries-->
+          <!--</div>-->
+          <div class="available">
+            Available in 2 libraries.<br>
+            The nearest is 2 kilometers away.
+          </div>
+        </div>
 
-    </mat-card-actions>
-  </mat-card>
+      </mat-card-content>
+
+      <mat-card-actions>
+
+        <button
+          mat-raised-button
+          color="primary"
+          type="button">
+          book a book
+        </button>
+
+      </mat-card-actions>
+    </mat-card>
+
+  </div>
 
 </div>

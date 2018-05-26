@@ -1,21 +1,33 @@
 .app-popular-books {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
 
-  .mat-card {
-    width: 164px;
-    margin-bottom: 24px;
+  .books {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 
-    .mat-card-title {
-      font-size: 11pt;
-      font-weight: bold;
+    .book {
+      width: 164px;
+      margin-bottom: 24px;
+
+      .mat-card-title {
+        font-size: 11pt;
+        font-weight: bold;
+      }
+
+      .book-availability {
+        margin-top: 8px;
+        font-size: 8pt;
+
+        .not-available {
+          color: #666;
+        }
+      }
+
+      &--not-available {
+        opacity: 0.5;
+      }
+
     }
-
-    .mat-card-image:first-child {
-      margin-top: -14px;
-    }
-
   }
 
 }

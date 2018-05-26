@@ -8,10 +8,14 @@ export class BooksService {
 
   constructor(private http: Http) { }
 
-  public list(): Promise<BooksModel[]> {
+  public list(limit: number = 10): Promise<BooksModel[]> {
     return this.http.get('/assets/books.json')
       .toPromise()
-      .then((res: Response) => res.json())
-      .then((res: any[]) => res.map((obj) => new BooksModel(obj)));
+      .then((res: any) => {
+        const arr: any[] = res.json();
+        let books: BooksModel[] = arr.map((obj) => new BooksModel(obj));
+        books = books.splice(0, limit);
+        return books;
+      });
   }
 }
