@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 
 export interface IPoint {
   latitude: number;
@@ -48,7 +48,6 @@ export class GeolocationService {
   }
 
   private successGeo(position) {
-    console.log('position', position);
     this.currentPosition = position;
     console.log('currentPosition', this.currentPosition);
   }

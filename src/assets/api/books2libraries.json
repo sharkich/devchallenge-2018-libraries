@@ -8,7 +8,13 @@
   {
     "bookId": "id-book-1",
     "libraryId": "id-lib-1",
-    "status": "RENTED",
+    "status": "FREE",
+    "rentTime": ""
+  },
+  {
+    "bookId": "id-book-3",
+    "libraryId": "id-lib-3",
+    "status": "FREE",
     "rentTime": ""
   }
 ]
