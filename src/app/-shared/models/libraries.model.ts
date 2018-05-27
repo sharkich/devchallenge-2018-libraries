@@ -1,3 +1,5 @@
+import {IPoint} from '../services/geolocation.service';
+
 const uuid = require('uuid/v1');
 
 /**
@@ -8,15 +10,17 @@ export class LibrariesModel {
   public id: string;
   public name: string;
   public address: string;
-  public N: number;
-  public E: number;
+  public geo: IPoint = {
+    latitude: null,
+    longitude: null
+  };
 
   constructor(data: any = {}) {
     this.id = data['id'] ? '' + data['id'] : uuid();
     this.name = data['name'] ? '' + data['name'] : '';
     this.address = data['address'] ? '' + data['address'] : '';
-    this.N = data['N'] ? +data['N'] : 0;
-    this.E = data['E'] ? +data['E'] : 0;
+    this.geo.latitude = data['latitude'] ? +data['latitude'] : 0;
+    this.geo.longitude = data['longitude'] ? +data['longitude'] : 0;
   }
 
 }

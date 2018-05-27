@@ -6,12 +6,18 @@
     <mat-card-title>{{book.name}}</mat-card-title>
 
     <div class="book-availability">
-      <!--<div class="not-available">-->
-      <!--Not available in libraries-->
-      <!--</div>-->
-      <div class="available">
+      <div
+        *ngIf="false"
+        class="not-available">
+        Not available in libraries
+      </div>
+      <div
+        *ngIf="true"
+        class="available">
         Available in <b>2</b> libraries.<br>
-        <i>The nearest is <b>5 km</b> away.</i>
+        <i *ngIf="isGeoSupported">
+          The nearest is <b>5 km</b> away.
+        </i>
       </div>
     </div>
 

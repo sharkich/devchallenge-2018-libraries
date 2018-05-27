@@ -18,7 +18,8 @@ import {BooksService} from './-shared/services/books.service';
 import {SearchBooksComponent} from './search-books/search-books.component';
 import {PopularBooksComponent} from './popular-books/popular-books.component';
 import {PopularLibrariesComponent} from './popular-libraries/popular-libraries.component';
-import { BookComponent } from './-shared/components/book/book.component';
+import {BookComponent} from './-shared/components/book/book.component';
+import {GeolocationService} from './-shared/services/geolocation.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { BookComponent } from './-shared/components/book/book.component';
   ],
   providers: [
     LibrariesService,
-    BooksService
+    BooksService,
+    GeolocationService
   ],
   bootstrap: [AppComponent]
 })

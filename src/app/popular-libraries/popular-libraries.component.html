@@ -9,7 +9,9 @@
         <mat-panel-title>{{library.name}}</mat-panel-title>
         <mat-panel-description>
           {{library.address}}
-          <i><b>2 km</b> to you</i>
+          <i *ngIf="isGeoSupported">
+            <b>{{distance(library) | number : '1.2-2'}} km</b> away
+          </i>
         </mat-panel-description>
       </mat-expansion-panel-header>
 
