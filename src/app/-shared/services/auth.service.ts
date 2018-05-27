@@ -1,12 +1,15 @@
 import {Injectable} from '@angular/core';
 const uuid = require('uuid/v1');
 
+const TOKEN = 'KL_UA.token';
+
 @Injectable()
 export class AuthService {
 
   private _token: string;
 
   constructor() {
+    this._token = window.localStorage.getItem(TOKEN) || null;
   }
 
   public isLogin(): boolean {
@@ -15,6 +18,7 @@ export class AuthService {
 
   public signin(): Promise<any> {
     this._token = uuid();
+    window.localStorage.setItem(TOKEN, this._token);
     return Promise.resolve();
   }
 
