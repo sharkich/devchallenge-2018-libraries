@@ -1,0 +1,40 @@
+<div class="app-dialog-login">
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSignIn()">
+
+    <h1 mat-dialog-title>Sign in</h1>
+
+    <div mat-dialog-content>
+
+
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          placeholder="Login"
+          formControlName="loginFormControl">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input
+          matInput placeholder="Password"
+          type="password"
+          formControlName="passwordFormControl">
+      </mat-form-field>
+
+
+    </div>
+
+    <div mat-dialog-actions>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit">
+        Log In
+      </button>
+      <div class="space"></div>
+      <button mat-button (click)="onNoClick()">No Thanks</button>
+    </div>
+
+  </form>
+
+</div>

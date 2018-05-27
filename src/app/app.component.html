@@ -11,7 +11,17 @@
       <img src="/assets/ukraine_now_logo.png" height="50" alt="Ukraine">
     </span>
 
-    <span class="login">Login</span>
+    <div class="login">
+      <button
+        *ngIf="!isLogin()"
+        mat-raised-button
+        (click)="onSignIn()">Sign in</button>
+      <button
+        *ngIf="isLogin()"
+        mat-raised-button
+        color="primary"
+        (click)="onSignOut()">Sign out</button>
+    </div>
   </mat-toolbar>
 
   <mat-card>

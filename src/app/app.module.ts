@@ -5,7 +5,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
   MatAutocompleteModule,
   MatButtonModule,
-  MatCardModule,
+  MatCardModule, MatDialogModule,
   MatExpansionModule,
   MatInputModule,
   MatToolbarModule
@@ -20,6 +20,8 @@ import {PopularBooksComponent} from './popular-books/popular-books.component';
 import {PopularLibrariesComponent} from './popular-libraries/popular-libraries.component';
 import {BookComponent} from './-shared/components/book/book.component';
 import {GeolocationService} from './-shared/services/geolocation.service';
+import {DialogLoginComponent} from './-shared/components/dialog-login/dialog-login.component';
+import {AuthService} from './-shared/services/auth.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import {GeolocationService} from './-shared/services/geolocation.service';
     SearchBooksComponent,
     PopularBooksComponent,
     PopularLibrariesComponent,
-    BookComponent
+    BookComponent,
+    DialogLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -41,12 +44,17 @@ import {GeolocationService} from './-shared/services/geolocation.service';
     MatAutocompleteModule,
     MatInputModule,
     MatButtonModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDialogModule
   ],
   providers: [
     LibrariesService,
     BooksService,
-    GeolocationService
+    GeolocationService,
+    AuthService
+  ],
+  entryComponents: [
+    DialogLoginComponent
   ],
   bootstrap: [AppComponent]
 })

@@ -28,7 +28,7 @@ export class LibrariesModel {
     this.geo.longitude = data['longitude'] ? +data['longitude'] : 0;
   }
 
-  public get books(): BooksModel[] {
+  public get books(): Books2librariesModel[] {
     return this._books;
   }
 
