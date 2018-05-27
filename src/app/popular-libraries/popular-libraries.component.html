@@ -4,6 +4,7 @@
     Libraries
     <button
       *ngIf="isLogin()"
+      (click)="onAddNewLibrary()"
       mat-raised-button
       color="accent">
       <i class="material-icons">add</i> Add new
@@ -29,6 +30,7 @@
 
         <button
           *ngIf="isLogin()"
+          (click)="onEditLibrary(library)"
           mat-raised-button
           color="accent">
           <i class="material-icons">edit</i> Edit

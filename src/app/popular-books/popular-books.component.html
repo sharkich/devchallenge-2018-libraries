@@ -4,6 +4,7 @@
     Books
     <button
       *ngIf="isLogin()"
+      (click)="onAddNewBook()"
       mat-raised-button
       color="accent">
       <i class="material-icons">add</i> Add new

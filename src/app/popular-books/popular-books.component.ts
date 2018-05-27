@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {BooksService} from '../-shared/services/books.service';
 import {BooksModel} from '../-shared/models/books.model';
 import {AuthService} from '../-shared/services/auth.service';
+import {MatDialog} from '@angular/material';
+import {DialogBookComponent} from '../-shared/components/dialog-book/dialog-book.component';
 
 @Component({
   selector: 'app-popular-books',
@@ -14,7 +16,8 @@ export class PopularBooksComponent implements OnInit {
 
   constructor(
     private booksService: BooksService,
-    public authService: AuthService) { }
+    public authService: AuthService,
+    public dialog: MatDialog) { }
 
   ngOnInit() {
     this.booksService.list()
@@ -25,6 +28,19 @@ export class PopularBooksComponent implements OnInit {
 
   public isLogin(): boolean {
     return this.authService.isLogin();
+  }
+
+  public onAddNewBook() {
+    const dialogRef = this.dialog.open(DialogBookComponent, {
+      width: '650px',
+      data: {
+        book: new BooksModel()
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed', result);
+    });
   }
 
 }

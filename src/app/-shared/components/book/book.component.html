@@ -26,6 +26,7 @@
   <mat-card-actions>
 
     <button
+      (click)="onBookBook(book)"
       mat-raised-button
       color="primary"
       type="button">
@@ -36,6 +37,7 @@
 
     <button
       *ngIf="isLogin()"
+      (click)="onEditBook(book)"
       mat-raised-button
       color="accent">
       <i class="material-icons">edit</i>
