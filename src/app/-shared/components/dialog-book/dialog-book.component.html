@@ -1,13 +1,57 @@
 <div class="app-dialog-book">
 
-  <h1 mat-dialog-title>Book</h1>
+  <form
+    [formGroup]="bookForm"
+    (ngSubmit)="onSaveBook()">
 
-  <div mat-dialog-content>
-    app-dialog-book
-  </div>
+    <h1 mat-dialog-title>Book</h1>
 
-  <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">No Thanks</button>
-  </div>
+    <div mat-dialog-content>
+
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          placeholder="Name"
+          formControlName="nameFormControl">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input
+          matInput placeholder="Author"
+          formControlName="authorFormControl">
+      </mat-form-field>
+
+      <mat-form-field class="half-width">
+        <input
+          matInput placeholder="Year"
+          formControlName="yearFormControl">
+      </mat-form-field>
+
+      <mat-form-field class="half-width">
+        <input
+          matInput placeholder="ISBN"
+          formControlName="isbnFormControl">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input
+          matInput placeholder="Image"
+          formControlName="thumbnailFormControl">
+      </mat-form-field>
+
+    </div>
+
+    <div mat-dialog-actions>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit">
+        Save
+      </button>
+      <div class="space"></div>
+      <button mat-button (click)="onNoClick()">No Thanks</button>
+    </div>
+
+  </form>
 
 </div>

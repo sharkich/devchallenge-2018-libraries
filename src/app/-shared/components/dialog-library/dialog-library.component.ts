@@ -12,7 +12,6 @@ import {LibrariesModel} from '../../models/libraries.model';
 export class DialogLibraryComponent implements OnInit {
 
   private library: LibrariesModel;
-
   public libraryForm: FormGroup;
 
   constructor(
@@ -40,7 +39,7 @@ export class DialogLibraryComponent implements OnInit {
     this.library.address = this.libraryForm.controls.addressFormControl.value;
     this.library.geo.latitude = this.libraryForm.controls.latitudeFormControl.value;
     this.library.geo.longitude = this.libraryForm.controls.longitudeFormControl.value;
-    console.log('save', this.library, this.libraryForm);
+    console.log('save', this.library);
   }
 
   public onNoClick() {
