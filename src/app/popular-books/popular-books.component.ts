@@ -16,8 +16,8 @@ export class PopularBooksComponent implements OnInit {
 
   constructor(
     private booksService: BooksService,
-    public authService: AuthService,
-    public dialog: MatDialog) { }
+    private authService: AuthService,
+    private dialog: MatDialog) { }
 
   ngOnInit() {
     this.booksService.list()

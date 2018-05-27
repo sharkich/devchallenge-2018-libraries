@@ -10,21 +10,21 @@ import {map, startWith} from 'rxjs/operators';
 })
 export class SearchBooksComponent implements OnInit {
 
-  myControl: FormControl = new FormControl();
-  options = ['One', 'Two', 'Three'];
-  filteredOptions: Observable<string[]>;
+  public myControl: FormControl = new FormControl();
+  public options = ['One', 'Two', 'Three'];
+  public filteredOptions: Observable<string[]>;
 
   constructor() {
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(val => this.filter(val))
     );
   }
 
-  filter(val: string): string[] {
+  public filter(val: string): string[] {
     return this.options.filter(option => option.toLowerCase().indexOf(val.toLowerCase()) === 0);
   }
 

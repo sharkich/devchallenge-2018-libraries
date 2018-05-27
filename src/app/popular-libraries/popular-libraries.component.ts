@@ -22,7 +22,7 @@ export class PopularLibrariesComponent implements OnInit {
     public dialog: MatDialog) {
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.librariesService.list()
       .then((libraries: LibrariesModel[]) => {
         this.libraries = libraries;
@@ -34,7 +34,7 @@ export class PopularLibrariesComponent implements OnInit {
     return this.authService.isLogin();
   }
 
-  get isGeoSupported(): boolean {
+  public get isGeoSupported(): boolean {
     return this.geolocationService.isSupported();
   }
 

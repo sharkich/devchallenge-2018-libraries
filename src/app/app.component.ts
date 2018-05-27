@@ -11,8 +11,8 @@ import {AuthService} from './-shared/services/auth.service';
 export class AppComponent {
 
   constructor(
-    public dialog: MatDialog,
-    public authService: AuthService
+    private dialog: MatDialog,
+    private authService: AuthService
   ) {
   }
 
@@ -28,7 +28,7 @@ export class AppComponent {
     });
   }
 
-  onSignOut() {
+  public onSignOut() {
     this.authService.signout();
   }
 

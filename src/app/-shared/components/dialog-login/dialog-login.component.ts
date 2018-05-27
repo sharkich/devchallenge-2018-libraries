@@ -29,19 +29,20 @@ export class DialogLoginComponent implements OnInit {
     ])
   });
 
-  constructor(private authService: AuthService,
-    public dialogRef: MatDialogRef<DialogLoginComponent>
+  constructor(
+    private authService: AuthService,
+    private dialogRef: MatDialogRef<DialogLoginComponent>
   ) {
   }
 
-  ngOnInit() {
+  public ngOnInit() {
   }
 
-  onNoClick() {
+  public onNoClick() {
     this.dialogRef.close();
   }
 
-  onSignIn() {
+  public onSignIn() {
     if (this.loginForm.invalid) {
       return;
     }

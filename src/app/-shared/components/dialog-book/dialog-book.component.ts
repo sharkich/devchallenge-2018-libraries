@@ -10,16 +10,16 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 export class DialogBookComponent implements OnInit {
 
   constructor(
-    public dialogRef: MatDialogRef<DialogLoginComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    private dialogRef: MatDialogRef<DialogLoginComponent>,
+    @Inject(MAT_DIALOG_DATA) private data: any
   ) {
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     console.log('data', this.data);
   }
 
-  onNoClick() {
+  public onNoClick() {
     this.dialogRef.close();
   }
 

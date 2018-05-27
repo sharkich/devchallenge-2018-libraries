@@ -1,13 +1,53 @@
 <div class="app-dialog-library">
 
-  <h1 mat-dialog-title>Library</h1>
+  <form
+    [formGroup]="libraryForm"
+    (ngSubmit)="onSaveLibrary()">
 
-  <div mat-dialog-content>
-    app-dialog-library
-  </div>
+    <h1 mat-dialog-title>Library</h1>
 
-  <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">No Thanks</button>
-  </div>
+    <div mat-dialog-content>
+
+
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          placeholder="Name"
+          formControlName="nameFormControl">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input
+          matInput placeholder="Address"
+          formControlName="addressFormControl">
+      </mat-form-field>
+
+      <mat-form-field class="half-width">
+        <input
+          matInput placeholder="Latitude"
+          formControlName="latitudeFormControl">
+      </mat-form-field>
+
+      <mat-form-field class="half-width">
+        <input
+          matInput placeholder="Longitude"
+          formControlName="longitudeFormControl">
+      </mat-form-field>
+
+
+    </div>
+
+    <div mat-dialog-actions>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit">
+        Save
+      </button>
+      <div class="space"></div>
+      <button mat-button (click)="onNoClick()">No Thanks</button>
+    </div>
+
+  </form>
 
 </div>

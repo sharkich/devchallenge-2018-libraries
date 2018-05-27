@@ -13,21 +13,21 @@ import {DialogBookingComponent} from '../dialog-booking/dialog-booking.component
 })
 export class BookComponent implements OnInit {
 
-  @Input() book: BooksModel;
+  @Input() public book: BooksModel;
 
   constructor(
     private geolocationService: GeolocationService,
     private authService: AuthService,
     public dialog: MatDialog) { }
 
-  ngOnInit() {
+  public ngOnInit() {
   }
 
   public isLogin(): boolean {
     return this.authService.isLogin();
   }
 
-  get isGeoSupported(): boolean {
+  public get isGeoSupported(): boolean {
     return this.geolocationService.isSupported();
   }
 
