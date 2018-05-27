@@ -24,6 +24,7 @@ export class AuthService {
 
   public signout(): Promise<any> {
     this._token = null;
+    window.localStorage.removeItem(TOKEN);
     return Promise.resolve();
   }
 }
