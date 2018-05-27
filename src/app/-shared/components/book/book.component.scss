@@ -1,5 +1,5 @@
 .app-book {
-  width: 164px;
+  width: 180px;
   margin-bottom: 24px;
 
   .mat-card-title {
@@ -18,6 +18,14 @@
 
   &--not-available {
     opacity: 0.5;
+  }
+
+  .mat-card-actions {
+    display: flex;
+  }
+
+  .space {
+    flex: 1 1 auto;
   }
 
 }

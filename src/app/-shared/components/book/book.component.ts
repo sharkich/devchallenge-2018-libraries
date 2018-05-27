@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {BooksModel} from '../../models/books.model';
 import {GeolocationService} from '../../services/geolocation.service';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-book',
@@ -11,9 +12,15 @@ export class BookComponent implements OnInit {
 
   @Input() book: BooksModel;
 
-  constructor(private geolocationService: GeolocationService) { }
+  constructor(
+    private geolocationService: GeolocationService,
+    public authService: AuthService) { }
 
   ngOnInit() {
+  }
+
+  public isLogin(): boolean {
+    return this.authService.isLogin();
   }
 
   get isGeoSupported(): boolean {

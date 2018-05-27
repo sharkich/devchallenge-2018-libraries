@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {LibrariesModel} from '../-shared/models/libraries.model';
 import {LibrariesService} from '../-shared/services/libraries.service';
 import {GeolocationService} from '../-shared/services/geolocation.service';
+import {AuthService} from '../-shared/services/auth.service';
 
 @Component({
   selector: 'app-popular-libraries',
@@ -14,7 +15,8 @@ export class PopularLibrariesComponent implements OnInit {
 
   constructor(
     private librariesService: LibrariesService,
-    private geolocationService: GeolocationService) {
+    private geolocationService: GeolocationService,
+    public authService: AuthService) {
   }
 
   ngOnInit() {
@@ -23,6 +25,10 @@ export class PopularLibrariesComponent implements OnInit {
         this.libraries = libraries;
         return this.librariesService.books2libraries(this.libraries);
       });
+  }
+
+  public isLogin(): boolean {
+    return this.authService.isLogin();
   }
 
   get isGeoSupported(): boolean {

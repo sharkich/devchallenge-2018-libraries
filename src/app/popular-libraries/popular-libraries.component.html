@@ -1,23 +1,42 @@
 <div class="app-popular-libraries">
 
-  <h2>Libraries</h2>
+  <h2>
+    Libraries
+    <button
+      *ngIf="isLogin()"
+      mat-raised-button
+      color="accent">
+      <i class="material-icons">add</i> Add new
+    </button>
+  </h2>
 
   <div class="libraries">
 
-    <mat-expansion-panel *ngFor="let library of libraries">
-      <mat-expansion-panel-header>
-        <mat-panel-title>{{library.name}}</mat-panel-title>
-        <mat-panel-description>
-          {{library.address}}
-          <i *ngIf="isGeoSupported">
-            <b>{{distance(library) | number : '1.2-2'}} km</b> away
-          </i>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
+    <mat-accordion>
 
-      <p>This is the primary content of the panel.</p>
+      <mat-expansion-panel *ngFor="let library of libraries">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{library.name}}
+          </mat-panel-title>
+          <mat-panel-description>
+            {{library.address}}
+            <i *ngIf="isGeoSupported">
+              <b>{{distance(library) | number : '1.2-2'}} km</b> away
+            </i>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
 
-    </mat-expansion-panel>
+        <button
+          *ngIf="isLogin()"
+          mat-raised-button
+          color="accent">
+          <i class="material-icons">edit</i> Edit
+        </button>
+
+      </mat-expansion-panel>
+
+    </mat-accordion>
 
   </div>
 

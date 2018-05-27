@@ -1,6 +1,14 @@
 <div class="app-popular-books">
 
-  <h2>Available Books</h2>
+  <h2>
+    Books
+    <button
+      *ngIf="isLogin()"
+      mat-raised-button
+      color="accent">
+      <i class="material-icons">add</i> Add new
+    </button>
+  </h2>
 
   <div class="books">
 

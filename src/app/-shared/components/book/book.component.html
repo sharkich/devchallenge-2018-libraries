@@ -32,5 +32,14 @@
       book a book
     </button>
 
+    <div class="space"></div>
+
+    <button
+      *ngIf="isLogin()"
+      mat-raised-button
+      color="accent">
+      <i class="material-icons">edit</i>
+    </button>
+
   </mat-card-actions>
 </mat-card>
