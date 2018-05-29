@@ -19,7 +19,7 @@ export class DialogBookingComponent implements OnInit {
     console.log('data', this.data);
   }
 
-  public onNoClick() {
+  public onCancel() {
     this.dialogRef.close();
   }
 

@@ -46,13 +46,21 @@ export class DialogBookComponent implements OnInit {
 
     this.booksService.save(this.book)
       .then((savedBook: BooksModel) => {
+        const isNew = this.book.isNew;
         this.book = savedBook;
-        this.dialogRef.close(savedBook);
+        this.dialogRef.close(isNew); // Refresh list or don't
       });
   }
 
-  public onNoClick() {
+  public onCancel() {
     this.dialogRef.close();
+  }
+
+  public onDelete() {
+    this.booksService.delete(this.book)
+      .then(() => {
+        this.dialogRef.close(true); // Refresh list
+      });
   }
 
 }

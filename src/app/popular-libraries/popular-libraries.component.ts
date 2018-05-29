@@ -61,9 +61,8 @@ export class PopularLibrariesComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe((changing) => {
-      console.log('changing', changing);
-      if (changing) {
+    dialogRef.afterClosed().subscribe((isReload) => {
+      if (isReload) {
         this.getList();
       }
     });

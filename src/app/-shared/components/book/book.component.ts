@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BooksModel} from '../../models/books.model';
 import {GeolocationService} from '../../services/geolocation.service';
 import {AuthService} from '../../services/auth.service';
@@ -14,6 +14,8 @@ import {DialogBookingComponent} from '../dialog-booking/dialog-booking.component
 export class BookComponent implements OnInit {
 
   @Input() public book: BooksModel;
+
+  @Output() private onDelete: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private geolocationService: GeolocationService,
@@ -32,10 +34,16 @@ export class BookComponent implements OnInit {
   }
 
   public onEditBook(book: BooksModel) {
-    this.dialog.open(DialogBookComponent, {
+    const dialogRef = this.dialog.open(DialogBookComponent, {
       width: '650px',
       data: {
         book
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((isReload) => {
+      if (isReload) {
+        this.onDelete.emit();
       }
     });
   }

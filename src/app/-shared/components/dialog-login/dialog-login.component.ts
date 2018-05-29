@@ -38,7 +38,7 @@ export class DialogLoginComponent implements OnInit {
   public ngOnInit() {
   }
 
-  public onNoClick() {
+  public onCancel() {
     this.dialogRef.close();
   }
 

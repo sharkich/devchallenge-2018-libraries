@@ -43,15 +43,15 @@ export class DialogLibraryComponent implements OnInit {
     this.library.geo.longitude = this.libraryForm.controls.longitudeFormControl.value;
 
     this.librariesService.save(this.library)
-      .then((savedLibrary) => {
-        const isNew = this.library;
+      .then((savedLibrary: LibrariesModel) => {
+        const isNew = this.library.isNew;
         this.library = savedLibrary;
         this.dialogRef.close(isNew); // Refresh list or don't
       });
 
   }
 
-  public onNoClick() {
+  public onCancel() {
     this.dialogRef.close();
   }
 

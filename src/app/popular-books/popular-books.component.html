@@ -15,7 +15,8 @@
 
     <app-book
       *ngFor="let book of books"
-      [book]="book"></app-book>
+      [book]="book"
+      (onDelete)="onDeleteBook()"></app-book>
 
   </div>
 

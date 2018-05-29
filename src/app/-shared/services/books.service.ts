@@ -27,4 +27,12 @@ export class BooksService {
       });
   }
 
+  public delete(book: BooksModel): Promise<any> {
+    return this.db.delete(APP_CONFIG.db.tables.books, book.id)
+      .catch((error) => {
+        console.error('error', error);
+        return Promise.reject(error);
+      });
+  }
+
 }

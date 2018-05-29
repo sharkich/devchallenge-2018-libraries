@@ -35,11 +35,15 @@ export class PopularBooksComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe((changing) => {
-      if (changing) {
+    dialogRef.afterClosed().subscribe((isReload) => {
+      if (isReload) {
         this.getList();
       }
     });
+  }
+
+  public onDeleteBook() {
+    this.getList();
   }
 
   private getList() {
