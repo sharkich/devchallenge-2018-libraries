@@ -28,4 +28,13 @@ export class LibrariesService {
       });
   }
 
+  public save(library: LibrariesModel): Promise<LibrariesModel> {
+    return this.db.update(APP_CONFIG.db.tables.libraries, library)
+      .then((obj) => new LibrariesModel(obj))
+      .catch((error) => {
+        console.error('error', error);
+        return Promise.reject(error);
+      });
+  }
+
 }

@@ -26,6 +26,7 @@ export class PopularLibrariesComponent implements OnInit {
     this.librariesService.list()
       .then((libraries: LibrariesModel[]) => {
         this.libraries = libraries;
+        console.log('libraries', libraries);
         return this.librariesService.books2libraries();
       });
   }

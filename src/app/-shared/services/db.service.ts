@@ -42,23 +42,33 @@ export class DbService {
       });
   }
 
+  public update(table, model): Promise<any> {
+    return this.db.update(table, model)
+      .then((data) => {
+        return Promise.resolve(data);
+      }, (error) => {
+        console.error(error);
+        return Promise.reject(error);
+      });
+  }
+
   private createTables(evt: any) {
     const booksStore: IDBObjectStore = evt.currentTarget.result
       .createObjectStore(APP_CONFIG.db.tables.books, {keyPath: 'id'});
-    booksStore.createIndex('name', 'name', { unique: false });
-    booksStore.createIndex('author', 'author', { unique: false });
-    booksStore.createIndex('ISBN', 'ISBN', { unique: true });
-    booksStore.createIndex('year', 'year', { unique: false });
+    booksStore.createIndex('name', 'name', {unique: false});
+    booksStore.createIndex('author', 'author', {unique: false});
+    booksStore.createIndex('ISBN', 'ISBN', {unique: true});
+    booksStore.createIndex('year', 'year', {unique: false});
 
     const librariesStore: IDBObjectStore = evt.currentTarget.result
       .createObjectStore(APP_CONFIG.db.tables.libraries, {keyPath: 'id'});
-    librariesStore.createIndex('name', 'name', { unique: false });
-    librariesStore.createIndex('address', 'address', { unique: false });
+    librariesStore.createIndex('name', 'name', {unique: false});
+    librariesStore.createIndex('address', 'address', {unique: false});
 
     const books2librariesStore: IDBObjectStore = evt.currentTarget.result
       .createObjectStore(APP_CONFIG.db.tables.books2libraries, {keyPath: 'id', autoIncrement: true});
-    books2librariesStore.createIndex('bookId', 'bookId', { unique: false });
-    books2librariesStore.createIndex('libraryId', 'libraryId', { unique: false });
+    books2librariesStore.createIndex('bookId', 'bookId', {unique: false});
+    books2librariesStore.createIndex('libraryId', 'libraryId', {unique: false});
 
     this.isTablesJustCreated = true;
   }

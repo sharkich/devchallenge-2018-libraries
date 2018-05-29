@@ -3,6 +3,7 @@ import {DialogLoginComponent} from '../dialog-login/dialog-login.component';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LibrariesModel} from '../../models/libraries.model';
+import {LibrariesService} from '../../services/libraries.service';
 
 @Component({
   selector: 'app-dialog-library',
@@ -17,7 +18,8 @@ export class DialogLibraryComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<DialogLoginComponent>,
     @Inject(MAT_DIALOG_DATA) private data: any,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private librariesService: LibrariesService
   ) {
   }
 
@@ -39,7 +41,14 @@ export class DialogLibraryComponent implements OnInit {
     this.library.address = this.libraryForm.controls.addressFormControl.value;
     this.library.geo.latitude = this.libraryForm.controls.latitudeFormControl.value;
     this.library.geo.longitude = this.libraryForm.controls.longitudeFormControl.value;
-    console.log('save', this.library);
+
+    this.librariesService.save(this.library)
+      .then((library) => {
+        console.log('library.saved', library);
+        this.library = library;
+      });
+
+    this.dialogRef.close();
   }
 
   public onNoClick() {

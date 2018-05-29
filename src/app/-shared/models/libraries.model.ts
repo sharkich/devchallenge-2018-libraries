@@ -24,8 +24,8 @@ export class LibrariesModel {
     this.id = data['id'] ? '' + data['id'] : uuid();
     this.name = data['name'] ? '' + data['name'] : '';
     this.address = data['address'] ? '' + data['address'] : '';
-    this.geo.latitude = data['latitude'] ? +data['latitude'] : 0;
-    this.geo.longitude = data['longitude'] ? +data['longitude'] : 0;
+    this.geo.latitude = data['geo'] && data['geo']['latitude'] ? +data['geo']['latitude'] : 0;
+    this.geo.longitude = data['geo'] && data['geo']['longitude'] ? +data['geo']['longitude'] : 0;
   }
 
   public get books(): Books2librariesModel[] {
