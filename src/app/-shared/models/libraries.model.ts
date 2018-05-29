@@ -1,5 +1,4 @@
 import {IPoint} from '../services/geolocation.service';
-import {BooksModel} from './books.model';
 import {Books2librariesModel} from './books2libraries.model';
 import {GeneralModel} from './general.model';
 

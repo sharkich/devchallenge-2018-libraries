@@ -61,7 +61,7 @@ export class DbService {
       });
   }
 
-  public delete(table: string, id: string): Promise<any> {
+  public delete(table: string, id: string|number): Promise<any> {
     return this.db.delete(table, id)
       .then((data) => {
         return Promise.resolve(data);

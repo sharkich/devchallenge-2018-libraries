@@ -43,7 +43,8 @@
           <app-book
             *ngFor="let book2library of library.book2library"
             [book]="book2library.book"
-            (onDelete)="onDeleteBook()"></app-book>
+            [book2library]="book2library"
+            (onDelete)="onDeleteBook(book2library)"></app-book>
 
         </div>
 

@@ -4,6 +4,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {BooksModel} from '../../models/books.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BooksService} from '../../services/books.service';
+import {LibrariesService} from '../../services/libraries.service';
+import {Books2librariesModel} from '../../models/books2libraries.model';
 
 @Component({
   selector: 'app-dialog-book',
@@ -13,17 +15,21 @@ import {BooksService} from '../../services/books.service';
 export class DialogBookComponent implements OnInit {
 
   private book: BooksModel;
+  private book2library: Books2librariesModel;
   public bookForm: FormGroup;
 
   constructor(
     private dialogRef: MatDialogRef<DialogLoginComponent>,
     @Inject(MAT_DIALOG_DATA) private data: any,
     private formBuilder: FormBuilder,
-    private booksService: BooksService
+    private booksService: BooksService,
+    private librariesService: LibrariesService
   ) {
   }
 
   public ngOnInit() {
+    this.book2library = this.data['book2library'];
+    console.log(this.book2library);
     this.book = this.data['book'];
     this.bookForm = this.formBuilder.group({
       nameFormControl: [this.book.name, [Validators.required]],
@@ -58,6 +64,13 @@ export class DialogBookComponent implements OnInit {
 
   public onDelete() {
     this.booksService.delete(this.book)
+      .then(() => {
+        this.dialogRef.close(true); // Refresh list
+      });
+  }
+
+  public onRemoveFromLibrary() {
+    this.librariesService.removeBook(this.book2library)
       .then(() => {
         this.dialogRef.close(true); // Refresh list
       });

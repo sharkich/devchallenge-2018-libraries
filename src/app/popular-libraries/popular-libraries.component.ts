@@ -5,6 +5,7 @@ import {GeolocationService} from '../-shared/services/geolocation.service';
 import {AuthService} from '../-shared/services/auth.service';
 import {MatDialog} from '@angular/material';
 import {DialogLibraryComponent} from '../-shared/components/dialog-library/dialog-library.component';
+import {Books2librariesModel} from '../-shared/models/books2libraries.model';
 
 @Component({
   selector: 'app-popular-libraries',
@@ -68,15 +69,15 @@ export class PopularLibrariesComponent implements OnInit {
     });
   }
 
-  public onDeleteBook() {
-    this.getList();
+  public onDeleteBook(book2library: Books2librariesModel) {
+    this.getList(); // todo: optimize for blinking
   }
 
   private getList() {
     this.librariesService.list()
       .then((libraries: LibrariesModel[]) => {
         this.libraries = libraries;
-        return this.librariesService.books2libraries(this.libraries)
+        this.librariesService.books2libraries(this.libraries)
           .then(() => {
             // todo loading = false
           });

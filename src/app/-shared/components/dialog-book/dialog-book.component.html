@@ -49,6 +49,14 @@
         Save
       </button>
       <div class="space"></div>
+
+      <button
+        *ngIf="!!book2library"
+        (click)="onRemoveFromLibrary()"
+        mat-raised-button
+        type="button">
+        Remove from Library
+      </button>
       <button
         *ngIf="!book.isNew"
         mat-raised-button

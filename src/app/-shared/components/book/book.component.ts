@@ -5,6 +5,7 @@ import {AuthService} from '../../services/auth.service';
 import {MatDialog} from '@angular/material';
 import {DialogBookComponent} from '../dialog-book/dialog-book.component';
 import {DialogBookingComponent} from '../dialog-booking/dialog-booking.component';
+import {Books2librariesModel} from '../../models/books2libraries.model';
 
 @Component({
   selector: 'app-book',
@@ -14,6 +15,7 @@ import {DialogBookingComponent} from '../dialog-booking/dialog-booking.component
 export class BookComponent implements OnInit {
 
   @Input() public book: BooksModel;
+  @Input() public book2library?: Books2librariesModel;
 
   @Output() private onDelete: EventEmitter<any> = new EventEmitter<any>();
 
@@ -37,7 +39,8 @@ export class BookComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogBookComponent, {
       width: '650px',
       data: {
-        book
+        book,
+        book2library: this.book2library
       }
     });
 

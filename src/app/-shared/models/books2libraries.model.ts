@@ -7,6 +7,7 @@ export const BOOKS_BOOKING_STATUS = {
 };
 
 export class Books2librariesModel extends GeneralModel {
+  public id: number;
   public bookId: string;
   public libraryId: string;
   public status: string;
@@ -16,9 +17,11 @@ export class Books2librariesModel extends GeneralModel {
 
   constructor(data: any = {}) {
     super(data);
+    this.id = data['id'] ? data['id'] : undefined;
     this.bookId = data['bookId'] ? data['bookId'] : undefined;
     this.libraryId = data['libraryId'] ? data['libraryId'] : undefined;
     this.status = data['status'] ? data['status'] : BOOKS_BOOKING_STATUS.FREE;
     this.rentTime = data['rentTime'] ? data['rentTime'] : '';
   }
+
 }

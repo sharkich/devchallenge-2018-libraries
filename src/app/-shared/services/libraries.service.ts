@@ -23,6 +23,23 @@ export class LibrariesService {
       });
   }
 
+  public save(library: LibrariesModel): Promise<LibrariesModel> {
+    return this.db.update(APP_CONFIG.db.tables.libraries, library)
+      .then((obj) => new LibrariesModel(obj))
+      .catch((error) => {
+        console.error('error', error);
+        return Promise.reject(error);
+      });
+  }
+
+  public delete(library: LibrariesModel): Promise<any> {
+    return this.db.delete(APP_CONFIG.db.tables.libraries, library.id)
+      .catch((error) => {
+        console.error('error', error);
+        return Promise.reject(error);
+      });
+  }
+
   public books2libraries(libraries: LibrariesModel[]): Promise<any> {
     return this.db.list(APP_CONFIG.db.tables.books2libraries)
       .then((objs: any) => {
@@ -53,17 +70,8 @@ export class LibrariesService {
       });
   }
 
-  public save(library: LibrariesModel): Promise<LibrariesModel> {
-    return this.db.update(APP_CONFIG.db.tables.libraries, library)
-      .then((obj) => new LibrariesModel(obj))
-      .catch((error) => {
-        console.error('error', error);
-        return Promise.reject(error);
-      });
-  }
-
-  public delete(library: LibrariesModel): Promise<any> {
-    return this.db.delete(APP_CONFIG.db.tables.libraries, library.id)
+  public removeBook(book2library: Books2librariesModel): Promise<any> {
+    return this.db.delete(APP_CONFIG.db.tables.books2libraries, book2library.id)
       .catch((error) => {
         console.error('error', error);
         return Promise.reject(error);
