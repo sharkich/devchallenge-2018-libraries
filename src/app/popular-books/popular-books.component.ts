@@ -35,8 +35,8 @@ export class PopularBooksComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe((savedBook) => {
-      if (savedBook) {
+    dialogRef.afterClosed().subscribe((changing) => {
+      if (changing) {
         this.getList();
       }
     });

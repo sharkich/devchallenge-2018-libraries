@@ -39,10 +39,16 @@ export class PopularLibrariesComponent implements OnInit {
   }
 
   public onEditLibrary(library: LibrariesModel) {
-    this.dialog.open(DialogLibraryComponent, {
+    const dialogRef = this.dialog.open(DialogLibraryComponent, {
       width: '650px',
       data: {
         library
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((changing) => {
+      if (changing) {
+        this.getList();
       }
     });
   }
@@ -55,8 +61,9 @@ export class PopularLibrariesComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe((savedLibrary) => {
-      if (savedLibrary) {
+    dialogRef.afterClosed().subscribe((changing) => {
+      console.log('changing', changing);
+      if (changing) {
         this.getList();
       }
     });

@@ -37,4 +37,12 @@ export class LibrariesService {
       });
   }
 
+  public delete(library: LibrariesModel): Promise<any> {
+    return this.db.delete(APP_CONFIG.db.tables.libraries, library.id)
+      .catch((error) => {
+        console.error('error', error);
+        return Promise.reject(error);
+      });
+  }
+
 }

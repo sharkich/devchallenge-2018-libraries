@@ -1,11 +1,12 @@
 import {BooksModel} from './books.model';
+import {GeneralModel} from './general.model';
 
 export const BOOKS_BOOKING_STATUS = {
   FREE: 'FREE',
   RENTED: 'RENTED'
 };
 
-export class Books2librariesModel {
+export class Books2librariesModel extends GeneralModel {
   public bookId: string;
   public libraryId: string;
   public status: string;
@@ -14,6 +15,7 @@ export class Books2librariesModel {
   public book?: BooksModel;
 
   constructor(data: any = {}) {
+    super(data);
     this.bookId = data['bookId'] ? data['bookId'] : undefined;
     this.libraryId = data['libraryId'] ? data['libraryId'] : undefined;
     this.status = data['status'] ? data['status'] : BOOKS_BOOKING_STATUS.FREE;

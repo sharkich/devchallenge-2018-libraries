@@ -43,7 +43,19 @@
         Save
       </button>
       <div class="space"></div>
-      <button mat-button (click)="onNoClick()" type="button">No Thanks</button>
+      <button
+        *ngIf="!library.isNew"
+        mat-raised-button
+        (click)="onDelete()"
+        type="button">
+        Delete
+      </button>
+      <button
+        mat-button
+        (click)="onNoClick()"
+        type="button">
+        Cancel
+      </button>
     </div>
 
   </form>

@@ -1,9 +1,11 @@
+import {GeneralModel} from './general.model';
+
 const uuid = require('uuid/v1');
 
 /**
  * Model for Books
  */
-export class BooksModel {
+export class BooksModel extends GeneralModel {
 
   public id: string;
   public name: string;
@@ -13,6 +15,7 @@ export class BooksModel {
   public thumbnail: string;
 
   constructor(data: any = {}) {
+    super(data);
     this.id = data['id'] ? '' + data['id'] : uuid();
     this.name = data['name'] ? '' + data['name'] : '';
     this.author = data['author'] ? '' + data['author'] : '';

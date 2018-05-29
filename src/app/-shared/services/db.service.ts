@@ -32,7 +32,7 @@ export class DbService {
       });
   }
 
-  public list(table): Promise<any[]> {
+  public list(table: string): Promise<any[]> {
     return this.dbReadyPromise
       .then(() => this.db.getAll(table))
       .then((objs: any[]) => {
@@ -42,8 +42,18 @@ export class DbService {
       });
   }
 
-  public update(table, model): Promise<any> {
+  public update(table: string, model: any): Promise<any> {
     return this.db.update(table, model)
+      .then((data) => {
+        return Promise.resolve(data);
+      }, (error) => {
+        console.error(error);
+        return Promise.reject(error);
+      });
+  }
+
+  public delete(table: string, id: string): Promise<any> {
+    return this.db.delete(table, id)
       .then((data) => {
         return Promise.resolve(data);
       }, (error) => {

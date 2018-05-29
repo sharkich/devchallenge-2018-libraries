@@ -44,14 +44,22 @@ export class DialogLibraryComponent implements OnInit {
 
     this.librariesService.save(this.library)
       .then((savedLibrary) => {
+        const isNew = this.library;
         this.library = savedLibrary;
-        this.dialogRef.close(savedLibrary);
+        this.dialogRef.close(isNew); // Refresh list or don't
       });
 
   }
 
   public onNoClick() {
     this.dialogRef.close();
+  }
+
+  public onDelete() {
+    this.librariesService.delete(this.library)
+      .then(() => {
+        this.dialogRef.close(true); // Refresh list
+      });
   }
 
 }
