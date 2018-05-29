@@ -36,6 +36,17 @@
           <i class="material-icons">edit</i> Edit
         </button>
 
+        <div
+          *ngIf="library.book2library.length"
+          class="books">
+
+          <app-book
+            *ngFor="let book2library of library.book2library"
+            [book]="book2library.book"
+            (onDelete)="onDeleteBook()"></app-book>
+
+        </div>
+
       </mat-expansion-panel>
 
     </mat-accordion>

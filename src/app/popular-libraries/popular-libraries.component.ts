@@ -68,11 +68,18 @@ export class PopularLibrariesComponent implements OnInit {
     });
   }
 
+  public onDeleteBook() {
+    this.getList();
+  }
+
   private getList() {
     this.librariesService.list()
       .then((libraries: LibrariesModel[]) => {
         this.libraries = libraries;
-        return this.librariesService.books2libraries();
+        return this.librariesService.books2libraries(this.libraries)
+          .then(() => {
+            // todo loading = false
+          });
       });
   }
 

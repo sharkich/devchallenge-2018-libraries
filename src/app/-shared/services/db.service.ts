@@ -5,6 +5,7 @@ import {BooksModel} from '../models/books.model';
 import {Http} from '@angular/http';
 import {LibrariesModel} from '../models/libraries.model';
 import {Books2librariesModel} from '../models/books2libraries.model';
+import {st} from '@angular/core/src/render3';
 
 @Injectable()
 export class DbService {
@@ -38,6 +39,14 @@ export class DbService {
       .then((objs: any[]) => {
         return objs;
       }, (error) => {
+        return Promise.reject(error);
+      });
+  }
+
+  public getById(table: string, id: string): Promise<any[]> {
+    return this.dbReadyPromise
+      .then(() => this.db.getByKey(table, id))
+      .then((obj: any) => obj, (error) => {
         return Promise.reject(error);
       });
   }

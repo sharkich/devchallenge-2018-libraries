@@ -19,7 +19,7 @@ export class LibrariesModel extends GeneralModel {
     longitude: null
   };
 
-  private _books: Books2librariesModel[] = [];
+  public book2library: Books2librariesModel[] = [];
 
   constructor(data: any = {}) {
     super(data);
@@ -28,14 +28,6 @@ export class LibrariesModel extends GeneralModel {
     this.address = data['address'] ? '' + data['address'] : '';
     this.geo.latitude = data['geo'] && data['geo']['latitude'] ? +data['geo']['latitude'] : 0;
     this.geo.longitude = data['geo'] && data['geo']['longitude'] ? +data['geo']['longitude'] : 0;
-  }
-
-  public get books(): Books2librariesModel[] {
-    return this._books;
-  }
-
-  public addBook(book: BooksModel) {
-    this._books.push(new Books2librariesModel({book}));
   }
 
 }
