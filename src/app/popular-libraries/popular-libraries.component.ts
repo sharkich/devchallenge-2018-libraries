@@ -23,12 +23,7 @@ export class PopularLibrariesComponent implements OnInit {
   }
 
   public ngOnInit() {
-    this.librariesService.list()
-      .then((libraries: LibrariesModel[]) => {
-        this.libraries = libraries;
-        console.log('libraries', libraries);
-        return this.librariesService.books2libraries();
-      });
+    this.getList();
   }
 
   public isLogin(): boolean {
@@ -44,15 +39,11 @@ export class PopularLibrariesComponent implements OnInit {
   }
 
   public onEditLibrary(library: LibrariesModel) {
-    const dialogRef = this.dialog.open(DialogLibraryComponent, {
+    this.dialog.open(DialogLibraryComponent, {
       width: '650px',
       data: {
         library
       }
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed', result);
     });
   }
 
@@ -64,9 +55,19 @@ export class PopularLibrariesComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed', result);
+    dialogRef.afterClosed().subscribe((savedLibrary) => {
+      if (savedLibrary) {
+        this.getList();
+      }
     });
+  }
+
+  private getList() {
+    this.librariesService.list()
+      .then((libraries: LibrariesModel[]) => {
+        this.libraries = libraries;
+        return this.librariesService.books2libraries();
+      });
   }
 
 }

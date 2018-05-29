@@ -44,11 +44,10 @@ export class DialogLibraryComponent implements OnInit {
 
     this.librariesService.save(this.library)
       .then((library) => {
-        console.log('library.saved', library);
         this.library = library;
+        this.dialogRef.close(library);
       });
 
-    this.dialogRef.close();
   }
 
   public onNoClick() {
