@@ -21,11 +21,7 @@ export class AppComponent {
   }
 
   public onSignIn() {
-    const dialogRef = this.dialog.open(DialogLoginComponent, {width: '450px'});
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed', result);
-    });
+    this.dialog.open(DialogLoginComponent, {width: '450px'});
   }
 
   public onSignOut() {

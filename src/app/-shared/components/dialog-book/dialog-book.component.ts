@@ -3,6 +3,7 @@ import {DialogLoginComponent} from '../dialog-login/dialog-login.component';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {BooksModel} from '../../models/books.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {BooksService} from '../../services/books.service';
 
 @Component({
   selector: 'app-dialog-book',
@@ -17,7 +18,8 @@ export class DialogBookComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<DialogLoginComponent>,
     @Inject(MAT_DIALOG_DATA) private data: any,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private booksService: BooksService
   ) {
   }
 
@@ -41,7 +43,12 @@ export class DialogBookComponent implements OnInit {
     this.book.year = this.bookForm.controls.yearFormControl.value;
     this.book.ISBN = this.bookForm.controls.isbnFormControl.value;
     this.book.thumbnail = this.bookForm.controls.thumbnailFormControl.value;
-    console.log('save', this.book);
+
+    this.booksService.save(this.book)
+      .then((savedBook: BooksModel) => {
+        this.book = savedBook;
+        this.dialogRef.close(savedBook);
+      });
   }
 
   public onNoClick() {

@@ -20,10 +20,7 @@ export class PopularBooksComponent implements OnInit {
     private dialog: MatDialog) { }
 
   ngOnInit() {
-    this.booksService.list()
-      .then((books: BooksModel[]) => {
-        this.books = books;
-      });
+    this.getList();
   }
 
   public isLogin(): boolean {
@@ -38,9 +35,18 @@ export class PopularBooksComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed', result);
+    dialogRef.afterClosed().subscribe((savedBook) => {
+      if (savedBook) {
+        this.getList();
+      }
     });
+  }
+
+  private getList() {
+    this.booksService.list()
+      .then((books: BooksModel[]) => {
+        this.books = books;
+      });
   }
 
 }

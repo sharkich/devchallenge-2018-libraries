@@ -43,9 +43,9 @@ export class DialogLibraryComponent implements OnInit {
     this.library.geo.longitude = this.libraryForm.controls.longitudeFormControl.value;
 
     this.librariesService.save(this.library)
-      .then((library) => {
-        this.library = library;
-        this.dialogRef.close(library);
+      .then((savedLibrary) => {
+        this.library = savedLibrary;
+        this.dialogRef.close(savedLibrary);
       });
 
   }

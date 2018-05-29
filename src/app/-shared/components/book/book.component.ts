@@ -32,15 +32,11 @@ export class BookComponent implements OnInit {
   }
 
   public onEditBook(book: BooksModel) {
-    const dialogRef = this.dialog.open(DialogBookComponent, {
+    this.dialog.open(DialogBookComponent, {
       width: '650px',
       data: {
         book
       }
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed', result);
     });
   }
 

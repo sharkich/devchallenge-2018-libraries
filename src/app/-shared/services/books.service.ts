@@ -17,4 +17,14 @@ export class BooksService {
         return Promise.reject(error);
       });
   }
+
+  public save(book: BooksModel): Promise<BooksModel> {
+    return this.db.update(APP_CONFIG.db.tables.books, book)
+      .then((obj) => new BooksModel(obj))
+      .catch((error) => {
+        console.error('error', error);
+        return Promise.reject(error);
+      });
+  }
+
 }
