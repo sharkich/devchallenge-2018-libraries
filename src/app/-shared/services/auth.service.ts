@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
+import {APP_CONFIG} from '../../app.config';
 const uuid = require('uuid/v1');
 
-const TOKEN = 'KL_UA.token';
+const TOKEN = APP_CONFIG.localStorage.token;
 
 @Injectable()
 export class AuthService {

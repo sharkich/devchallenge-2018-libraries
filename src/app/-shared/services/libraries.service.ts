@@ -1,32 +1,30 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
 import {LibrariesModel} from '../models/libraries.model';
 import {Books2librariesModel} from '../models/books2libraries.model';
+import {APP_CONFIG} from '../../app.config';
+import {DbService} from './db.service';
 
 @Injectable()
 export class LibrariesService {
 
-  constructor(private http: Http) {
+  constructor(private db: DbService) {
   }
 
   public list(limit: number = 10): Promise<LibrariesModel[]> {
-    return this.http.get('/assets/libraries.json')
-      .toPromise()
-      .then((res: any) => {
-        const arr: any[] = res.json();
-        let libraries: LibrariesModel[] = arr.map((obj) => new LibrariesModel(obj));
-        libraries = libraries.splice(0, limit);
-        return libraries;
+    return this.db.list(APP_CONFIG.db.tables.libraries)
+      .then((objs: any[]) => objs.map((obj) => new LibrariesModel(obj)))
+      .catch((error) => {
+        console.error('error', error);
+        return Promise.reject(error);
       });
   }
 
-  public books2libraries(libraries: LibrariesModel[] = []): Promise<LibrariesModel[]> {
-    return this.http.get('/assets/books2libraries.json')
-      .toPromise()
-      .then((res: any) => {
-        const arr: any[] = res.json();
-        console.log('arr', arr);
-        return libraries;
+  public books2libraries(library?: LibrariesModel): Promise<Books2librariesModel[]> {
+    return this.db.list(APP_CONFIG.db.tables.books2libraries)
+      .then((objs: any) => objs.map((obj) => new Books2librariesModel(obj)))
+      .catch((error) => {
+        console.error('error', error);
+        return Promise.reject(error);
       });
   }
 

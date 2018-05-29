@@ -25,6 +25,7 @@ import {AuthService} from './-shared/services/auth.service';
 import {DialogLibraryComponent} from './-shared/components/dialog-library/dialog-library.component';
 import {DialogBookComponent} from './-shared/components/dialog-book/dialog-book.component';
 import {DialogBookingComponent} from './-shared/components/dialog-booking/dialog-booking.component';
+import {DbService} from './-shared/services/db.service';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import {DialogBookingComponent} from './-shared/components/dialog-booking/dialog
     LibrariesService,
     BooksService,
     GeolocationService,
-    AuthService
+    AuthService,
+    DbService
   ],
   entryComponents: [
     DialogLoginComponent,
