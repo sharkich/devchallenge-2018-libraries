@@ -16,6 +16,7 @@ import {DialogAddBooksComponent} from '../-shared/components/dialog-add-books/di
 export class LibrariesComponent implements OnInit {
 
   public libraries: LibrariesModel[] = [];
+  public selectedLibrary: LibrariesModel;
 
   constructor(
     private librariesService: LibrariesService,
@@ -50,22 +51,29 @@ export class LibrariesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((changing) => {
       if (changing) {
-        this.getList();
+        this.getList()
+          .then(() => {
+            this.selectedLibrary = library;
+          });
       }
     });
   }
 
   public onAddNewLibrary() {
+    const library = new LibrariesModel();
     const dialogRef = this.dialog.open(DialogEditLibraryComponent, {
       width: '650px',
       data: {
-        library: new LibrariesModel()
+        library
       }
     });
 
     dialogRef.afterClosed().subscribe((isReload) => {
       if (isReload) {
-        this.getList();
+        this.getList()
+          .then(() => {
+            this.selectedLibrary = library;
+          });
       }
     });
   }
@@ -80,7 +88,10 @@ export class LibrariesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((isReload) => {
       if (isReload) {
-        this.getList();
+        this.getList()
+          .then(() => {
+            this.selectedLibrary = library;
+          });
       }
     });
   }
@@ -89,8 +100,12 @@ export class LibrariesComponent implements OnInit {
     this.getList(); // todo: optimize for blinking
   }
 
+  public onSelectLibrary(library: LibrariesModel) {
+    this.selectedLibrary = library;
+  }
+
   private getList() {
-    this.librariesService.list()
+    return this.librariesService.list()
       .then((libraries: LibrariesModel[]) => {
         this.libraries = libraries;
         this.librariesService.books2libraries(this.libraries)

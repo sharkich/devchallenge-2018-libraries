@@ -15,7 +15,11 @@
 
     <mat-accordion>
 
-      <mat-expansion-panel *ngFor="let library of libraries">
+      <mat-expansion-panel
+        *ngFor="let library of libraries"
+        [expanded]="selectedLibrary?.id === library.id"
+        (opened)="onSelectLibrary(library)"
+        hideToggle="true">
         <mat-expansion-panel-header>
           <mat-panel-title>
             {{library.name}}
