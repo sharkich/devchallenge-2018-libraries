@@ -14,6 +14,13 @@ export const APP_CONFIG = {
     }
   },
   localStorage: {
-    token: 'KL_UA.token'
+    token: 'KL_UA.token',
+    'app-popular-books': {
+      isListView: 'KL_UA.popView'
+    }
+  },
+  view: {
+    list: 'list',
+    grid: 'grid'
   }
 };

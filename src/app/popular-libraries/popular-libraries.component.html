@@ -7,7 +7,7 @@
       (click)="onAddNewLibrary()"
       mat-raised-button
       color="accent">
-      <i class="material-icons">add</i> Add new
+      <i class="material-icons">add</i> Create New Library
     </button>
   </h2>
 
@@ -28,13 +28,23 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
 
-        <button
-          *ngIf="isLogin()"
-          (click)="onEditLibrary(library)"
-          mat-raised-button
-          color="accent">
-          <i class="material-icons">edit</i> Edit
-        </button>
+        <div class="buttons">
+          <button
+            *ngIf="isLogin()"
+            (click)="onEditLibrary(library)"
+            mat-raised-button
+            color="accent">
+            <i class="material-icons">edit</i> Edit Library
+          </button>
+
+          <button
+            *ngIf="isLogin()"
+            (click)="onAddNewLibrary()"
+            mat-raised-button
+            color="accent">
+            <i class="material-icons">add</i> Add Book Entity to Library
+          </button>
+        </div>
 
         <div
           *ngIf="library.book2library.length"

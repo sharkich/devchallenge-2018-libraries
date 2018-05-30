@@ -4,6 +4,9 @@ import {BooksModel} from '../-shared/models/books.model';
 import {AuthService} from '../-shared/services/auth.service';
 import {MatDialog} from '@angular/material';
 import {DialogBookComponent} from '../-shared/components/dialog-book/dialog-book.component';
+import {APP_CONFIG} from '../app.config';
+
+const COMPONENT_KEY = APP_CONFIG.localStorage['app-popular-books'];
 
 @Component({
   selector: 'app-popular-books',
@@ -14,6 +17,8 @@ export class PopularBooksComponent implements OnInit {
 
   public books: BooksModel[] = [];
 
+  public view: string = APP_CONFIG.view.grid;
+
   constructor(
     private booksService: BooksService,
     private authService: AuthService,
@@ -21,6 +26,7 @@ export class PopularBooksComponent implements OnInit {
 
   ngOnInit() {
     this.getList();
+    this.view = window.localStorage.getItem(COMPONENT_KEY.isListView);
   }
 
   public isLogin(): boolean {
@@ -44,6 +50,15 @@ export class PopularBooksComponent implements OnInit {
 
   public onDeleteBook() {
     this.getList();
+  }
+
+  public onToggleView() {
+    this.view = this.view === APP_CONFIG.view.grid ? APP_CONFIG.view.list : APP_CONFIG.view.grid;
+    window.localStorage.setItem(COMPONENT_KEY.isListView, this.view);
+  }
+
+  public get isListView(): boolean {
+    return this.view === APP_CONFIG.view.list;
   }
 
   private getList() {

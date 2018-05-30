@@ -17,7 +17,7 @@ export class Books2librariesModel extends GeneralModel {
 
   constructor(data: any = {}) {
     super(data);
-    this.id = data['id'] ? data['id'] : undefined;
+    this.id = data['id'] ? data['id'] : null;
     this.bookId = data['bookId'] ? data['bookId'] : undefined;
     this.libraryId = data['libraryId'] ? data['libraryId'] : undefined;
     this.status = data['status'] ? data['status'] : BOOKS_BOOKING_STATUS.FREE;

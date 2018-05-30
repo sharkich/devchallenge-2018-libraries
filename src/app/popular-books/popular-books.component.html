@@ -1,21 +1,41 @@
 <div class="app-popular-books">
 
   <h2>
-    Books
+    <span>
+      Books
+    </span>
     <button
       *ngIf="isLogin()"
       (click)="onAddNewBook()"
       mat-raised-button
       color="accent">
-      <i class="material-icons">add</i> Add new
+      <i class="material-icons">add</i> Create New Book
+    </button>
+    <div class="space"></div>
+    <button
+      (click)="onToggleView()"
+      mat-raised-button>
+      <i
+        *ngIf="!isListView"
+        class="material-icons">
+        view_headline
+      </i>
+      <i
+        *ngIf="isListView"
+        class="material-icons">
+        view_module
+      </i>
     </button>
   </h2>
 
-  <div class="books">
+  <div
+    [ngClass]="{'list-view': isListView, 'grid-view': !isListView}"
+    class="books">
 
     <app-book
       *ngFor="let book of books"
       [book]="book"
+      [view]="view"
       (onDelete)="onDeleteBook()"></app-book>
 
   </div>

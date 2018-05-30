@@ -1,9 +1,13 @@
-<mat-card class="app-book"><!--  book--not-available -->
+<mat-card
+  [ngClass]="[view]"
+  class="app-book"><!--  book--not-available -->
 
   <mat-card-content>
-    <img mat-card-image [src]="book.thumbnail">
-    <mat-card-subtitle>{{book.author}}</mat-card-subtitle>
-    <mat-card-title>{{book.name}}</mat-card-title>
+    <div class="top">
+      <img mat-card-image [src]="book.thumbnail">
+      <mat-card-subtitle>{{book.author}}</mat-card-subtitle>
+      <mat-card-title>{{book.name}}</mat-card-title>
+    </div>
 
     <div class="book-availability">
       <div
@@ -14,10 +18,12 @@
       <div
         *ngIf="true"
         class="available">
-        Available in <b>2</b> libraries.<br>
-        <i *ngIf="isGeoSupported">
-          The nearest is <b>5 km</b> away.
-        </i>
+        <div>Available in <b>2</b> libraries.</div>
+        <div>
+          <i *ngIf="isGeoSupported">
+            The nearest is <b>5 km</b> away.
+          </i>
+        </div>
       </div>
     </div>
 

@@ -125,9 +125,11 @@ export class DbService {
       .toPromise()
       .then((res: any) => {
         const arr: any[] = res.json();
-        console.log('arr', arr);
-        const books2libraries: Books2librariesModel[] = arr.map((obj) => new Books2librariesModel(obj));
-        console.log('books2libraries', books2libraries);
+        const books2libraries: Books2librariesModel[] = arr.map((obj) => {
+          const b2l = new Books2librariesModel(obj);
+          delete b2l.id;
+          return b2l;
+        });
         const promises = [];
         books2libraries.forEach((book2library) => {
           promises.push(this.db.add(APP_CONFIG.db.tables.books2libraries, book2library));

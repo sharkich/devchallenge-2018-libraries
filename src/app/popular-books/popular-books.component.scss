@@ -1,9 +1,19 @@
 .app-popular-books {
 
-  .books {
+  h2 {
+    display: flex;
+    span {
+      margin-right: 16px;
+    }
+  }
+
+  .books.grid-view {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+  }
+
+  .books.list-view {
   }
 
 }

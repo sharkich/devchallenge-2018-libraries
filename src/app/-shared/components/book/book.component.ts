@@ -6,6 +6,7 @@ import {MatDialog} from '@angular/material';
 import {DialogBookComponent} from '../dialog-book/dialog-book.component';
 import {DialogBookingComponent} from '../dialog-booking/dialog-booking.component';
 import {Books2librariesModel} from '../../models/books2libraries.model';
+import {APP_CONFIG} from '../../../app.config';
 
 @Component({
   selector: 'app-book',
@@ -16,6 +17,8 @@ export class BookComponent implements OnInit {
 
   @Input() public book: BooksModel;
   @Input() public book2library?: Books2librariesModel;
+
+  @Input() public view?: string = APP_CONFIG.view.grid;
 
   @Output() private onDelete: EventEmitter<any> = new EventEmitter<any>();
 
