@@ -3,7 +3,7 @@ import {BooksService} from '../-shared/services/books.service';
 import {BooksModel} from '../-shared/models/books.model';
 import {AuthService} from '../-shared/services/auth.service';
 import {MatDialog} from '@angular/material';
-import {DialogBookComponent} from '../-shared/components/dialog-book/dialog-book.component';
+import {DialogEditBookComponent} from '../-shared/components/dialog-edit-book/dialog-edit-book.component';
 import {APP_CONFIG} from '../app.config';
 
 const COMPONENT_KEY = APP_CONFIG.localStorage['app-popular-books'];
@@ -34,7 +34,7 @@ export class PopularBooksComponent implements OnInit {
   }
 
   public onAddNewBook() {
-    const dialogRef = this.dialog.open(DialogBookComponent, {
+    const dialogRef = this.dialog.open(DialogEditBookComponent, {
       width: '650px',
       data: {
         book: new BooksModel()

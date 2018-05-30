@@ -4,8 +4,9 @@ import {LibrariesService} from '../-shared/services/libraries.service';
 import {GeolocationService} from '../-shared/services/geolocation.service';
 import {AuthService} from '../-shared/services/auth.service';
 import {MatDialog} from '@angular/material';
-import {DialogLibraryComponent} from '../-shared/components/dialog-library/dialog-library.component';
+import {DialogEditLibraryComponent} from '../-shared/components/dialog-library/dialog-edit-library.component';
 import {Books2librariesModel} from '../-shared/models/books2libraries.model';
+import {DialogAddBooksComponent} from '../-shared/components/dialog-add-book/dialog-add-books.component';
 
 @Component({
   selector: 'app-popular-libraries',
@@ -40,7 +41,7 @@ export class PopularLibrariesComponent implements OnInit {
   }
 
   public onEditLibrary(library: LibrariesModel) {
-    const dialogRef = this.dialog.open(DialogLibraryComponent, {
+    const dialogRef = this.dialog.open(DialogEditLibraryComponent, {
       width: '650px',
       data: {
         library
@@ -55,10 +56,25 @@ export class PopularLibrariesComponent implements OnInit {
   }
 
   public onAddNewLibrary() {
-    const dialogRef = this.dialog.open(DialogLibraryComponent, {
+    const dialogRef = this.dialog.open(DialogEditLibraryComponent, {
       width: '650px',
       data: {
         library: new LibrariesModel()
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((isReload) => {
+      if (isReload) {
+        this.getList();
+      }
+    });
+  }
+
+  public onAddBooks2Library(library: LibrariesModel) {
+    const dialogRef = this.dialog.open(DialogAddBooksComponent, {
+      width: '650px',
+      data: {
+        library
       }
     });
 

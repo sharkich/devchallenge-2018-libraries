@@ -8,11 +8,11 @@ import {LibrariesService} from '../../services/libraries.service';
 import {Books2librariesModel} from '../../models/books2libraries.model';
 
 @Component({
-  selector: 'app-dialog-book',
-  templateUrl: './dialog-book.component.html',
-  styleUrls: ['./dialog-book.component.scss']
+  selector: 'app-edit-dialog-book',
+  templateUrl: './dialog-edit-book.component.html',
+  styleUrls: ['./dialog-edit-book.component.scss']
 })
-export class DialogBookComponent implements OnInit {
+export class DialogEditBookComponent implements OnInit {
 
   private book: BooksModel;
   private book2library: Books2librariesModel;
@@ -29,7 +29,6 @@ export class DialogBookComponent implements OnInit {
 
   public ngOnInit() {
     this.book2library = this.data['book2library'];
-    console.log(this.book2library);
     this.book = this.data['book'];
     this.bookForm = this.formBuilder.group({
       nameFormControl: [this.book.name, [Validators.required]],

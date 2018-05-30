@@ -6,11 +6,11 @@ import {LibrariesModel} from '../../models/libraries.model';
 import {LibrariesService} from '../../services/libraries.service';
 
 @Component({
-  selector: 'app-dialog-library',
-  templateUrl: './dialog-library.component.html',
-  styleUrls: ['./dialog-library.component.scss']
+  selector: 'app-dialog-edit-library',
+  templateUrl: './dialog-edit-library.component.html',
+  styleUrls: ['./dialog-edit-library.component.scss']
 })
-export class DialogLibraryComponent implements OnInit {
+export class DialogEditLibraryComponent implements OnInit {
 
   private library: LibrariesModel;
   public libraryForm: FormGroup;

@@ -3,7 +3,7 @@ import {BooksModel} from '../../models/books.model';
 import {GeolocationService} from '../../services/geolocation.service';
 import {AuthService} from '../../services/auth.service';
 import {MatDialog} from '@angular/material';
-import {DialogBookComponent} from '../dialog-book/dialog-book.component';
+import {DialogEditBookComponent} from '../dialog-edit-book/dialog-edit-book.component';
 import {DialogBookingComponent} from '../dialog-booking/dialog-booking.component';
 import {Books2librariesModel} from '../../models/books2libraries.model';
 import {APP_CONFIG} from '../../../app.config';
@@ -39,7 +39,7 @@ export class BookComponent implements OnInit {
   }
 
   public onEditBook(book: BooksModel) {
-    const dialogRef = this.dialog.open(DialogBookComponent, {
+    const dialogRef = this.dialog.open(DialogEditBookComponent, {
       width: '650px',
       data: {
         book,

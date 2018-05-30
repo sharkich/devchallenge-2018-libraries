@@ -22,10 +22,11 @@ import {BookComponent} from './-shared/components/book/book.component';
 import {GeolocationService} from './-shared/services/geolocation.service';
 import {DialogLoginComponent} from './-shared/components/dialog-login/dialog-login.component';
 import {AuthService} from './-shared/services/auth.service';
-import {DialogLibraryComponent} from './-shared/components/dialog-library/dialog-library.component';
-import {DialogBookComponent} from './-shared/components/dialog-book/dialog-book.component';
+import {DialogEditLibraryComponent} from './-shared/components/dialog-library/dialog-edit-library.component';
+import {DialogEditBookComponent} from './-shared/components/dialog-edit-book/dialog-edit-book.component';
 import {DialogBookingComponent} from './-shared/components/dialog-booking/dialog-booking.component';
 import {DbService} from './-shared/services/db.service';
+import {DialogAddBooksComponent} from './-shared/components/dialog-add-book/dialog-add-books.component';
 
 @NgModule({
   declarations: [
@@ -35,9 +36,10 @@ import {DbService} from './-shared/services/db.service';
     PopularLibrariesComponent,
     BookComponent,
     DialogLoginComponent,
-    DialogLibraryComponent,
-    DialogBookComponent,
-    DialogBookingComponent
+    DialogEditLibraryComponent,
+    DialogEditBookComponent,
+    DialogBookingComponent,
+    DialogAddBooksComponent
   ],
   imports: [
     BrowserModule,
@@ -63,9 +65,10 @@ import {DbService} from './-shared/services/db.service';
   ],
   entryComponents: [
     DialogLoginComponent,
-    DialogLibraryComponent,
-    DialogBookComponent,
-    DialogBookingComponent
+    DialogEditLibraryComponent,
+    DialogEditBookComponent,
+    DialogBookingComponent,
+    DialogAddBooksComponent
   ],
   bootstrap: [AppComponent]
 })
