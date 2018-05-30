@@ -54,6 +54,7 @@
             *ngFor="let book2library of library.book2library"
             [book]="book2library.book"
             [book2library]="book2library"
+            view="list"
             (onDelete)="onDeleteBook(book2library)"></app-book>
 
         </div>

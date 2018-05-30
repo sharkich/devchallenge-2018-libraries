@@ -11,10 +11,16 @@
     }
 
     .books {
+      margin-top: 24px;
+    }
+
+    .books.grid-view {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      margin-top: 24px;
+    }
+
+    .books.list-view {
     }
   }
 
