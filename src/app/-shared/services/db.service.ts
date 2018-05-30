@@ -61,6 +61,16 @@ export class DbService {
       });
   }
 
+  public add(table: string, data: any): Promise<any> {
+    return this.db.add(table, data)
+      .then((res) => {
+        return Promise.resolve(res);
+      }, (error) => {
+        console.error(error);
+        return Promise.reject(error);
+      });
+  }
+
   public delete(table: string, id: string|number): Promise<any> {
     return this.db.delete(table, id)
       .then((data) => {

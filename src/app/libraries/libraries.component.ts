@@ -6,14 +6,14 @@ import {AuthService} from '../-shared/services/auth.service';
 import {MatDialog} from '@angular/material';
 import {DialogEditLibraryComponent} from '../-shared/components/dialog-library/dialog-edit-library.component';
 import {Books2librariesModel} from '../-shared/models/books2libraries.model';
-import {DialogAddBooksComponent} from '../-shared/components/dialog-add-book/dialog-add-books.component';
+import {DialogAddBooksComponent} from '../-shared/components/dialog-add-books/dialog-add-books.component';
 
 @Component({
-  selector: 'app-popular-libraries',
-  templateUrl: './popular-libraries.component.html',
-  styleUrls: ['./popular-libraries.component.scss']
+  selector: 'app-libraries',
+  templateUrl: './libraries.component.html',
+  styleUrls: ['./libraries.component.scss']
 })
-export class PopularLibrariesComponent implements OnInit {
+export class LibrariesComponent implements OnInit {
 
   public libraries: LibrariesModel[] = [];
 

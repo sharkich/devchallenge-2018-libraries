@@ -1,0 +1,21 @@
+<div class="app-dialog-add-books">
+
+  <h1 mat-dialog-title>Add Books to Library &laquo;{{library.name}}&raquo;</h1>
+
+  <div mat-dialog-content>
+
+    <mat-nav-list>
+      <mat-list-item
+        *ngFor="let book of books"
+        (click)="onClick(book)">
+        <a matLine>{{ book.name }}</a>
+        <i>{{booksInLibrary[book.id]}}</i>
+      </mat-list-item>
+    </mat-nav-list>
+
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Close</button>
+  </div>
+</div>

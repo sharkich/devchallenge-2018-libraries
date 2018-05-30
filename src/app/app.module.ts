@@ -7,7 +7,7 @@ import {
   MatButtonModule,
   MatCardModule, MatDialogModule,
   MatExpansionModule,
-  MatInputModule,
+  MatInputModule, MatListModule,
   MatToolbarModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -16,8 +16,8 @@ import {AppComponent} from './app.component';
 import {LibrariesService} from './-shared/services/libraries.service';
 import {BooksService} from './-shared/services/books.service';
 import {SearchBooksComponent} from './search-books/search-books.component';
-import {PopularBooksComponent} from './popular-books/popular-books.component';
-import {PopularLibrariesComponent} from './popular-libraries/popular-libraries.component';
+import {BooksComponent} from './books/books.component';
+import {LibrariesComponent} from './libraries/libraries.component';
 import {BookComponent} from './-shared/components/book/book.component';
 import {GeolocationService} from './-shared/services/geolocation.service';
 import {DialogLoginComponent} from './-shared/components/dialog-login/dialog-login.component';
@@ -26,14 +26,14 @@ import {DialogEditLibraryComponent} from './-shared/components/dialog-library/di
 import {DialogEditBookComponent} from './-shared/components/dialog-edit-book/dialog-edit-book.component';
 import {DialogBookingComponent} from './-shared/components/dialog-booking/dialog-booking.component';
 import {DbService} from './-shared/services/db.service';
-import {DialogAddBooksComponent} from './-shared/components/dialog-add-book/dialog-add-books.component';
+import {DialogAddBooksComponent} from './-shared/components/dialog-add-books/dialog-add-books.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchBooksComponent,
-    PopularBooksComponent,
-    PopularLibrariesComponent,
+    BooksComponent,
+    LibrariesComponent,
     BookComponent,
     DialogLoginComponent,
     DialogEditLibraryComponent,
@@ -54,7 +54,8 @@ import {DialogAddBooksComponent} from './-shared/components/dialog-add-book/dial
     MatInputModule,
     MatButtonModule,
     MatExpansionModule,
-    MatDialogModule
+    MatDialogModule,
+    MatListModule
   ],
   providers: [
     LibrariesService,

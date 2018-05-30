@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {LibrariesModel} from '../models/libraries.model';
-import {Books2librariesModel} from '../models/books2libraries.model';
+import {Books2librariesModel, BOOKS_BOOKING_STATUS} from '../models/books2libraries.model';
 import {APP_CONFIG} from '../../app.config';
 import {DbService} from './db.service';
 import {BooksService} from './books.service';
@@ -72,6 +72,21 @@ export class LibrariesService {
 
   public removeBook(book2library: Books2librariesModel): Promise<any> {
     return this.db.delete(APP_CONFIG.db.tables.books2libraries, book2library.id)
+      .catch((error) => {
+        console.error('error', error);
+        return Promise.reject(error);
+      });
+  }
+
+  public addBook(book: BooksModel, library: LibrariesModel): Promise<Books2librariesModel> {
+    const books2libraries = new Books2librariesModel({
+      bookId: book.id,
+      libraryId: library.id,
+      status: BOOKS_BOOKING_STATUS.FREE,
+      rentTime: ''
+    });
+    delete books2libraries.id;
+    return this.db.add(APP_CONFIG.db.tables.books2libraries, books2libraries)
       .catch((error) => {
         console.error('error', error);
         return Promise.reject(error);
