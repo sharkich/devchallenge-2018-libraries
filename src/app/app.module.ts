@@ -7,7 +7,7 @@ import {
   MatButtonModule,
   MatCardModule, MatDialogModule,
   MatExpansionModule,
-  MatInputModule, MatListModule,
+  MatInputModule, MatListModule, MatMenuModule,
   MatToolbarModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -55,7 +55,8 @@ import {DialogAddBooksComponent} from './-shared/components/dialog-add-books/dia
     MatButtonModule,
     MatExpansionModule,
     MatDialogModule,
-    MatListModule
+    MatListModule,
+    MatMenuModule
   ],
   providers: [
     LibrariesService,

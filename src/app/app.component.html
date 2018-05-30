@@ -16,11 +16,39 @@
         *ngIf="!isLogin()"
         mat-raised-button
         (click)="onSignIn()">Sign in</button>
-      <button
-        *ngIf="isLogin()"
-        mat-raised-button
-        color="primary"
-        (click)="onSignOut()">Sign out</button>
+
+      <div *ngIf="isLogin()">
+
+        <mat-menu #backupMenu="matMenu">
+          <button mat-menu-item class="backup-menu-item">
+            <i class="material-icons">
+              backup
+            </i>
+            Create backup
+          </button>
+          <button mat-menu-item class="backup-menu-item">
+            <i class="material-icons">
+              settings_backup_restore
+            </i>
+            Restore from backup
+          </button>
+        </mat-menu>
+
+        <button
+          mat-raised-button
+          color="primary"
+          [matMenuTriggerFor]="backupMenu">
+          <i class="material-icons">
+            backup
+          </i>
+        </button>
+
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="onSignOut()">Sign out</button>
+      </div>
+
     </div>
   </mat-toolbar>
 
