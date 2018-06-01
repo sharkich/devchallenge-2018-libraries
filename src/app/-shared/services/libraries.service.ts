@@ -14,7 +14,7 @@ export class LibrariesService {
     private booksService: BooksService) {
   }
 
-  public list(limit: number = 10): Promise<LibrariesModel[]> {
+  public list(): Promise<LibrariesModel[]> {
     return this.db.list(APP_CONFIG.db.tables.libraries)
       .then((objs: any[]) => objs.map((obj) => new LibrariesModel(obj)))
       .catch((error) => {
@@ -40,29 +40,16 @@ export class LibrariesService {
       });
   }
 
-  public books2libraries(libraries: LibrariesModel[]): Promise<any> {
+  public books2libraries(libraries?: LibrariesModel[]): Promise<any> {
     return this.db.list(APP_CONFIG.db.tables.books2libraries)
       .then((objs: any) => {
         const books2libraries = objs.map((obj) => new Books2librariesModel(obj));
+        if (!libraries) {
+          return books2libraries;
+        }
 
-        const librariesObj = libraries.reduce((obj, library) => {
-          obj[library.id] = library;
-          return obj;
-        }, {});
+        return this.updateLibraries(libraries, books2libraries);
 
-        const promises = [];
-
-        books2libraries.forEach((book2library: Books2librariesModel) => {
-          const library: LibrariesModel = librariesObj[book2library.libraryId];
-          const promise = this.booksService.getById(book2library.bookId)
-            .then((book: BooksModel) => {
-              book2library.book = book;
-              library.book2library.push(book2library);
-            });
-          promises.push(promise);
-        });
-
-        return Promise.all(promises);
       })
       .catch((error) => {
         console.error('error', error);
@@ -91,6 +78,27 @@ export class LibrariesService {
         console.error('error', error);
         return Promise.reject(error);
       });
+  }
+
+  private updateLibraries(libraries: LibrariesModel[], books2libraries: Books2librariesModel[]): Promise<any> {
+    const librariesObj = libraries.reduce((obj, library) => {
+      obj[library.id] = library;
+      return obj;
+    }, {});
+
+    const promises = [];
+
+    books2libraries.forEach((book2library: Books2librariesModel) => {
+      const library: LibrariesModel = librariesObj[book2library.libraryId];
+      const promise = this.booksService.getById(book2library.bookId)
+        .then((book: BooksModel) => {
+          book2library.book = book;
+          library.book2library.push(book2library);
+        });
+      promises.push(promise);
+    });
+
+    return Promise.all(promises);
   }
 
 }

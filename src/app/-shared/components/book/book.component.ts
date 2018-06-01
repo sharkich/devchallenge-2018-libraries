@@ -28,6 +28,9 @@ export class BookComponent implements OnInit {
     public dialog: MatDialog) { }
 
   public ngOnInit() {
+    if (!this.view) {
+      this.view = APP_CONFIG.view.grid;
+    }
   }
 
   public isLogin(): boolean {

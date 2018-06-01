@@ -20,13 +20,21 @@
       <div *ngIf="isLogin()">
 
         <mat-menu #backupMenu="matMenu">
-          <button mat-menu-item class="backup-menu-item">
+          <button
+            (click)="onCreateBackup()"
+            mat-menu-item
+            type="button"
+            class="backup-menu-item">
             <i class="material-icons">
               backup
             </i>
             Create backup
           </button>
-          <button mat-menu-item class="backup-menu-item">
+          <button
+            (click)="onRestoreBackup()"
+            mat-menu-item
+            type="button"
+            class="backup-menu-item">
             <i class="material-icons">
               settings_backup_restore
             </i>

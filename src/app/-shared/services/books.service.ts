@@ -9,7 +9,7 @@ export class BooksService {
   constructor(private db: DbService) {
   }
 
-  public list(limit: number = 10): Promise<BooksModel[]> {
+  public list(): Promise<BooksModel[]> {
     return this.db.list(APP_CONFIG.db.tables.books)
       .then((objs: BooksModel[]) => objs.map((obj) => new BooksModel(obj)))
       .catch((error) => {

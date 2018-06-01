@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {DialogLoginComponent} from './-shared/components/dialog-login/dialog-login.component';
 import {AuthService} from './-shared/services/auth.service';
+import {BackupService} from './-shared/services/backup.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,8 @@ export class AppComponent {
 
   constructor(
     private dialog: MatDialog,
-    private authService: AuthService
+    private authService: AuthService,
+    private backupService: BackupService
   ) {
   }
 
@@ -26,6 +28,14 @@ export class AppComponent {
 
   public onSignOut() {
     this.authService.signout();
+  }
+
+  public onCreateBackup() {
+    this.backupService.create();
+  }
+
+  public onRestoreBackup() {
+    this.backupService.restore();
   }
 
 }
