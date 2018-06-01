@@ -5,6 +5,7 @@ import {AuthService} from '../-shared/services/auth.service';
 import {MatDialog} from '@angular/material';
 import {DialogEditBookComponent} from '../-shared/components/dialog-edit-book/dialog-edit-book.component';
 import {APP_CONFIG} from '../app.config';
+import {ChangesService} from '../-shared/services/changes.service';
 
 const COMPONENT_KEY = APP_CONFIG.localStorage['app-popular-books'];
 
@@ -22,10 +23,12 @@ export class BooksComponent implements OnInit {
   constructor(
     private booksService: BooksService,
     private authService: AuthService,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private changesService: ChangesService) { }
 
   ngOnInit() {
     this.getList();
+    this.changesService.books.subscribe(this.getList.bind(this));
     this.view = window.localStorage.getItem(COMPONENT_KEY.isListView);
   }
 

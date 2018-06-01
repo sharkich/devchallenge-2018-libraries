@@ -20,7 +20,7 @@ export class BooksService {
 
   public getById(id: string): Promise<BooksModel> {
     return this.db.getById(APP_CONFIG.db.tables.books, id)
-      .then((obj) => new BooksModel(obj))
+      .then((obj) => obj && new BooksModel(obj))
       .catch((error) => {
         console.error('error', error);
         return Promise.reject(error);

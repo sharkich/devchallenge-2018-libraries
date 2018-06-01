@@ -90,6 +90,10 @@ export class LibrariesService {
   }
 
   private updateLibraries(libraries: LibrariesModel[], books2libraries: Books2librariesModel[]): Promise<any> {
+    if (!libraries || !libraries.length || !books2libraries || !books2libraries.length) {
+      return;
+    }
+
     const librariesObj = libraries.reduce((obj, library) => {
       obj[library.id] = library;
       return obj;
@@ -98,9 +102,18 @@ export class LibrariesService {
     const promises = [];
 
     books2libraries.forEach((book2library: Books2librariesModel) => {
+      if (!book2library) {
+        return;
+      }
       const library: LibrariesModel = librariesObj[book2library.libraryId];
+      if (!library) {
+        return;
+      }
       const promise = this.booksService.getById(book2library.bookId)
         .then((book: BooksModel) => {
+          if (!book) {
+            return;
+          }
           book2library.book = book;
           library.book2library.push(book2library);
         });

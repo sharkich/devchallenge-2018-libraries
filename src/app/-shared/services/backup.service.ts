@@ -74,7 +74,6 @@ export class BackupService {
         ]);
       })
       .then(() => {
-        console.log('all clear');
         const promises: Promise<any>[] = [];
         libraries.forEach((library) => {
           promises.push(this.librariesService.save(library));
@@ -86,9 +85,6 @@ export class BackupService {
           promises.push(this.librariesService.saveBook2Library(book2library));
         });
         return promises;
-      })
-      .then(() => {
-        console.log('all saved');
       })
       .catch((err) => {
         console.log(err);

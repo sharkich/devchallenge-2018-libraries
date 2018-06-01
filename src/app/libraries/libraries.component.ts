@@ -7,6 +7,7 @@ import {MatDialog} from '@angular/material';
 import {DialogEditLibraryComponent} from '../-shared/components/dialog-library/dialog-edit-library.component';
 import {Books2librariesModel} from '../-shared/models/books2libraries.model';
 import {DialogAddBooksComponent} from '../-shared/components/dialog-add-books/dialog-add-books.component';
+import {ChangesService} from '../-shared/services/changes.service';
 
 @Component({
   selector: 'app-libraries',
@@ -21,12 +22,14 @@ export class LibrariesComponent implements OnInit {
   constructor(
     private librariesService: LibrariesService,
     private geolocationService: GeolocationService,
+    private changesService: ChangesService,
     public authService: AuthService,
     public dialog: MatDialog) {
   }
 
   public ngOnInit() {
     this.getList();
+    this.changesService.libraries.subscribe(this.getList.bind(this));
   }
 
   public isLogin(): boolean {

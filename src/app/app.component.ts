@@ -3,6 +3,7 @@ import {MatDialog} from '@angular/material';
 import {DialogLoginComponent} from './-shared/components/dialog-login/dialog-login.component';
 import {AuthService} from './-shared/services/auth.service';
 import {BackupService} from './-shared/services/backup.service';
+import {ChangesService} from './-shared/services/changes.service';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ export class AppComponent {
   constructor(
     private dialog: MatDialog,
     private authService: AuthService,
-    private backupService: BackupService
+    private backupService: BackupService,
+    private changesService: ChangesService
   ) {
   }
 
@@ -49,8 +51,9 @@ export class AppComponent {
 
     this.backupService.restore(files.item(0))
       .then(() => {
-        console.log('all done');
-        // window.location.reload();
+        this.changesService.libraries.emit();
+        this.changesService.books.emit();
+        this.changesService.books2libraries.emit();
       });
   }
 
