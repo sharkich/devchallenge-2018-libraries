@@ -4,19 +4,20 @@ import {LibrariesModel} from '../models/libraries.model';
 import {Books2librariesModel} from '../models/books2libraries.model';
 import {LibrariesService} from './libraries.service';
 import {BooksService} from './books.service';
+import {DbService} from './db.service';
+import {APP_CONFIG} from '../../app.config';
 
 @Injectable()
 export class BackupService {
 
   constructor(
+    private db: DbService,
     private librariesService: LibrariesService,
     private booksService: BooksService
   ) {
   }
 
   public create() {
-    console.log('create');
-
     Promise.all([
       this.getLibraries(),
       this.getBooks(),
@@ -38,8 +39,61 @@ export class BackupService {
       });
   }
 
-  public restore() {
-    console.log('restore');
+  public restore(file: File): Promise<any> {
+    let libraries: LibrariesModel[];
+    let books: BooksModel[];
+    let books2libraries: Books2librariesModel[];
+
+    return new Promise((resolve, reject) => {
+      const fr = new FileReader();
+      fr.onload = (e: any) => {
+        try {
+          const result = JSON.parse(e.target.result);
+          if (!result || !result.libraries || !result.books || !result.books2libraries) {
+            reject(new Error('Invalid JSON'));
+          }
+          resolve(result);
+
+        } catch (e) {
+          console.log('Error: Parsing JSON');
+          reject(e);
+        }
+
+      };
+      fr.readAsText(file);
+    })
+      .then((res: any) => {
+        libraries = res.libraries.map((obj) => new LibrariesModel(obj));
+        books = res.books.map((obj) => new BooksModel(obj));
+        books2libraries = res.books2libraries.map((obj) => new Books2librariesModel(obj));
+
+        return Promise.all([
+          this.db.clear(APP_CONFIG.db.tables.libraries),
+          this.db.clear(APP_CONFIG.db.tables.books),
+          this.db.clear(APP_CONFIG.db.tables.books2libraries)
+        ]);
+      })
+      .then(() => {
+        console.log('all clear');
+        const promises: Promise<any>[] = [];
+        libraries.forEach((library) => {
+          promises.push(this.librariesService.save(library));
+        });
+        books.forEach((book) => {
+          promises.push(this.booksService.save(book));
+        });
+        books2libraries.forEach((book2library) => {
+          promises.push(this.librariesService.saveBook2Library(book2library));
+        });
+        return promises;
+      })
+      .then(() => {
+        console.log('all saved');
+      })
+      .catch((err) => {
+        console.log(err);
+        return Promise.reject(err);
+      });
   }
 
   private getLibraries(): Promise<LibrariesModel[]> {

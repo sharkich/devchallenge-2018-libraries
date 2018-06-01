@@ -20,6 +20,7 @@
       <div *ngIf="isLogin()">
 
         <mat-menu #backupMenu="matMenu">
+
           <button
             (click)="onCreateBackup()"
             mat-menu-item
@@ -30,6 +31,7 @@
             </i>
             Create backup
           </button>
+
           <button
             (click)="onRestoreBackup()"
             mat-menu-item
@@ -40,6 +42,13 @@
             </i>
             Restore from backup
           </button>
+          <input
+            type="file"
+            #uploadFile
+            [hidden]="true"
+            accept=".json"
+            (change)="onUploadFile($event)"/>
+
         </mat-menu>
 
         <button

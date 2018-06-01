@@ -80,6 +80,15 @@ export class LibrariesService {
       });
   }
 
+  public saveBook2Library(book2library: Books2librariesModel): Promise<Books2librariesModel> {
+    delete book2library.id;
+    return this.db.add(APP_CONFIG.db.tables.books2libraries, book2library)
+      .catch((error) => {
+        console.error('error', error);
+        return Promise.reject(error);
+      });
+  }
+
   private updateLibraries(libraries: LibrariesModel[], books2libraries: Books2librariesModel[]): Promise<any> {
     const librariesObj = libraries.reduce((obj, library) => {
       obj[library.id] = library;

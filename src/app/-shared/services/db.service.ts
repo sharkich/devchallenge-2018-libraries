@@ -81,6 +81,10 @@ export class DbService {
       });
   }
 
+  public clear(table: string): Promise<any> {
+    return this.db.clear(table);
+  }
+
   private createTables(evt: any) {
     const booksStore: IDBObjectStore = evt.currentTarget.result
       .createObjectStore(APP_CONFIG.db.tables.books, {keyPath: 'id'});

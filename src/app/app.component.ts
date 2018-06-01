@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {DialogLoginComponent} from './-shared/components/dialog-login/dialog-login.component';
 import {AuthService} from './-shared/services/auth.service';
@@ -10,6 +10,8 @@ import {BackupService} from './-shared/services/backup.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  @ViewChild('uploadFile') uploadFile; // hidden. for upload
 
   constructor(
     private dialog: MatDialog,
@@ -35,7 +37,21 @@ export class AppComponent {
   }
 
   public onRestoreBackup() {
-    this.backupService.restore();
+    this.uploadFile.nativeElement.click();
+    // this.backupService.restore();
+  }
+
+  public onUploadFile(event) {
+    const files = event.srcElement.files;
+    if (files.length <= 0) {
+      return false;
+    }
+
+    this.backupService.restore(files.item(0))
+      .then(() => {
+        console.log('all done');
+        // window.location.reload();
+      });
   }
 
 }
