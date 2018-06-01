@@ -7,6 +7,7 @@ import {DialogEditBookComponent} from '../dialog-edit-book/dialog-edit-book.comp
 import {DialogBookingComponent} from '../dialog-booking/dialog-booking.component';
 import {Books2librariesModel} from '../../models/books2libraries.model';
 import {APP_CONFIG} from '../../../app.config';
+import {ChangesService} from '../../services/changes.service';
 
 @Component({
   selector: 'app-book',
@@ -25,12 +26,18 @@ export class BookComponent implements OnInit {
   constructor(
     private geolocationService: GeolocationService,
     private authService: AuthService,
+    private changesService: ChangesService,
     public dialog: MatDialog) { }
 
   public ngOnInit() {
     if (!this.view) {
       this.view = APP_CONFIG.view.grid;
     }
+    this.changesService.book.subscribe((changedBook: BooksModel) => {
+      if (changedBook.id === this.book.id) {
+        this.book = changedBook;
+      }
+    });
   }
 
   public isLogin(): boolean {

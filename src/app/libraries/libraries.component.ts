@@ -8,6 +8,7 @@ import {DialogEditLibraryComponent} from '../-shared/components/dialog-library/d
 import {Books2librariesModel} from '../-shared/models/books2libraries.model';
 import {DialogAddBooksComponent} from '../-shared/components/dialog-add-books/dialog-add-books.component';
 import {ChangesService} from '../-shared/services/changes.service';
+import {BooksModel} from '../-shared/models/books.model';
 
 @Component({
   selector: 'app-libraries',
@@ -30,6 +31,7 @@ export class LibrariesComponent implements OnInit {
   public ngOnInit() {
     this.getList();
     this.changesService.libraries.subscribe(this.getList.bind(this));
+    this.changesService.bookDelete.subscribe(this.onDeleteAllBooks.bind(this));
   }
 
   public isLogin(): boolean {
@@ -101,6 +103,10 @@ export class LibrariesComponent implements OnInit {
 
   public onDeleteBook(book2library: Books2librariesModel) {
     this.getList(); // todo: optimize for blinking
+  }
+
+  private onDeleteAllBooks(book: BooksModel) {
+    this.librariesService.removeAllBookFromLibraries(this.libraries, book);
   }
 
   public onSelectLibrary(library: LibrariesModel) {

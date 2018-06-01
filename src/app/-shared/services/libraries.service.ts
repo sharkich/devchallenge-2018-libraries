@@ -57,6 +57,16 @@ export class LibrariesService {
       });
   }
 
+  public removeAllBookFromLibraries(libraries: LibrariesModel[], bookDeleted: BooksModel) {
+    libraries.forEach((library: LibrariesModel) => {
+      const book2library = library.book2library
+        .filter((b2l: Books2librariesModel) => b2l.book.id !== bookDeleted.id);
+      if (book2library.length !== library.book2library.length) {
+        library.book2library = book2library;
+      }
+    });
+  }
+
   public removeBook(book2library: Books2librariesModel): Promise<any> {
     return this.db.delete(APP_CONFIG.db.tables.books2libraries, book2library.id)
       .catch((error) => {

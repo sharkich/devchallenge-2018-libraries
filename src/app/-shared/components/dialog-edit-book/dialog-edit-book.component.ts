@@ -6,6 +6,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BooksService} from '../../services/books.service';
 import {LibrariesService} from '../../services/libraries.service';
 import {Books2librariesModel} from '../../models/books2libraries.model';
+import {ChangesService} from '../../services/changes.service';
 
 @Component({
   selector: 'app-edit-dialog-book',
@@ -23,7 +24,8 @@ export class DialogEditBookComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private data: any,
     private formBuilder: FormBuilder,
     private booksService: BooksService,
-    private librariesService: LibrariesService
+    private librariesService: LibrariesService,
+    private changesService: ChangesService
   ) {
   }
 
@@ -53,6 +55,9 @@ export class DialogEditBookComponent implements OnInit {
       .then((savedBook: BooksModel) => {
         const isNew = this.book.isNew;
         this.book = savedBook;
+
+        this.changesService.book.emit(savedBook);
+
         this.dialogRef.close(isNew); // Refresh list or don't
       });
   }
@@ -64,6 +69,7 @@ export class DialogEditBookComponent implements OnInit {
   public onDelete() {
     this.booksService.delete(this.book)
       .then(() => {
+        this.changesService.bookDelete.emit(this.book);
         this.dialogRef.close(true); // Refresh list
       });
   }

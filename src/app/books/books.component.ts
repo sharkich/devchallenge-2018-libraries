@@ -29,6 +29,7 @@ export class BooksComponent implements OnInit {
   ngOnInit() {
     this.getList();
     this.changesService.books.subscribe(this.getList.bind(this));
+    this.changesService.bookDelete.subscribe(this.onDeleteBook.bind(this));
     this.view = window.localStorage.getItem(COMPONENT_KEY.isListView);
   }
 
