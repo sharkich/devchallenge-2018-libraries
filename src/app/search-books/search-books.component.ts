@@ -5,6 +5,8 @@ import {map, startWith} from 'rxjs/operators';
 import {LibrariesService} from '../-shared/services/libraries.service';
 import {BooksModel} from '../-shared/models/books.model';
 import {BooksService} from '../-shared/services/books.service';
+import {DialogBookingComponent} from '../-shared/components/dialog-booking/dialog-booking.component';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-search-books',
@@ -20,7 +22,8 @@ export class SearchBooksComponent implements OnInit {
 
   constructor(
     private librariesService: LibrariesService,
-    private booksService: BooksService) {
+    private booksService: BooksService,
+    private dialog: MatDialog) {
   }
 
   public ngOnInit() {
@@ -54,7 +57,16 @@ export class SearchBooksComponent implements OnInit {
     if (!isSelected) {
       return;
     }
-    console.log('select', isSelected, book.name);
+    const dialogRef = this.dialog.open(DialogBookingComponent, {
+      width: '650px',
+      data: {
+        book
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      // console.log('The dialog was closed', result);
+    });
   }
 
 }

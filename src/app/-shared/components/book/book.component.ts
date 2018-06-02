@@ -34,7 +34,7 @@ export class BookComponent implements OnInit, OnDestroy {
     private geolocationService: GeolocationService,
     private authService: AuthService,
     private changesService: ChangesService,
-    public dialog: MatDialog) { }
+    private dialog: MatDialog) { }
 
   public ngOnInit() {
     if (!this.view) {

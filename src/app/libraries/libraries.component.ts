@@ -24,8 +24,8 @@ export class LibrariesComponent implements OnInit {
     private librariesService: LibrariesService,
     private geolocationService: GeolocationService,
     private changesService: ChangesService,
-    public authService: AuthService,
-    public dialog: MatDialog) {
+    private authService: AuthService,
+    private dialog: MatDialog) {
   }
 
   public ngOnInit() {
