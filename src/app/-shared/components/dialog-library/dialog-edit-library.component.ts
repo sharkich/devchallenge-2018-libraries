@@ -6,6 +6,9 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LibrariesService} from '../../services/libraries.service';
 import {DialogLoginComponent} from '../dialog-login/dialog-login.component';
 
+/**
+ * Dialog edit library
+ */
 @Component({
   selector: 'app-dialog-edit-library',
   templateUrl: './dialog-edit-library.component.html',
@@ -13,7 +16,14 @@ import {DialogLoginComponent} from '../dialog-login/dialog-login.component';
 })
 export class DialogEditLibraryComponent implements OnInit {
 
+  /**
+   * Library
+   */
   private library: LibrariesModel;
+
+  /**
+   * Form for edit library
+   */
   public libraryForm: FormGroup;
 
   constructor(
@@ -34,6 +44,9 @@ export class DialogEditLibraryComponent implements OnInit {
     });
   }
 
+  /**
+   * Handle submit event
+   */
   public onSaveLibrary() {
     if (this.libraryForm.invalid) {
       return;
@@ -52,10 +65,16 @@ export class DialogEditLibraryComponent implements OnInit {
 
   }
 
+  /**
+   * Close dialog
+   */
   public onCancel() {
     this.dialogRef.close();
   }
 
+  /**
+   * Delete library
+   */
   public onDelete() {
     this.librariesService.delete(this.library)
       .then(() => {

@@ -11,6 +11,9 @@ import {Books2librariesModel} from '../../models/books2libraries.model';
 import {DialogEditBookComponent} from '../dialog-edit-book/dialog-edit-book.component';
 import {DialogBookingComponent} from '../dialog-booking/dialog-booking.component';
 
+/**
+ * Book component (tile of list view)
+ */
 @Component({
   selector: 'app-book',
   templateUrl: './book.component.html',
@@ -18,16 +21,36 @@ import {DialogBookingComponent} from '../dialog-booking/dialog-booking.component
 })
 export class BookComponent implements OnInit, OnDestroy {
 
+  /**
+   * Edited book
+   */
   @Input() public book: BooksModel;
+
+  /**
+   * Book in library (if present)
+   */
   @Input() public book2library?: Books2librariesModel;
 
+  /**
+   * Kind of view (pipe/list)
+   * @type {string}
+   */
   @Input() public view?: string = APP_CONFIG.view.grid;
 
   @Output() public onDelete: EventEmitter<any> = new EventEmitter<any>();
 
+  /**
+   * Status rented book or free
+   */
   public isBookRented: boolean;
+  /**
+   * Time when rent if over
+   */
   public rentDiffTime: string;
 
+  /**
+   * Inner timer for check book status
+   */
   private _setInterval;
 
   constructor(
@@ -65,14 +88,25 @@ export class BookComponent implements OnInit, OnDestroy {
     this.stopCheckingRent();
   }
 
+  /**
+   * Check view from admin
+   * @return {boolean}
+   */
   public isLogin(): boolean {
     return this.authService.isLogin();
   }
 
+  /**
+   * Check geo support
+   * @return {boolean}
+   */
   public get isGeoSupported(): boolean {
     return this.geolocationService.isSupported();
   }
 
+  /**
+   * Handle click event on edit button
+   */
   public onEditBook() {
     const dialogRef = this.dialog.open(DialogEditBookComponent, {
       width: '650px',
@@ -89,6 +123,9 @@ export class BookComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Handle click on booking button
+   */
   public onBookBook() {
     const dialogRef = this.dialog.open(DialogBookingComponent, {
       width: '650px',
@@ -103,6 +140,9 @@ export class BookComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Handle click on return book to library (change status to free)
+   */
   public onReturnBook() {
     this.librariesService.returnBook(this.book2library)
       .then((book2library) => {
@@ -111,6 +151,9 @@ export class BookComponent implements OnInit, OnDestroy {
       });
   }
 
+  /**
+   * Start process for checking book status
+   */
   private startCheckingRent() {
     if (this.book2library) {
       this._setInterval = setInterval(() => {
@@ -124,6 +167,9 @@ export class BookComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Stop process for checking book status
+   */
   private stopCheckingRent() {
     clearInterval(this._setInterval);
   }

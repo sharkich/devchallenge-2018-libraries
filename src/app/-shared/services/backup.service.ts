@@ -8,6 +8,9 @@ import {LibrariesService} from './libraries.service';
 import {LibrariesModel} from '../models/libraries.model';
 import {Books2librariesModel} from '../models/books2libraries.model';
 
+/**
+ * Service for backuping
+ */
 @Injectable()
 export class BackupService {
 
@@ -18,6 +21,9 @@ export class BackupService {
   ) {
   }
 
+  /**
+   * Create backup and download JSON
+   */
   public create() {
     Promise.all([
       this.getLibraries(),
@@ -40,6 +46,11 @@ export class BackupService {
       });
   }
 
+  /**
+   * Restore backup from JSON with clearing DB
+   * @param {File} file
+   * @return {Promise<any>}
+   */
   public restore(file: File): Promise<any> {
     let libraries: LibrariesModel[];
     let books: BooksModel[];
@@ -93,14 +104,26 @@ export class BackupService {
       });
   }
 
+  /**
+   * Get all Libraries from DB
+   * @return {Promise<LibrariesModel[]>}
+   */
   private getLibraries(): Promise<LibrariesModel[]> {
     return this.librariesService.list();
   }
 
+  /**
+   * Get all books from DB
+   * @return {Promise<BooksModel[]>}
+   */
   private getBooks(): Promise<BooksModel[]> {
     return this.booksService.list();
   }
 
+  /**
+   * Get all books in libraries from DB
+   * @return {Promise<Books2librariesModel[]>}
+   */
   private getBooks2libraries(): Promise<Books2librariesModel[]> {
     return this.librariesService.books2libraries();
   }

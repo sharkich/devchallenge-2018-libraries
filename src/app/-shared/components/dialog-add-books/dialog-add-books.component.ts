@@ -8,6 +8,9 @@ import {LibrariesService} from '../../services/libraries.service';
 import {Books2librariesModel} from '../../models/books2libraries.model';
 import {DialogLoginComponent} from '../dialog-login/dialog-login.component';
 
+/**
+ * Dialog for add books in library
+ */
 @Component({
   selector: 'app-dialog-add-books',
   templateUrl: './dialog-add-books.component.html',
@@ -15,8 +18,21 @@ import {DialogLoginComponent} from '../dialog-login/dialog-login.component';
 })
 export class DialogAddBooksComponent implements OnInit {
 
+  /**
+   * Library
+   */
   public library: LibrariesModel;
+
+  /**
+   * All books
+   * @type {BooksModel[]}
+   */
   public books: BooksModel[] = [];
+
+  /**
+   * Book it library
+   * @type {Books2librariesModel}
+   */
   public booksInLibrary: any = {};
 
   constructor(
@@ -31,10 +47,17 @@ export class DialogAddBooksComponent implements OnInit {
     this.getList();
   }
 
+  /**
+   * Handle for close dialog
+   */
   public onCancel() {
     this.dialogRef.close(true);
   }
 
+  /**
+   * Add book to library
+   * @param {BooksModel} book
+   */
   public onClick(book: BooksModel) {
     this.librariesService.addBook(book, this.library)
       .then(() => {
@@ -42,6 +65,9 @@ export class DialogAddBooksComponent implements OnInit {
       });
   }
 
+  /**
+   * Get books inside library
+   */
   private getList() {
     this.booksService.list()
       .then((books: BooksModel[]) => {

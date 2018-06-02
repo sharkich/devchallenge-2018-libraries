@@ -5,6 +5,9 @@ export interface IPoint {
   longitude: number;
 }
 
+/**
+ * Service for GEO-location
+ */
 @Injectable()
 export class GeolocationService {
 
@@ -18,10 +21,19 @@ export class GeolocationService {
     }
   }
 
+  /**
+   * Check is geo location is supported
+   * @return {boolean}
+   */
   public isSupported(): boolean {
     return !!this.currentPosition;
   }
 
+  /**
+   * Calculate distance from current position to point
+   * @param {IPoint} coordinates
+   * @return {number}
+   */
   public distanceTo(coordinates: IPoint): number {
     if (!this.isSupported()) {
       return;
@@ -29,6 +41,12 @@ export class GeolocationService {
     return this.distance(coordinates, this.currentPosition.coords);
   }
 
+  /**
+   * Calculate distance between two points
+   * @param {IPoint} point1
+   * @param {IPoint} point2
+   * @return {number}
+   */
   public distance(point1: IPoint, point2: IPoint): number {
     const R = 6371; // Radius of the earth in km
     const dLat = this.deg2rad(point2.latitude - point1.latitude);  // deg2rad below
@@ -43,15 +61,28 @@ export class GeolocationService {
     return d;
   }
 
+  /**
+   * Convert degrees to radiance
+   * @param {number} deg
+   * @return {number}
+   */
   private deg2rad(deg: number): number {
     return deg * (Math.PI / 180);
   }
 
-  private successGeo(position) {
+  /**
+   * Handle success current location initiate
+   * @param {Position} position
+   */
+  private successGeo(position: Position) {
     this.currentPosition = position;
     console.log('currentPosition', this.currentPosition);
   }
 
+  /**
+   * Handle error event initiate current position
+   * @param error
+   */
   private errorGeo(error) {
     switch (error.code) {
       case error.PERMISSION_DENIED:

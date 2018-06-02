@@ -9,6 +9,9 @@ import {GeolocationService} from '../../services/geolocation.service';
 import {Books2librariesModel} from '../../models/books2libraries.model';
 import {DialogLoginComponent} from '../dialog-login/dialog-login.component';
 
+/**
+ * Dialog for booking book
+ */
 @Component({
   selector: 'app-dialog-booking',
   templateUrl: './dialog-booking.component.html',
@@ -16,10 +19,24 @@ import {DialogLoginComponent} from '../dialog-login/dialog-login.component';
 })
 export class DialogBookingComponent implements OnInit {
 
+  /**
+   * Book
+   */
   public book: BooksModel;
+
+  /**
+   * Book in library
+   */
   public book2library?: Books2librariesModel;
+
+  /**
+   * Data for QR-Code
+   */
   public qrCodeData: string;
 
+  /**
+   * Libraries where book present
+   */
   public libraries = {
     free: [],
     rented: []
@@ -60,18 +77,33 @@ export class DialogBookingComponent implements OnInit {
       });
   }
 
+  /**
+   * Close dialog
+   */
   public onCancel() {
     this.dialogRef.close();
   }
 
+  /**
+   * Distance to library
+   * @param {LibrariesModel} library
+   * @return {number}
+   */
   public distance(library: LibrariesModel): number {
     return this.geolocationService.distanceTo(library.geo);
   }
 
+  /**
+   * Check is geo support
+   * @return {boolean}
+   */
   public get isGeoSupported(): boolean {
     return this.geolocationService.isSupported();
   }
 
+  /**
+   * Download QR-Code
+   */
   public onDownload() {
     const canvasElement = this.elementRef.nativeElement.querySelector('canvas');
     // download
@@ -83,6 +115,10 @@ export class DialogBookingComponent implements OnInit {
     document.body.removeChild(link);
   }
 
+  /**
+   * Book the book
+   * @param {LibrariesModel} library
+   */
   public onBookingInLibrary(library: LibrariesModel) {
     this.librariesService.bookBookInLibrary(this.book, library)
       .then((book2library) => {
@@ -90,6 +126,10 @@ export class DialogBookingComponent implements OnInit {
       });
   }
 
+  /**
+   * Update booking and QR-Code data
+   * @param {Books2librariesModel} book2library
+   */
   private setBooking(book2library: Books2librariesModel) {
     this.book2library = book2library;
     this.qrCodeData = JSON.stringify({

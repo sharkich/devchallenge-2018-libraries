@@ -1,3 +1,6 @@
+/**
+ * Main Application Config
+ */
 export const APP_CONFIG = {
   bookingMinutes: 1,
   url: {

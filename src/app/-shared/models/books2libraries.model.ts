@@ -2,11 +2,17 @@ import {BooksModel} from './books.model';
 import {GeneralModel} from './general.model';
 import {LibrariesModel} from './libraries.model';
 
+/**
+ * Book statuses inside library
+ */
 export const BOOKS_BOOKING_STATUS = {
   FREE: 'FREE',
   RENTED: 'RENTED'
 };
 
+/**
+ * Model for book inside library
+ */
 export class Books2librariesModel extends GeneralModel {
   public id: number;
   public bookId: string;

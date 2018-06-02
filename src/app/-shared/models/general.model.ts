@@ -1,3 +1,6 @@
+/**
+ * General model from check is it new
+ */
 export class GeneralModel {
 
   private _isNew = true;

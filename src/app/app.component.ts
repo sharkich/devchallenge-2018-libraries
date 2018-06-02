@@ -22,27 +22,48 @@ export class AppComponent {
   ) {
   }
 
+  /**
+   * Check auth user
+   * @return {boolean}
+   */
   public isLogin(): boolean {
     return this.authService.isLogin();
   }
 
+  /**
+   * Handle click event on "Sign in" button
+   */
   public onSignIn() {
     this.dialog.open(DialogLoginComponent, {width: '450px'});
   }
 
+  /**
+   * Handle click event on "Sign out" button
+   */
   public onSignOut() {
     this.authService.signout();
   }
 
+  /**
+   * Handle click on backup button
+   */
   public onCreateBackup() {
     this.backupService.create();
   }
 
+  /**
+   * Handle click on restore button
+   */
   public onRestoreBackup() {
     this.uploadFile.nativeElement.click();
     // this.backupService.restore();
   }
 
+  /**
+   * Handle event on file uploaded (#uploadFile input element)
+   * @param event
+   * @return {boolean}
+   */
   public onUploadFile(event) {
     const files = event.srcElement.files;
     if (files.length <= 0) {

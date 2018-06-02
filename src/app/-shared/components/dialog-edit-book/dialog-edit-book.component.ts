@@ -9,6 +9,9 @@ import {LibrariesService} from '../../services/libraries.service';
 import {Books2librariesModel} from '../../models/books2libraries.model';
 import {DialogLoginComponent} from '../dialog-login/dialog-login.component';
 
+/**
+ * Dialog for edit book
+ */
 @Component({
   selector: 'app-edit-dialog-book',
   templateUrl: './dialog-edit-book.component.html',
@@ -16,8 +19,19 @@ import {DialogLoginComponent} from '../dialog-login/dialog-login.component';
 })
 export class DialogEditBookComponent implements OnInit {
 
+  /**
+   * Book
+   */
   private book: BooksModel;
+
+  /**
+   * Book in library (if present)
+   */
   private book2library: Books2librariesModel;
+
+  /**
+   * Form with book data
+   */
   public bookForm: FormGroup;
 
   constructor(
@@ -42,6 +56,9 @@ export class DialogEditBookComponent implements OnInit {
     });
   }
 
+  /**
+   * Handle submit event
+   */
   public onSaveBook() {
     if (this.bookForm.invalid) {
       return;
@@ -63,10 +80,16 @@ export class DialogEditBookComponent implements OnInit {
       });
   }
 
+  /**
+   * Close dialog
+   */
   public onCancel() {
     this.dialogRef.close();
   }
 
+  /**
+   * Delete book from DB
+   */
   public onDelete() {
     this.booksService.delete(this.book)
       .then(() => {
@@ -75,6 +98,9 @@ export class DialogEditBookComponent implements OnInit {
       });
   }
 
+  /**
+   * Remove book from current library
+   */
   public onRemoveFromLibrary() {
     this.librariesService.removeBook(this.book2library)
       .then(() => {

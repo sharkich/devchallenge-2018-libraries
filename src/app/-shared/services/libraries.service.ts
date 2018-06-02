@@ -9,6 +9,9 @@ import {ChangesService} from './changes.service';
 import {LibrariesModel} from '../models/libraries.model';
 import {Books2librariesModel, BOOKS_BOOKING_STATUS} from '../models/books2libraries.model';
 
+/**
+ * Service for Libraries and Books inside Libraries
+ */
 @Injectable()
 export class LibrariesService {
 
@@ -18,6 +21,10 @@ export class LibrariesService {
     private changesService: ChangesService) {
   }
 
+  /**
+   * Get all libraries with books inside it
+   * @return {Promise<LibrariesModel[]>}
+   */
   public getFullLibraries(): Promise<LibrariesModel[]> {
     let libraries;
     return this.list()
@@ -28,6 +35,10 @@ export class LibrariesService {
       .then(() => libraries);
   }
 
+  /**
+   * Get all libraries
+   * @return {Promise<LibrariesModel[]>}
+   */
   public list(): Promise<LibrariesModel[]> {
     return this.db.list(APP_CONFIG.db.tables.libraries)
       .then((objs: any[]) => objs.map((obj) => new LibrariesModel(obj)))
@@ -37,6 +48,11 @@ export class LibrariesService {
       });
   }
 
+  /**
+   * Update/Add library
+   * @param {LibrariesModel} library
+   * @return {Promise<LibrariesModel>}
+   */
   public save(library: LibrariesModel): Promise<LibrariesModel> {
     return this.db.update(APP_CONFIG.db.tables.libraries, library)
       .then((obj) => new LibrariesModel(obj))
@@ -46,6 +62,11 @@ export class LibrariesService {
       });
   }
 
+  /**
+   * Delete library from DB
+   * @param {LibrariesModel} library
+   * @return {Promise<any>}
+   */
   public delete(library: LibrariesModel): Promise<any> {
     return this.db.delete(APP_CONFIG.db.tables.libraries, library.id)
       .catch((error) => {
@@ -54,6 +75,11 @@ export class LibrariesService {
       });
   }
 
+  /**
+   * Get books inside libraries and update libraries list
+   * @param {LibrariesModel[]} libraries
+   * @return {Promise<any>}
+   */
   public books2libraries(libraries?: LibrariesModel[]): Promise<any> {
     return this.db.list(APP_CONFIG.db.tables.books2libraries)
       .then((objs: any) => {
@@ -71,6 +97,11 @@ export class LibrariesService {
       });
   }
 
+  /**
+   * Delete book from all librariws
+   * @param {LibrariesModel[]} libraries
+   * @param {BooksModel} bookDeleted
+   */
   public removeAllBookFromLibraries(libraries: LibrariesModel[], bookDeleted: BooksModel) {
     libraries.forEach((library: LibrariesModel) => {
       const book2library = library.book2library
@@ -81,6 +112,11 @@ export class LibrariesService {
     });
   }
 
+  /**
+   * Remove book from library
+   * @param {Books2librariesModel} book2library
+   * @return {Promise<any>}
+   */
   public removeBook(book2library: Books2librariesModel): Promise<any> {
     return this.db.delete(APP_CONFIG.db.tables.books2libraries, book2library.id)
       .catch((error) => {
@@ -89,6 +125,12 @@ export class LibrariesService {
       });
   }
 
+  /**
+   * Add book to the library by book
+   * @param {BooksModel} book
+   * @param {LibrariesModel} library
+   * @return {Promise<Books2librariesModel>}
+   */
   public addBook(book: BooksModel, library: LibrariesModel): Promise<Books2librariesModel> {
     const books2libraries = new Books2librariesModel({
       bookId: book.id,
@@ -99,11 +141,21 @@ export class LibrariesService {
     return this.addBook2Library(books2libraries);
   }
 
+  /**
+   * Add book to library by link
+   * @param {Books2librariesModel} book2library
+   * @return {Promise<Books2librariesModel>}
+   */
   public addBook2Library(book2library: Books2librariesModel): Promise<Books2librariesModel> {
     delete book2library.id;
     return this.saveBook2Library(book2library);
   }
 
+  /**
+   * Update book status inside library by link
+   * @param {Books2librariesModel} book2library
+   * @return {Promise<Books2librariesModel>}
+   */
   public saveBook2Library(book2library: Books2librariesModel): Promise<Books2librariesModel> {
     return this.db.update(APP_CONFIG.db.tables.books2libraries, book2library)
       .then((res) => {
@@ -117,32 +169,63 @@ export class LibrariesService {
       });
   }
 
+  /**
+   * Booking book in library by book
+   * @param {BooksModel} book
+   * @param {LibrariesModel} library
+   * @return {Promise<Books2librariesModel>}
+   */
   public bookBookInLibrary(book: BooksModel, library: LibrariesModel): Promise<Books2librariesModel> {
     const book2library = library.book2library
       .find((b2l) => b2l.bookId === book.id && !this.isBookRented(b2l));
     return this.bookBook(book2library);
   }
 
+  /**
+   * Booking book in library by link
+   * @param {Books2librariesModel} book2library
+   * @return {Promise<Books2librariesModel>}
+   */
   public bookBook(book2library: Books2librariesModel): Promise<Books2librariesModel> {
     book2library.status = BOOKS_BOOKING_STATUS.RENTED;
     book2library.rentTime = moment().add(APP_CONFIG.bookingMinutes, 'm').toISOString(true);
     return this.saveBook2Library(book2library);
   }
 
+  /**
+   * Change booking status to FREE
+   * @param {Books2librariesModel} book2library
+   * @return {Promise<Books2librariesModel>}
+   */
   public returnBook(book2library: Books2librariesModel): Promise<Books2librariesModel> {
     book2library.status = BOOKS_BOOKING_STATUS.FREE;
     book2library.rentTime = moment().toISOString(true);
     return this.saveBook2Library(book2library);
   }
 
+  /**
+   * Get second to end of the booking in seconds
+   * @param {Books2librariesModel} book2library
+   * @return {number}
+   */
   public bookRentedTimeDiff(book2library: Books2librariesModel): number {
     return moment(book2library.rentTime).diff(moment(), 'seconds');
   }
 
+  /**
+   * Get second to end of the booking in humans string
+   * @param {Books2librariesModel} book2library
+   * @return {string}
+   */
   public bookRentedTimeDiffString(book2library: Books2librariesModel): string {
     return moment.duration(this.bookRentedTimeDiff(book2library), 'seconds').humanize();
   }
 
+  /**
+   * Check is book rented of free
+   * @param {Books2librariesModel} book2library
+   * @return {boolean}
+   */
   public isBookRented(book2library: Books2librariesModel): boolean {
     if (!book2library) {
       return;
@@ -161,6 +244,12 @@ export class LibrariesService {
     return true;
   }
 
+  /**
+   * Update library list with books inside it
+   * @param {LibrariesModel[]} libraries
+   * @param {Books2librariesModel[]} books2libraries
+   * @return {Promise<any>}
+   */
   private updateLibraries(libraries: LibrariesModel[], books2libraries: Books2librariesModel[]): Promise<any> {
     if (!libraries || !libraries.length || !books2libraries || !books2libraries.length) {
       return;
@@ -195,6 +284,11 @@ export class LibrariesService {
     return Promise.all(promises);
   }
 
+  /**
+   * Get all libraries and filter them where book present
+   * @param {BooksModel} book
+   * @return {Promise<any>}
+   */
   public getLibrariesForBook(book: BooksModel): Promise<any> {
     return this.getFullLibraries()
       .then((libraries: LibrariesModel[]) => {
@@ -204,20 +298,46 @@ export class LibrariesService {
       });
   }
 
+  /**
+   * Get libraries where book present with some status
+   * @param {BooksModel} book
+   * @param {LibrariesModel[]} libraries
+   * @param {string} status
+   * @return {LibrariesModel[]}
+   */
   private getLibrariesWithBookAndStatus(book: BooksModel, libraries: LibrariesModel[], status: string): LibrariesModel[] {
     return this.getLibrariesWithBook(book, libraries)
       .filter((library: LibrariesModel) => this.isBookInLibraryWithStatus(book, library, status));
   }
 
+  /**
+   * Filter libraries by book present it
+   * @param {BooksModel} book
+   * @param {LibrariesModel[]} libraries
+   * @return {LibrariesModel[]}
+   */
   private getLibrariesWithBook(book: BooksModel, libraries: LibrariesModel[]): LibrariesModel[] {
     return libraries
       .filter((library: LibrariesModel) => this.isBookInLibrary(book, library));
   }
 
+  /**
+   * Check is book present in the library
+   * @param {BooksModel} book
+   * @param {LibrariesModel} library
+   * @return {boolean}
+   */
   private isBookInLibrary(book: BooksModel, library: LibrariesModel): boolean {
     return library.book2library.some((book2library) => book2library.bookId === book.id);
   }
 
+  /**
+   * Check is book present it library with some status
+   * @param {BooksModel} book
+   * @param {LibrariesModel} library
+   * @param {string} status
+   * @return {boolean}
+   */
   private isBookInLibraryWithStatus(book: BooksModel, library: LibrariesModel, status: string): boolean {
     return library.book2library.some((book2library) => {
       if (status === BOOKS_BOOKING_STATUS.RENTED) {

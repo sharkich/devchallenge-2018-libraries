@@ -7,6 +7,9 @@ import {BooksModel} from '../models/books.model';
 import {LibrariesModel} from '../models/libraries.model';
 import {Books2librariesModel} from '../models/books2libraries.model';
 
+/**
+ * Service for IndexedDB
+ */
 @Injectable()
 export class DbService {
 
@@ -33,6 +36,11 @@ export class DbService {
       });
   }
 
+  /**
+   * Get list of assets
+   * @param {string} table
+   * @return {Promise<any[]>}
+   */
   public list(table: string): Promise<any[]> {
     return this.dbReadyPromise
       .then(() => this.db.getAll(table))
@@ -43,6 +51,12 @@ export class DbService {
       });
   }
 
+  /**
+   * Get asset by ID
+   * @param {string} table
+   * @param {string} id
+   * @return {Promise<any[]>}
+   */
   public getById(table: string, id: string): Promise<any[]> {
     return this.dbReadyPromise
       .then(() => this.db.getByKey(table, id))
@@ -51,6 +65,12 @@ export class DbService {
       });
   }
 
+  /**
+   * Update/add asset to table
+   * @param {string} table
+   * @param model
+   * @return {Promise<any>}
+   */
   public update(table: string, model: any): Promise<any> {
     return this.db.update(table, model)
       .then((data) => {
@@ -61,6 +81,12 @@ export class DbService {
       });
   }
 
+  /**
+   * Add asset to table
+   * @param {string} table
+   * @param data
+   * @return {Promise<any>}
+   */
   public add(table: string, data: any): Promise<any> {
     return this.db.add(table, data)
       .then((res) => {
@@ -71,6 +97,12 @@ export class DbService {
       });
   }
 
+  /**
+   * Delete asset from table
+   * @param {string} table
+   * @param {string | number} id
+   * @return {Promise<any>}
+   */
   public delete(table: string, id: string|number): Promise<any> {
     return this.db.delete(table, id)
       .then((data) => {
@@ -81,10 +113,19 @@ export class DbService {
       });
   }
 
+  /**
+   * Clear table
+   * @param {string} table
+   * @return {Promise<any>}
+   */
   public clear(table: string): Promise<any> {
     return this.db.clear(table);
   }
 
+  /**
+   * Init tables
+   * @param evt
+   */
   private createTables(evt: any) {
     const booksStore: IDBObjectStore = evt.currentTarget.result
       .createObjectStore(APP_CONFIG.db.tables.books, {keyPath: 'id'});
@@ -106,6 +147,10 @@ export class DbService {
     this.isTablesJustCreated = true;
   }
 
+  /**
+   * Initial fill books
+   * @return {Promise<any[]>}
+   */
   private fillBooks() {
     return this.http.get(APP_CONFIG.url.books)
       .toPromise()
@@ -120,6 +165,10 @@ export class DbService {
       });
   }
 
+  /**
+   * Initial fill libraries
+   * @return {Promise<any[]>}
+   */
   private fillLibraries() {
     return this.http.get(APP_CONFIG.url.libraries)
       .toPromise()
@@ -134,6 +183,10 @@ export class DbService {
       });
   }
 
+  /**
+   * Initial fill books to libraries
+   * @return {Promise<any[]>}
+   */
   private fillBooks2Libraries() {
     return this.http.get(APP_CONFIG.url.books2libraries)
       .toPromise()

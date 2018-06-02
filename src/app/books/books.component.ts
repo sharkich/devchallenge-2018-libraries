@@ -17,8 +17,16 @@ const COMPONENT_KEY = APP_CONFIG.localStorage['app-popular-books'];
 })
 export class BooksComponent implements OnInit {
 
+  /**
+   * All book in DB
+   * @type {any[]}
+   */
   public books: BooksModel[] = [];
 
+  /**
+   * Toggle list/tile view
+   * @type {string}
+   */
   public view: string = APP_CONFIG.view.grid;
 
   constructor(
@@ -35,10 +43,17 @@ export class BooksComponent implements OnInit {
     this.onToggleView();
   }
 
+  /**
+   * Check auth user
+   * @return {boolean}
+   */
   public isLogin(): boolean {
     return this.authService.isLogin();
   }
 
+  /**
+   * Handle click on create book button
+   */
   public onAddNewBook() {
     const dialogRef = this.dialog.open(DialogEditBookComponent, {
       width: '650px',
@@ -54,19 +69,32 @@ export class BooksComponent implements OnInit {
     });
   }
 
+  /**
+   * Handle event delete book and update list
+   */
   public onDeleteBook() {
     this.getList();
   }
 
+  /**
+   * Toggle tile/list view and save to localStorage
+   */
   public onToggleView() {
     this.view = (this.view === APP_CONFIG.view.grid) ? APP_CONFIG.view.list : APP_CONFIG.view.grid;
     window.localStorage.setItem(COMPONENT_KEY.isListView, this.view);
   }
 
+  /**
+   * View type checker
+   * @return {boolean}
+   */
   public get isListView(): boolean {
     return this.view === APP_CONFIG.view.list;
   }
 
+  /**
+   * Update list
+   */
   private getList() {
     this.booksService.list()
       .then((books: BooksModel[]) => {

@@ -1,9 +1,14 @@
 import {MatDialogRef} from '@angular/material';
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 import {AuthService} from '../../services/auth.service';
 
+/**
+ * Validation by Admin/Admin
+ * @param {FormControl} formControl
+ * @return {{validateAdmin: {valid: boolean}}}
+ */
 function validateAdmin(formControl: FormControl) {
   return formControl.value === 'admin' ? null : {
     validateAdmin: {
@@ -12,13 +17,20 @@ function validateAdmin(formControl: FormControl) {
   };
 }
 
+/**
+ * Dialog Login
+ */
 @Component({
   selector: 'app-dialog-login',
   templateUrl: './dialog-login.component.html',
   styleUrls: ['./dialog-login.component.scss']
 })
-export class DialogLoginComponent implements OnInit {
+export class DialogLoginComponent {
 
+  /**
+   * Login form
+   * @type {FormGroup}
+   */
   public loginForm = new FormGroup({
     loginFormControl: new FormControl('', [
       Validators.required,
@@ -36,13 +48,16 @@ export class DialogLoginComponent implements OnInit {
   ) {
   }
 
-  public ngOnInit() {
-  }
-
+  /**
+   * Close dialog
+   */
   public onCancel() {
     this.dialogRef.close();
   }
 
+  /**
+   * Handle login event
+   */
   public onSignIn() {
     if (this.loginForm.invalid) {
       return;

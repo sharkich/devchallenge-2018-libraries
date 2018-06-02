@@ -16,9 +16,20 @@ import {DialogBookingComponent} from '../-shared/components/dialog-booking/dialo
 })
 export class SearchBooksComponent implements OnInit {
 
+  /**
+   * Control for input search
+   * @type {FormControl}
+   */
   public myControl: FormControl = new FormControl();
+  /**
+   * Options variants for select
+   */
   public filteredOptions: Observable<BooksModel[]>;
 
+  /**
+   * All books in DB
+   * @type {BooksModel[]}
+   */
   private books: BooksModel[] = [];
 
   constructor(
@@ -38,6 +49,11 @@ export class SearchBooksComponent implements OnInit {
       });
   }
 
+  /**
+   * Search books by input string
+   * @param {string} val
+   * @return {BooksModel[]}
+   */
   public filter(val: string): BooksModel[] {
     return this.books
       .filter((book: BooksModel) => {
@@ -54,7 +70,12 @@ export class SearchBooksComponent implements OnInit {
       });
   }
 
-  public onSelectBook(isSelected, book: BooksModel) {
+  /**
+   * Handle select book and show booking popup
+   * @param {boolean} isSelected
+   * @param {BooksModel} book
+   */
+  public onSelectBook(isSelected: boolean, book: BooksModel) {
     if (!isSelected) {
       return;
     }
