@@ -15,10 +15,14 @@
         #auto="matAutocomplete">
 
         <mat-option
-          *ngFor="let option of filteredOptions | async"
-          [value]="option">
-          <img src="/assets/ukraine_now_logo.png" height="10" alt="">
-          {{ option }}
+          *ngFor="let book of filteredOptions | async"
+          (onSelectionChange)="onSelectBook($event.source.selected, book)"
+          [value]="book.name">
+          <img
+            [src]="book.thumbnail"
+            height="20"
+            alt="">
+          {{ book.name }}
         </mat-option>
 
       </mat-autocomplete>

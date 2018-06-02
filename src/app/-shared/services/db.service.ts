@@ -5,7 +5,6 @@ import {BooksModel} from '../models/books.model';
 import {Http} from '@angular/http';
 import {LibrariesModel} from '../models/libraries.model';
 import {Books2librariesModel} from '../models/books2libraries.model';
-import {st} from '@angular/core/src/render3';
 
 @Injectable()
 export class DbService {
