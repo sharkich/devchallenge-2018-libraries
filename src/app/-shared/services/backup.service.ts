@@ -82,7 +82,7 @@ export class BackupService {
           promises.push(this.booksService.save(book));
         });
         books2libraries.forEach((book2library) => {
-          promises.push(this.librariesService.saveBook2Library(book2library));
+          promises.push(this.librariesService.addBook2Library(book2library));
         });
         return promises;
       })

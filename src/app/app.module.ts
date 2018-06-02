@@ -29,6 +29,7 @@ import {DbService} from './-shared/services/db.service';
 import {DialogAddBooksComponent} from './-shared/components/dialog-add-books/dialog-add-books.component';
 import {BackupService} from './-shared/services/backup.service';
 import {ChangesService} from './-shared/services/changes.service';
+import {QRCodeModule} from 'angularx-qrcode';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,9 @@ import {ChangesService} from './-shared/services/changes.service';
     MatExpansionModule,
     MatDialogModule,
     MatListModule,
-    MatMenuModule
+    MatMenuModule,
+
+    QRCodeModule
   ],
   providers: [
     LibrariesService,

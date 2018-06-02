@@ -1,5 +1,6 @@
 import {BooksModel} from './books.model';
 import {GeneralModel} from './general.model';
+import {LibrariesModel} from './libraries.model';
 
 export const BOOKS_BOOKING_STATUS = {
   FREE: 'FREE',
@@ -14,6 +15,7 @@ export class Books2librariesModel extends GeneralModel {
   public rentTime: string;
 
   public book?: BooksModel;
+  public library?: LibrariesModel;
 
   constructor(data: any = {}) {
     super(data);

@@ -31,8 +31,10 @@
 
   <mat-card-actions>
 
+    ({{book2library?.status}})
+
     <button
-      (click)="onBookBook(book)"
+      (click)="onBookBook()"
       mat-raised-button
       color="primary"
       type="button">
@@ -43,7 +45,7 @@
 
     <button
       *ngIf="isLogin()"
-      (click)="onEditBook(book)"
+      (click)="onEditBook()"
       mat-raised-button
       color="accent">
       <i class="material-icons">edit</i>

@@ -3,7 +3,35 @@
   <h1 mat-dialog-title>Booking</h1>
 
   <div mat-dialog-content>
-    app-dialog-booking
+
+    <div
+      *ngIf="book2library"
+      class="app-dialog-booking__qr-code">
+
+      <div
+        *ngIf="qrCodeData"
+        class="qr-code">
+        <qrcode
+          [qrdata]="qrCodeData"
+          [size]="256"
+          [level]="'M'">
+        </qrcode>
+      </div>
+
+      <ul>
+        <li><b>Library:</b> {{book2library?.library?.name}}</li>
+        <li><b>Book:</b> {{book2library?.book?.name}}</li>
+        <li><b>End time:</b> {{book2library?.rentTime | date:'MMM d, y, h:mm a'}}</li>
+      </ul>
+
+    </div>
+
+    <div
+      *ngIf="!book2library"
+      class="app-dialog-booking__map">
+      MAP with Libraries
+    </div>
+
   </div>
 
   <div mat-dialog-actions>

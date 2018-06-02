@@ -1,3 +1,15 @@
 .app-dialog-booking {
 
+  &__qr-code {
+    .qr-code {
+      margin: 0 auto;
+      width: 256px;
+      height: 256px;
+    }
+  }
+
+  &__map {
+
+  }
+
 }

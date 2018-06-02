@@ -21,7 +21,7 @@ export class BookComponent implements OnInit {
 
   @Input() public view?: string = APP_CONFIG.view.grid;
 
-  @Output() private onDelete: EventEmitter<any> = new EventEmitter<any>();
+  @Output() public onDelete: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private geolocationService: GeolocationService,
@@ -48,11 +48,11 @@ export class BookComponent implements OnInit {
     return this.geolocationService.isSupported();
   }
 
-  public onEditBook(book: BooksModel) {
+  public onEditBook() {
     const dialogRef = this.dialog.open(DialogEditBookComponent, {
       width: '650px',
       data: {
-        book,
+        book: this.book,
         book2library: this.book2library
       }
     });
@@ -64,16 +64,17 @@ export class BookComponent implements OnInit {
     });
   }
 
-  public onBookBook(book: BooksModel) {
+  public onBookBook() {
     const dialogRef = this.dialog.open(DialogBookingComponent, {
       width: '650px',
       data: {
-        book
+        book: this.book,
+        book2library: this.book2library
       }
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed', result);
+      // console.log('The dialog was closed', result);
     });
   }
 

@@ -5,6 +5,7 @@ import {APP_CONFIG} from '../../app.config';
 import {DbService} from './db.service';
 import {BooksService} from './books.service';
 import {BooksModel} from '../models/books.model';
+import * as moment from 'moment';
 
 @Injectable()
 export class LibrariesService {
@@ -82,21 +83,26 @@ export class LibrariesService {
       status: BOOKS_BOOKING_STATUS.FREE,
       rentTime: ''
     });
-    delete books2libraries.id;
-    return this.db.add(APP_CONFIG.db.tables.books2libraries, books2libraries)
+    return this.addBook2Library(books2libraries);
+  }
+
+  public addBook2Library(book2library: Books2librariesModel): Promise<Books2librariesModel> {
+    delete book2library.id;
+    return this.saveBook2Library(book2library);
+  }
+
+  public saveBook2Library(book2library: Books2librariesModel): Promise<Books2librariesModel> {
+    return this.db.update(APP_CONFIG.db.tables.books2libraries, book2library)
       .catch((error) => {
         console.error('error', error);
         return Promise.reject(error);
       });
   }
 
-  public saveBook2Library(book2library: Books2librariesModel): Promise<Books2librariesModel> {
-    delete book2library.id;
-    return this.db.add(APP_CONFIG.db.tables.books2libraries, book2library)
-      .catch((error) => {
-        console.error('error', error);
-        return Promise.reject(error);
-      });
+  public bookBook(book2library: Books2librariesModel): Promise<Books2librariesModel> {
+    book2library.status = BOOKS_BOOKING_STATUS.RENTED;
+    book2library.rentTime = moment().add(5, 'm').toISOString();
+    return this.saveBook2Library(book2library);
   }
 
   private updateLibraries(libraries: LibrariesModel[], books2libraries: Books2librariesModel[]): Promise<any> {
@@ -125,6 +131,7 @@ export class LibrariesService {
             return;
           }
           book2library.book = book;
+          book2library.library = library;
           library.book2library.push(book2library);
         });
       promises.push(promise);
