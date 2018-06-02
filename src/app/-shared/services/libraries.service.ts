@@ -101,8 +101,22 @@ export class LibrariesService {
 
   public bookBook(book2library: Books2librariesModel): Promise<Books2librariesModel> {
     book2library.status = BOOKS_BOOKING_STATUS.RENTED;
-    book2library.rentTime = moment().add(5, 'm').toISOString();
+    book2library.rentTime = moment().add(5, 'm').toISOString(true);
     return this.saveBook2Library(book2library);
+  }
+
+  public isBookRentedTimeDiff(book2library: Books2librariesModel): number {
+    return moment(book2library.rentTime).diff(moment(), 'seconds');
+  }
+
+  public isBookRented(book2library: Books2librariesModel): boolean {
+    if (!book2library) {
+      return;
+    }
+    if (!book2library.rentTime || this.isBookRentedTimeDiff(book2library) <= 0) {
+      return false;
+    }
+    return book2library.status === BOOKS_BOOKING_STATUS.RENTED;
   }
 
   private updateLibraries(libraries: LibrariesModel[], books2libraries: Books2librariesModel[]): Promise<any> {

@@ -31,15 +31,27 @@
 
   <mat-card-actions>
 
-    ({{book2library?.status}})
-
     <button
+      *ngIf="!isBookRented"
       (click)="onBookBook()"
       mat-raised-button
       color="primary"
       type="button">
       book a book
     </button>
+
+    <div
+      class="rent-wrapper"
+      *ngIf="isBookRented">
+      <button
+        *ngIf="isBookRented"
+        (click)="onReturnBook()"
+        mat-raised-button
+        type="button">
+        return a book
+      </button>
+      <div class="rent-time">{{rentDiffTime}}</div>
+    </div>
 
     <div class="space"></div>
 

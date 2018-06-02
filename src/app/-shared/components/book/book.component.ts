@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {BooksModel} from '../../models/books.model';
 import {GeolocationService} from '../../services/geolocation.service';
 import {AuthService} from '../../services/auth.service';
@@ -8,13 +8,14 @@ import {DialogBookingComponent} from '../dialog-booking/dialog-booking.component
 import {Books2librariesModel} from '../../models/books2libraries.model';
 import {APP_CONFIG} from '../../../app.config';
 import {ChangesService} from '../../services/changes.service';
+import {LibrariesService} from '../../services/libraries.service';
 
 @Component({
   selector: 'app-book',
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.scss']
 })
-export class BookComponent implements OnInit {
+export class BookComponent implements OnInit, OnDestroy {
 
   @Input() public book: BooksModel;
   @Input() public book2library?: Books2librariesModel;
@@ -23,7 +24,13 @@ export class BookComponent implements OnInit {
 
   @Output() public onDelete: EventEmitter<any> = new EventEmitter<any>();
 
+  public isBookRented: boolean;
+  public rentDiffTime: string;
+
+  private _setInterval;
+
   constructor(
+    private librariesService: LibrariesService,
     private geolocationService: GeolocationService,
     private authService: AuthService,
     private changesService: ChangesService,
@@ -36,8 +43,16 @@ export class BookComponent implements OnInit {
     this.changesService.book.subscribe((changedBook: BooksModel) => {
       if (changedBook.id === this.book.id) {
         this.book = changedBook;
+        this.isBookRented = this.librariesService.isBookRented(this.book2library);
+        this.startCheckingRent();
       }
     });
+
+    this.startCheckingRent();
+  }
+
+  public ngOnDestroy() {
+    this.stopCheckingRent();
   }
 
   public isLogin(): boolean {
@@ -76,6 +91,25 @@ export class BookComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       // console.log('The dialog was closed', result);
     });
+  }
+
+  public onReturnBook() {
+  }
+
+  private startCheckingRent() {
+    if (this.book2library) {
+      this._setInterval = setInterval(() => {
+        this.isBookRented = this.librariesService.isBookRented(this.book2library);
+        this.rentDiffTime = '' + this.librariesService.isBookRentedTimeDiff(this.book2library);
+        if (!this.isBookRented) {
+          this.stopCheckingRent();
+        }
+      }, 100);
+    }
+  }
+
+  private stopCheckingRent() {
+    clearInterval(this._setInterval);
   }
 
 }

@@ -25,9 +25,25 @@
 
   .mat-card-actions {
     display: flex;
+
+    .rent-wrapper {
+      position: relative;
+      height: 60px;
+
+      .rent-time {
+        position: absolute;
+        bottom: 0;
+        font-size: 8pt;
+        color: #666;
+        width: 100%;
+        text-align: center;
+      }
+    }
+
     .mat-raised-button {
       max-height: 40px;
     }
+
   }
 
 }

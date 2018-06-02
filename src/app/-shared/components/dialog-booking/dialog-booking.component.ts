@@ -4,6 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {BooksModel} from '../../models/books.model';
 import {Books2librariesModel} from '../../models/books2libraries.model';
 import {LibrariesService} from '../../services/libraries.service';
+import {ChangesService} from '../../services/changes.service';
 
 @Component({
   selector: 'app-dialog-booking',
@@ -18,6 +19,7 @@ export class DialogBookingComponent implements OnInit {
 
   constructor(
     private librariesService: LibrariesService,
+    private changesService: ChangesService,
     private dialogRef: MatDialogRef<DialogLoginComponent>,
     @Inject(MAT_DIALOG_DATA) private data: any
   ) {
@@ -31,6 +33,8 @@ export class DialogBookingComponent implements OnInit {
 
       this.librariesService.bookBook(this.book2library)
         .then((book2library: Books2librariesModel) => {
+          this.changesService.book.emit(book2library.book);
+
           this.book2library = book2library;
           this.qrCodeData = JSON.stringify({
             LIBRARY_ID: this.book2library.libraryId,
