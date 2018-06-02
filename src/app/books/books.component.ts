@@ -30,7 +30,7 @@ export class BooksComponent implements OnInit {
     this.getList();
     this.changesService.books.subscribe(this.getList.bind(this));
     this.changesService.bookDelete.subscribe(this.onDeleteBook.bind(this));
-    this.view = window.localStorage.getItem(COMPONENT_KEY.isListView);
+    this.onToggleView();
   }
 
   public isLogin(): boolean {
@@ -57,7 +57,7 @@ export class BooksComponent implements OnInit {
   }
 
   public onToggleView() {
-    this.view = this.view === APP_CONFIG.view.grid ? APP_CONFIG.view.list : APP_CONFIG.view.grid;
+    this.view = (this.view === APP_CONFIG.view.grid) ? APP_CONFIG.view.list : APP_CONFIG.view.grid;
     window.localStorage.setItem(COMPONENT_KEY.isListView, this.view);
   }
 
