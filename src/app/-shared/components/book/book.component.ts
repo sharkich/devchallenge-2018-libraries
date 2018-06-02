@@ -94,16 +94,22 @@ export class BookComponent implements OnInit, OnDestroy {
   }
 
   public onReturnBook() {
+    this.librariesService.returnBook(this.book2library)
+      .then((book2library) => {
+        this.book2library = book2library;
+        this.startCheckingRent();
+      });
   }
 
   private startCheckingRent() {
     if (this.book2library) {
       this._setInterval = setInterval(() => {
         this.isBookRented = this.librariesService.isBookRented(this.book2library);
-        this.rentDiffTime = '' + this.librariesService.isBookRentedTimeDiff(this.book2library);
         if (!this.isBookRented) {
           this.stopCheckingRent();
+          return;
         }
+        this.rentDiffTime = this.librariesService.bookRentedTimeDiffString(this.book2library);
       }, 100);
     }
   }

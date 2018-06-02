@@ -105,15 +105,25 @@ export class LibrariesService {
     return this.saveBook2Library(book2library);
   }
 
-  public isBookRentedTimeDiff(book2library: Books2librariesModel): number {
+  public returnBook(book2library: Books2librariesModel): Promise<Books2librariesModel> {
+    book2library.status = BOOKS_BOOKING_STATUS.FREE;
+    book2library.rentTime = moment().toISOString(true);
+    return this.saveBook2Library(book2library);
+  }
+
+  public bookRentedTimeDiff(book2library: Books2librariesModel): number {
     return moment(book2library.rentTime).diff(moment(), 'seconds');
+  }
+
+  public bookRentedTimeDiffString(book2library: Books2librariesModel): string {
+    return moment.duration(this.bookRentedTimeDiff(book2library), 'seconds').humanize();
   }
 
   public isBookRented(book2library: Books2librariesModel): boolean {
     if (!book2library) {
       return;
     }
-    if (!book2library.rentTime || this.isBookRentedTimeDiff(book2library) <= 0) {
+    if (!book2library.rentTime || this.bookRentedTimeDiff(book2library) <= 0) {
       return false;
     }
     return book2library.status === BOOKS_BOOKING_STATUS.RENTED;
