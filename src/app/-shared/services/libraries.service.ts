@@ -5,6 +5,7 @@ import {APP_CONFIG} from '../../app.config';
 import {DbService} from './db.service';
 import {BooksService} from './books.service';
 import {BooksModel} from '../models/books.model';
+import {ChangesService} from './changes.service';
 import * as moment from 'moment';
 
 @Injectable()
@@ -12,7 +13,8 @@ export class LibrariesService {
 
   constructor(
     private db: DbService,
-    private booksService: BooksService) {
+    private booksService: BooksService,
+    private changesService: ChangesService) {
   }
 
   public getFullLibraries(): Promise<LibrariesModel[]> {
@@ -103,15 +105,26 @@ export class LibrariesService {
 
   public saveBook2Library(book2library: Books2librariesModel): Promise<Books2librariesModel> {
     return this.db.update(APP_CONFIG.db.tables.books2libraries, book2library)
+      .then((res) => {
+        this.changesService.book.emit(book2library.book);
+        this.changesService.book2Library.emit(book2library);
+        return res;
+      })
       .catch((error) => {
         console.error('error', error);
         return Promise.reject(error);
       });
   }
 
+  public bookBookInLibrary(book: BooksModel, library: LibrariesModel): Promise<Books2librariesModel> {
+    const book2library = library.book2library
+      .find((b2l) => b2l.bookId === book.id && !this.isBookRented(b2l));
+    return this.bookBook(book2library);
+  }
+
   public bookBook(book2library: Books2librariesModel): Promise<Books2librariesModel> {
     book2library.status = BOOKS_BOOKING_STATUS.RENTED;
-    book2library.rentTime = moment().add(5, 'm').toISOString(true);
+    book2library.rentTime = moment().add(APP_CONFIG.bookingMinutes, 'm').toISOString(true);
     return this.saveBook2Library(book2library);
   }
 
@@ -133,10 +146,18 @@ export class LibrariesService {
     if (!book2library) {
       return;
     }
-    if (!book2library.rentTime || this.bookRentedTimeDiff(book2library) <= 0) {
+    if (!book2library.rentTime) {
       return false;
     }
-    return book2library.status === BOOKS_BOOKING_STATUS.RENTED;
+    if (book2library.status !== BOOKS_BOOKING_STATUS.RENTED) {
+      return false;
+    }
+    if (this.bookRentedTimeDiff(book2library) <= 0) {
+      book2library.status = BOOKS_BOOKING_STATUS.FREE;
+      this.returnBook(book2library);
+      return false;
+    }
+    return true;
   }
 
   private updateLibraries(libraries: LibrariesModel[], books2libraries: Books2librariesModel[]): Promise<any> {
@@ -175,10 +196,11 @@ export class LibrariesService {
 
   public getLibrariesForBook(book: BooksModel): Promise<any> {
     return this.getFullLibraries()
-      .then((libraries: LibrariesModel[]) => ({
-        free: this.getLibrariesWithBookAndStatus(book, libraries, BOOKS_BOOKING_STATUS.FREE),
-        rented: this.getLibrariesWithBookAndStatus(book, libraries, BOOKS_BOOKING_STATUS.RENTED)
-    }));
+      .then((libraries: LibrariesModel[]) => {
+        const rented = this.getLibrariesWithBookAndStatus(book, libraries, BOOKS_BOOKING_STATUS.RENTED);
+        const free = this.getLibrariesWithBookAndStatus(book, libraries, BOOKS_BOOKING_STATUS.FREE);
+        return {free, rented};
+      });
   }
 
   private getLibrariesWithBookAndStatus(book: BooksModel, libraries: LibrariesModel[], status: string): LibrariesModel[] {
@@ -196,7 +218,12 @@ export class LibrariesService {
   }
 
   private isBookInLibraryWithStatus(book: BooksModel, library: LibrariesModel, status: string): boolean {
-    return library.book2library.some((book2library) => book2library.bookId === book.id && book2library.status === status);
+    return library.book2library.some((book2library) => {
+      if (status === BOOKS_BOOKING_STATUS.RENTED) {
+        return this.isBookRented(book2library);
+      }
+      return book2library.bookId === book.id && book2library.status === status;
+    });
   }
 
 }

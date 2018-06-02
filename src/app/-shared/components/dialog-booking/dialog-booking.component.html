@@ -35,7 +35,26 @@
     <div
       *ngIf="!book2library"
       class="app-dialog-booking__map">
-      MAP with Libraries
+
+      <h3>{{book.name}}</h3>
+
+      <div *ngIf="libraries.free.length">
+        <mat-nav-list>
+          <mat-list-item
+            *ngFor="let library of libraries.free"
+            (click)="onBookingInLibrary(library)">
+            <a matLine>
+              <b>{{library.name}}</b>
+              <br>
+              <span class="small-text">{{library.address}}</span>
+            </a>
+            <i *ngIf="isGeoSupported">
+              <b>{{distance(library) | number : '1.2-2'}} km</b> away
+            </i>
+          </mat-list-item>
+        </mat-nav-list>
+      </div>
+
     </div>
 
   </div>

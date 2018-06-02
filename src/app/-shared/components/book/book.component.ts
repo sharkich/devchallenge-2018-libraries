@@ -40,9 +40,18 @@ export class BookComponent implements OnInit, OnDestroy {
     if (!this.view) {
       this.view = APP_CONFIG.view.grid;
     }
+
     this.changesService.book.subscribe((changedBook: BooksModel) => {
       if (changedBook.id === this.book.id) {
         this.book = changedBook;
+        this.isBookRented = this.librariesService.isBookRented(this.book2library);
+        this.startCheckingRent();
+      }
+    });
+
+    this.changesService.book2Library.subscribe((book2library: Books2librariesModel) => {
+      if (this.book2library && book2library.id === this.book2library.id) {
+        this.book2library = book2library;
         this.isBookRented = this.librariesService.isBookRented(this.book2library);
         this.startCheckingRent();
       }

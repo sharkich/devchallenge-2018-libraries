@@ -1,4 +1,5 @@
 export const APP_CONFIG = {
+  bookingMinutes: 1,
   url: {
     books: '/assets/api/books.json',
     libraries: '/assets/api/libraries.json',
