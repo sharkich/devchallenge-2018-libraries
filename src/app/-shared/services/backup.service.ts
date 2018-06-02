@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
-import {BooksModel} from '../models/books.model';
-import {LibrariesModel} from '../models/libraries.model';
-import {Books2librariesModel} from '../models/books2libraries.model';
-import {LibrariesService} from './libraries.service';
-import {BooksService} from './books.service';
+
 import {DbService} from './db.service';
 import {APP_CONFIG} from '../../app.config';
+import {BooksService} from './books.service';
+import {BooksModel} from '../models/books.model';
+import {LibrariesService} from './libraries.service';
+import {LibrariesModel} from '../models/libraries.model';
+import {Books2librariesModel} from '../models/books2libraries.model';
 
 @Injectable()
 export class BackupService {

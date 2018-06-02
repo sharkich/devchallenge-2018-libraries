@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import {BooksService} from '../-shared/services/books.service';
+import {MatDialog} from '@angular/material';
+import {Component, OnInit} from '@angular/core';
+
+import {APP_CONFIG} from '../app.config';
 import {BooksModel} from '../-shared/models/books.model';
 import {AuthService} from '../-shared/services/auth.service';
-import {MatDialog} from '@angular/material';
-import {DialogEditBookComponent} from '../-shared/components/dialog-edit-book/dialog-edit-book.component';
-import {APP_CONFIG} from '../app.config';
+import {BooksService} from '../-shared/services/books.service';
 import {ChangesService} from '../-shared/services/changes.service';
+import {DialogEditBookComponent} from '../-shared/components/dialog-edit-book/dialog-edit-book.component';
 
 const COMPONENT_KEY = APP_CONFIG.localStorage['app-popular-books'];
 
@@ -24,7 +25,8 @@ export class BooksComponent implements OnInit {
     private booksService: BooksService,
     private authService: AuthService,
     private dialog: MatDialog,
-    private changesService: ChangesService) { }
+    private changesService: ChangesService) {
+  }
 
   ngOnInit() {
     this.getList();

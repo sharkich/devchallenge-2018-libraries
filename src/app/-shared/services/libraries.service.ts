@@ -1,12 +1,13 @@
+import * as moment from 'moment';
 import {Injectable} from '@angular/core';
-import {LibrariesModel} from '../models/libraries.model';
-import {Books2librariesModel, BOOKS_BOOKING_STATUS} from '../models/books2libraries.model';
-import {APP_CONFIG} from '../../app.config';
+
 import {DbService} from './db.service';
+import {APP_CONFIG} from '../../app.config';
 import {BooksService} from './books.service';
 import {BooksModel} from '../models/books.model';
 import {ChangesService} from './changes.service';
-import * as moment from 'moment';
+import {LibrariesModel} from '../models/libraries.model';
+import {Books2librariesModel, BOOKS_BOOKING_STATUS} from '../models/books2libraries.model';
 
 @Injectable()
 export class LibrariesService {

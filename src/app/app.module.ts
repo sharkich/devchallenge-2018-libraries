@@ -1,7 +1,3 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {HttpModule} from '@angular/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -10,74 +6,79 @@ import {
   MatInputModule, MatListModule, MatMenuModule,
   MatToolbarModule
 } from '@angular/material';
+import {NgModule} from '@angular/core';
+import {HttpModule} from '@angular/http';
+import {QRCodeModule} from 'angularx-qrcode';
+import {BrowserModule} from '@angular/platform-browser';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-import {AppComponent} from './app.component';
-import {LibrariesService} from './-shared/services/libraries.service';
+import {DbService} from './-shared/services/db.service';
+import {AuthService} from './-shared/services/auth.service';
 import {BooksService} from './-shared/services/books.service';
-import {SearchBooksComponent} from './search-books/search-books.component';
+import {BackupService} from './-shared/services/backup.service';
+import {ChangesService} from './-shared/services/changes.service';
+import {LibrariesService} from './-shared/services/libraries.service';
+import {GeolocationService} from './-shared/services/geolocation.service';
+
+import {AppComponent} from './app.component';
 import {BooksComponent} from './books/books.component';
 import {LibrariesComponent} from './libraries/libraries.component';
 import {BookComponent} from './-shared/components/book/book.component';
-import {GeolocationService} from './-shared/services/geolocation.service';
+import {SearchBooksComponent} from './search-books/search-books.component';
 import {DialogLoginComponent} from './-shared/components/dialog-login/dialog-login.component';
-import {AuthService} from './-shared/services/auth.service';
-import {DialogEditLibraryComponent} from './-shared/components/dialog-library/dialog-edit-library.component';
-import {DialogEditBookComponent} from './-shared/components/dialog-edit-book/dialog-edit-book.component';
 import {DialogBookingComponent} from './-shared/components/dialog-booking/dialog-booking.component';
-import {DbService} from './-shared/services/db.service';
+import {DialogEditBookComponent} from './-shared/components/dialog-edit-book/dialog-edit-book.component';
 import {DialogAddBooksComponent} from './-shared/components/dialog-add-books/dialog-add-books.component';
-import {BackupService} from './-shared/services/backup.service';
-import {ChangesService} from './-shared/services/changes.service';
-import {QRCodeModule} from 'angularx-qrcode';
+import {DialogEditLibraryComponent} from './-shared/components/dialog-library/dialog-edit-library.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchBooksComponent,
+    BookComponent,
     BooksComponent,
     LibrariesComponent,
-    BookComponent,
     DialogLoginComponent,
-    DialogEditLibraryComponent,
-    DialogEditBookComponent,
+    SearchBooksComponent,
     DialogBookingComponent,
-    DialogAddBooksComponent
+    DialogAddBooksComponent,
+    DialogEditBookComponent,
+    DialogEditLibraryComponent
   ],
   imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    FormsModule,
     HttpModule,
+    FormsModule,
+    BrowserModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
 
     MatCardModule,
-    MatToolbarModule,
-    MatAutocompleteModule,
-    MatInputModule,
-    MatButtonModule,
-    MatExpansionModule,
-    MatDialogModule,
     MatListModule,
     MatMenuModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatToolbarModule,
+    MatExpansionModule,
+    MatAutocompleteModule,
 
     QRCodeModule
   ],
   providers: [
-    LibrariesService,
-    BooksService,
-    GeolocationService,
-    AuthService,
     DbService,
+    AuthService,
+    BooksService,
     BackupService,
-    ChangesService
+    ChangesService,
+    LibrariesService,
+    GeolocationService
   ],
   entryComponents: [
     DialogLoginComponent,
-    DialogEditLibraryComponent,
-    DialogEditBookComponent,
     DialogBookingComponent,
-    DialogAddBooksComponent
+    DialogEditBookComponent,
+    DialogAddBooksComponent,
+    DialogEditLibraryComponent
   ],
   bootstrap: [AppComponent]
 })

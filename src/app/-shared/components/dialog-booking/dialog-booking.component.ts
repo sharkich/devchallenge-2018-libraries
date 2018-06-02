@@ -1,12 +1,13 @@
 import {Component, ElementRef, Inject, OnInit} from '@angular/core';
-import {DialogLoginComponent} from '../dialog-login/dialog-login.component';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+
 import {BooksModel} from '../../models/books.model';
-import {Books2librariesModel} from '../../models/books2libraries.model';
-import {LibrariesService} from '../../services/libraries.service';
-import {ChangesService} from '../../services/changes.service';
 import {LibrariesModel} from '../../models/libraries.model';
+import {ChangesService} from '../../services/changes.service';
+import {LibrariesService} from '../../services/libraries.service';
 import {GeolocationService} from '../../services/geolocation.service';
+import {Books2librariesModel} from '../../models/books2libraries.model';
+import {DialogLoginComponent} from '../dialog-login/dialog-login.component';
 
 @Component({
   selector: 'app-dialog-booking',

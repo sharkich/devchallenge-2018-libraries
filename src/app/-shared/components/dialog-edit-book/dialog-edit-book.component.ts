@@ -1,12 +1,13 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {DialogLoginComponent} from '../dialog-login/dialog-login.component';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {BooksModel} from '../../models/books.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+
+import {BooksModel} from '../../models/books.model';
 import {BooksService} from '../../services/books.service';
+import {ChangesService} from '../../services/changes.service';
 import {LibrariesService} from '../../services/libraries.service';
 import {Books2librariesModel} from '../../models/books2libraries.model';
-import {ChangesService} from '../../services/changes.service';
+import {DialogLoginComponent} from '../dialog-login/dialog-login.component';
 
 @Component({
   selector: 'app-edit-dialog-book',

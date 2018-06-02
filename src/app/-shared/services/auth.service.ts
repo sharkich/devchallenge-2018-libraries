@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
-import {APP_CONFIG} from '../../app.config';
+
 const uuid = require('uuid/v1');
+import {APP_CONFIG} from '../../app.config';
 
 const TOKEN = APP_CONFIG.localStorage.token;
 

@@ -1,11 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {DialogLoginComponent} from '../dialog-login/dialog-login.component';
+
 import {BooksModel} from '../../models/books.model';
 import {BooksService} from '../../services/books.service';
 import {LibrariesModel} from '../../models/libraries.model';
 import {LibrariesService} from '../../services/libraries.service';
 import {Books2librariesModel} from '../../models/books2libraries.model';
+import {DialogLoginComponent} from '../dialog-login/dialog-login.component';
 
 @Component({
   selector: 'app-dialog-add-books',

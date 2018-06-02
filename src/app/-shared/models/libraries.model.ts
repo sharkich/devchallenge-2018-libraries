@@ -1,6 +1,6 @@
+import {GeneralModel} from './general.model';
 import {IPoint} from '../services/geolocation.service';
 import {Books2librariesModel} from './books2libraries.model';
-import {GeneralModel} from './general.model';
 
 const uuid = require('uuid/v1');
 

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import {BooksModel} from '../models/books.model';
+
 import {DbService} from './db.service';
 import {APP_CONFIG} from '../../app.config';
+import {BooksModel} from '../models/books.model';
 
 @Injectable()
 export class BooksService {

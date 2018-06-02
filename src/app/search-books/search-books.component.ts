@@ -1,12 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
+import {FormControl} from '@angular/forms';
+import {MatDialog} from '@angular/material';
 import {map, startWith} from 'rxjs/operators';
-import {LibrariesService} from '../-shared/services/libraries.service';
+import {Component, OnInit} from '@angular/core';
+
 import {BooksModel} from '../-shared/models/books.model';
 import {BooksService} from '../-shared/services/books.service';
+import {LibrariesService} from '../-shared/services/libraries.service';
 import {DialogBookingComponent} from '../-shared/components/dialog-booking/dialog-booking.component';
-import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-search-books',

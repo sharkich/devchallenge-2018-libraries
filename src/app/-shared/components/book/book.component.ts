@@ -1,14 +1,15 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {BooksModel} from '../../models/books.model';
-import {GeolocationService} from '../../services/geolocation.service';
-import {AuthService} from '../../services/auth.service';
 import {MatDialog} from '@angular/material';
-import {DialogEditBookComponent} from '../dialog-edit-book/dialog-edit-book.component';
-import {DialogBookingComponent} from '../dialog-booking/dialog-booking.component';
-import {Books2librariesModel} from '../../models/books2libraries.model';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+
 import {APP_CONFIG} from '../../../app.config';
+import {BooksModel} from '../../models/books.model';
+import {AuthService} from '../../services/auth.service';
 import {ChangesService} from '../../services/changes.service';
 import {LibrariesService} from '../../services/libraries.service';
+import {GeolocationService} from '../../services/geolocation.service';
+import {Books2librariesModel} from '../../models/books2libraries.model';
+import {DialogEditBookComponent} from '../dialog-edit-book/dialog-edit-book.component';
+import {DialogBookingComponent} from '../dialog-booking/dialog-booking.component';
 
 @Component({
   selector: 'app-book',

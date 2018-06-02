@@ -1,9 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {DialogLoginComponent} from '../dialog-login/dialog-login.component';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+
 import {LibrariesModel} from '../../models/libraries.model';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LibrariesService} from '../../services/libraries.service';
+import {DialogLoginComponent} from '../dialog-login/dialog-login.component';
 
 @Component({
   selector: 'app-dialog-edit-library',

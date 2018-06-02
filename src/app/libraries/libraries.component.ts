@@ -1,14 +1,15 @@
+import {MatDialog} from '@angular/material';
 import {Component, OnInit} from '@angular/core';
+
+import {BooksModel} from '../-shared/models/books.model';
+import {AuthService} from '../-shared/services/auth.service';
 import {LibrariesModel} from '../-shared/models/libraries.model';
+import {ChangesService} from '../-shared/services/changes.service';
 import {LibrariesService} from '../-shared/services/libraries.service';
 import {GeolocationService} from '../-shared/services/geolocation.service';
-import {AuthService} from '../-shared/services/auth.service';
-import {MatDialog} from '@angular/material';
-import {DialogEditLibraryComponent} from '../-shared/components/dialog-library/dialog-edit-library.component';
 import {Books2librariesModel} from '../-shared/models/books2libraries.model';
 import {DialogAddBooksComponent} from '../-shared/components/dialog-add-books/dialog-add-books.component';
-import {ChangesService} from '../-shared/services/changes.service';
-import {BooksModel} from '../-shared/models/books.model';
+import {DialogEditLibraryComponent} from '../-shared/components/dialog-library/dialog-edit-library.component';
 
 @Component({
   selector: 'app-libraries',
