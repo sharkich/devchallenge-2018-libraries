@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, ElementRef, Inject, OnInit} from '@angular/core';
 import {DialogLoginComponent} from '../dialog-login/dialog-login.component';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {BooksModel} from '../../models/books.model';
@@ -21,6 +21,7 @@ export class DialogBookingComponent implements OnInit {
     private librariesService: LibrariesService,
     private changesService: ChangesService,
     private dialogRef: MatDialogRef<DialogLoginComponent>,
+    private elementRef: ElementRef,
     @Inject(MAT_DIALOG_DATA) private data: any
   ) {
   }
@@ -47,6 +48,17 @@ export class DialogBookingComponent implements OnInit {
 
   public onCancel() {
     this.dialogRef.close();
+  }
+
+  public onDownload() {
+    const canvasElement = this.elementRef.nativeElement.querySelector('canvas');
+    // download
+    const link = document.createElement('a');
+    link.download = `booking.png`;
+    link.href = canvasElement.toDataURL();
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }
 
 }
