@@ -17,6 +17,11 @@ export class DialogBookingComponent implements OnInit {
   public book2library?: Books2librariesModel;
   public qrCodeData: string;
 
+  public libraries = {
+    free: [],
+    rented: []
+  };
+
   constructor(
     private librariesService: LibrariesService,
     private changesService: ChangesService,
@@ -31,8 +36,7 @@ export class DialogBookingComponent implements OnInit {
     this.book2library = this.data.book2library;
 
     if (this.book2library) {
-
-      this.librariesService.bookBook(this.book2library)
+      return this.librariesService.bookBook(this.book2library)
         .then((book2library: Books2librariesModel) => {
           this.changesService.book.emit(book2library.book);
 
@@ -44,6 +48,13 @@ export class DialogBookingComponent implements OnInit {
           });
         });
     }
+
+    return this.librariesService.getLibrariesForBook(this.book)
+      .then(({free, rented}) => {
+        this.libraries.free = free;
+        this.libraries.rented = rented;
+        console.log('res', this.libraries);
+      });
   }
 
   public onCancel() {

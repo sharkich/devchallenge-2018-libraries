@@ -114,13 +114,9 @@ export class LibrariesComponent implements OnInit {
   }
 
   private getList() {
-    return this.librariesService.list()
+    return this.librariesService.getFullLibraries()
       .then((libraries: LibrariesModel[]) => {
         this.libraries = libraries;
-        this.librariesService.books2libraries(this.libraries)
-          .then(() => {
-            // todo loading = false
-          });
       });
   }
 

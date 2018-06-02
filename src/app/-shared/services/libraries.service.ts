@@ -15,6 +15,16 @@ export class LibrariesService {
     private booksService: BooksService) {
   }
 
+  public getFullLibraries(): Promise<LibrariesModel[]> {
+    let libraries;
+    return this.list()
+      .then((libs: LibrariesModel[]) => {
+        libraries = libs;
+        return this.books2libraries(libraries);
+      })
+      .then(() => libraries);
+  }
+
   public list(): Promise<LibrariesModel[]> {
     return this.db.list(APP_CONFIG.db.tables.libraries)
       .then((objs: any[]) => objs.map((obj) => new LibrariesModel(obj)))
@@ -133,7 +143,6 @@ export class LibrariesService {
     if (!libraries || !libraries.length || !books2libraries || !books2libraries.length) {
       return;
     }
-
     const librariesObj = libraries.reduce((obj, library) => {
       obj[library.id] = library;
       return obj;
@@ -162,6 +171,32 @@ export class LibrariesService {
     });
 
     return Promise.all(promises);
+  }
+
+  public getLibrariesForBook(book: BooksModel): Promise<any> {
+    return this.getFullLibraries()
+      .then((libraries: LibrariesModel[]) => ({
+        free: this.getLibrariesWithBookAndStatus(book, libraries, BOOKS_BOOKING_STATUS.FREE),
+        rented: this.getLibrariesWithBookAndStatus(book, libraries, BOOKS_BOOKING_STATUS.RENTED)
+    }));
+  }
+
+  private getLibrariesWithBookAndStatus(book: BooksModel, libraries: LibrariesModel[], status: string): LibrariesModel[] {
+    return this.getLibrariesWithBook(book, libraries)
+      .filter((library: LibrariesModel) => this.isBookInLibraryWithStatus(book, library, status));
+  }
+
+  private getLibrariesWithBook(book: BooksModel, libraries: LibrariesModel[]): LibrariesModel[] {
+    return libraries
+      .filter((library: LibrariesModel) => this.isBookInLibrary(book, library));
+  }
+
+  private isBookInLibrary(book: BooksModel, library: LibrariesModel): boolean {
+    return library.book2library.some((book2library) => book2library.bookId === book.id);
+  }
+
+  private isBookInLibraryWithStatus(book: BooksModel, library: LibrariesModel, status: string): boolean {
+    return library.book2library.some((book2library) => book2library.bookId === book.id && book2library.status === status);
   }
 
 }
