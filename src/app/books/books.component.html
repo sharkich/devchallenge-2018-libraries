@@ -15,6 +15,12 @@
       mat-raised-button>
       Show all books
     </button>
+    <button
+      *ngIf="isShowAll"
+      (click)="isShowAll = false"
+      mat-raised-button>
+      Hide books
+    </button>
 
     <button
       *ngIf="isShowAll && isLogin()"
