@@ -66,7 +66,7 @@ export class BookComponent implements OnInit, OnDestroy {
     }
 
     this.changesService.book.subscribe((changedBook: BooksModel) => {
-      if (changedBook.id === this.book.id) {
+      if (changedBook && changedBook.id === this.book.id) {
         this.book = changedBook;
         this.isBookRented = this.librariesService.isBookRented(this.book2library);
         this.startCheckingRent();
@@ -74,7 +74,7 @@ export class BookComponent implements OnInit, OnDestroy {
     });
 
     this.changesService.book2Library.subscribe((book2library: Books2librariesModel) => {
-      if (this.book2library && book2library.id === this.book2library.id) {
+      if (book2library && this.book2library && book2library.id === this.book2library.id) {
         this.book2library = book2library;
         this.isBookRented = this.librariesService.isBookRented(this.book2library);
         this.startCheckingRent();

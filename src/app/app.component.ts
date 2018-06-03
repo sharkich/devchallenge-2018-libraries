@@ -75,6 +75,9 @@ export class AppComponent {
         this.changesService.libraries.emit();
         this.changesService.books.emit();
         this.changesService.books2libraries.emit();
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       });
   }
 
