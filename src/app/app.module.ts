@@ -14,6 +14,8 @@ import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
+import {environment} from '../environments/environment';
+
 import {DbService} from './-shared/services/db.service';
 import {AuthService} from './-shared/services/auth.service';
 import {BooksService} from './-shared/services/books.service';
@@ -32,6 +34,7 @@ import {DialogBookingComponent} from './-shared/components/dialog-booking/dialog
 import {DialogEditBookComponent} from './-shared/components/dialog-edit-book/dialog-edit-book.component';
 import {DialogAddBooksComponent} from './-shared/components/dialog-add-books/dialog-add-books.component';
 import {DialogEditLibraryComponent} from './-shared/components/dialog-library/dialog-edit-library.component';
+import {ServiceWorkerModule} from '@angular/service-worker';
 
 @NgModule({
   imports: [
@@ -56,7 +59,9 @@ import {DialogEditLibraryComponent} from './-shared/components/dialog-library/di
     QRCodeModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyACowu9N8Jla2TEL_bsn6h1zWJsJBA6Hic'
-    })
+    }),
+
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   declarations: [
     AppComponent,

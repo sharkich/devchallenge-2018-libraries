@@ -77,6 +77,13 @@
       </mat-nav-list>
     </div>
 
+    <div *ngIf="!isLoading && !libraries.free.length && !libraries.rented.length">
+      <hr>
+      <p><i>No one library for booking.</i></p>
+    </div>
+
+    <div *ngIf="isLoading">Loading...</div>
+
   </div>
 
   <div mat-dialog-actions>

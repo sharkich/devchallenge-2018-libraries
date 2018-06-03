@@ -42,6 +42,8 @@ export class DialogBookingComponent implements OnInit {
     rented: []
   };
 
+  public isLoading = true;
+
   constructor(
     private librariesService: LibrariesService,
     private changesService: ChangesService,
@@ -53,6 +55,7 @@ export class DialogBookingComponent implements OnInit {
   }
 
   public ngOnInit() {
+    this.isLoading = true;
     this.book = this.data.book;
     this.book2library = this.data.book2library;
 
@@ -69,11 +72,14 @@ export class DialogBookingComponent implements OnInit {
         this.libraries.free = free;
         this.libraries.rented = rented;
         if (this.libraries.free.length === 1) {
-          this.librariesService.bookBookInLibrary(this.book, this.libraries.free[0])
+          return this.librariesService.bookBookInLibrary(this.book, this.libraries.free[0])
             .then((book2library: Books2librariesModel) => {
               this.setBooking(book2library);
             });
         }
+      })
+      .then(() => {
+        this.isLoading = false;
       });
   }
 
@@ -137,6 +143,7 @@ export class DialogBookingComponent implements OnInit {
       BOOK_ID: this.book2library.bookId,
       END_TIME: this.book2library.rentTime
     });
+    this.isLoading = false;
   }
 
   /**

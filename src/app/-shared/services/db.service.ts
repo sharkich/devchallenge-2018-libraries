@@ -1,6 +1,6 @@
 import {Http} from '@angular/http';
 import {Injectable} from '@angular/core';
-import {AngularIndexedDB} from '../TODO/angular-indexed-db';
+import {AngularIndexedDB} from 'angular2-indexeddb';
 
 import {APP_CONFIG} from '../../app.config';
 import {BooksModel} from '../models/books.model';
