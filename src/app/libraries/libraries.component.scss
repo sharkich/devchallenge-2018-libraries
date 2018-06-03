@@ -34,4 +34,27 @@
     }
   }
 
+  .mat-button-toggle-group {
+    font-size: 12pt;
+    margin-right: 16px;
+    margin-left: 8px;
+  }
+
+  .geo {
+    margin: 16px auto;
+    text-align: center;
+    .error {
+      color: red;
+    }
+    .google-map {
+      //width: 600px;
+      //height: 400px;
+      margin: 0 auto;
+    }
+
+    agm-map {
+      height: 300px;
+    }
+  }
+
 }

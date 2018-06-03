@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {ChangesService} from './changes.service';
 
 export interface IPoint {
   latitude: number;
@@ -11,9 +12,17 @@ export interface IPoint {
 @Injectable()
 export class GeolocationService {
 
+  /**
+   * Error is some problems with geolovations
+   */
+  public error;
+
+  /**
+   * Current user position
+   */
   private currentPosition: Position;
 
-  constructor() {
+  constructor(private changesService: ChangesService) {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(this.successGeo.bind(this), this.errorGeo.bind(this));
     } else {
@@ -27,6 +36,14 @@ export class GeolocationService {
    */
   public isSupported(): boolean {
     return !!this.currentPosition;
+  }
+
+  /**
+   * Get current user position
+   * @return {boolean}
+   */
+  public getCurrentPosition(): IPoint {
+    return this.currentPosition && this.currentPosition.coords;
   }
 
   /**
@@ -76,7 +93,7 @@ export class GeolocationService {
    */
   private successGeo(position: Position) {
     this.currentPosition = position;
-    console.log('currentPosition', this.currentPosition);
+    this.changesService.geo.emit();
   }
 
   /**
@@ -86,19 +103,20 @@ export class GeolocationService {
   private errorGeo(error) {
     switch (error.code) {
       case error.PERMISSION_DENIED:
-        console.log('User denied the request for Geolocation.');
+        this.error = 'User denied the request for Geolocation.';
         break;
       case error.POSITION_UNAVAILABLE:
-        console.log('Location information is unavailable.');
+        this.error = 'Location information is unavailable.';
         break;
       case error.TIMEOUT:
-        console.log('The request to get user location timed out.');
+        this.error = 'The request to get user location timed out.';
         break;
       case error.UNKNOWN_ERROR:
       default:
-        console.log('An unknown error occurred.');
+        this.error = 'An unknown error occurred.';
         break;
     }
+    this.changesService.geo.emit();
   }
 
 }

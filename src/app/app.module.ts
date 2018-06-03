@@ -1,6 +1,6 @@
 import {
   MatAutocompleteModule,
-  MatButtonModule,
+  MatButtonModule, MatButtonToggleModule,
   MatCardModule, MatDialogModule,
   MatExpansionModule,
   MatInputModule, MatListModule, MatMenuModule,
@@ -8,6 +8,7 @@ import {
 } from '@angular/material';
 import {NgModule} from '@angular/core';
 import {HttpModule} from '@angular/http';
+import {AgmCoreModule} from '@agm/core';
 import {QRCodeModule} from 'angularx-qrcode';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -61,8 +62,12 @@ import {DialogEditLibraryComponent} from './-shared/components/dialog-library/di
     MatToolbarModule,
     MatExpansionModule,
     MatAutocompleteModule,
+    MatButtonToggleModule,
 
-    QRCodeModule
+    QRCodeModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyACowu9N8Jla2TEL_bsn6h1zWJsJBA6Hic'
+    })
   ],
   providers: [
     DbService,

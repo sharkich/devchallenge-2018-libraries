@@ -1,7 +1,19 @@
 <div class="app-libraries">
 
   <h2>
+
     Libraries
+
+    <mat-button-toggle-group
+      #view="matButtonToggleGroup"
+      (change)="onChangeView()"
+      name="view"
+      value="map"
+      aria-label="View">
+      <mat-button-toggle value="map">Map</mat-button-toggle>
+      <mat-button-toggle value="list">List</mat-button-toggle>
+    </mat-button-toggle-group>
+
     <button
       *ngIf="isLogin()"
       (click)="onAddNewLibrary()"
@@ -13,7 +25,45 @@
 
   <div class="libraries">
 
-    <mat-accordion>
+    <div *ngIf="isShowMap" class="geo">
+
+      <div *ngIf="!isGeoSupported && !geoError">
+        Loading...
+      </div>
+
+      <div *ngIf="!isGeoSupported && geoError" class="error">
+        {{geoError}}
+      </div>
+
+      <div *ngIf="isGeoSupported">
+
+        <div class="google-map" *ngIf="currentPosition">
+
+          <agm-map
+            #AgmMap
+            [latitude]="currentPosition.latitude"
+            [longitude]="currentPosition.longitude">
+
+            <agm-marker
+              *ngFor="let library of libraries"
+              (markerClick)="onSelectLibrary(library)"
+              (mouseOut)="onMarkerOut(library)"
+              (mouseOver)="onMarkerOver(library)"
+              [markerClickable]="true"
+              [label]="librariesTitle[library.id]"
+              [latitude]="library.geo.latitude"
+              [longitude]="library.geo.longitude">
+            </agm-marker>
+
+          </agm-map>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <mat-accordion *ngIf="!isShowMap">
 
       <mat-expansion-panel
         *ngFor="let library of libraries"

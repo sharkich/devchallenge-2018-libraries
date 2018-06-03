@@ -49,4 +49,9 @@ export class ChangesService {
    */
   @Output() public bookDelete: EventEmitter<BooksModel> = new EventEmitter();
 
+  /**
+   * Change geo position status
+   * @type {EventEmitter<any>}
+   */
+  @Output() public geo: EventEmitter<any> = new EventEmitter();
 }
