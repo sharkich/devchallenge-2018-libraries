@@ -7,13 +7,13 @@ import {
   MatToolbarModule
 } from '@angular/material';
 import {NgModule} from '@angular/core';
-import {HttpModule} from '@angular/http';
 import {AgmCoreModule} from '@agm/core';
+import {HttpModule} from '@angular/http';
 import {QRCodeModule} from 'angularx-qrcode';
 import {BrowserModule} from '@angular/platform-browser';
+import {ServiceWorkerModule} from '@angular/service-worker';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
 import {environment} from '../environments/environment';
 
 import {DbService} from './-shared/services/db.service';
@@ -34,7 +34,6 @@ import {DialogBookingComponent} from './-shared/components/dialog-booking/dialog
 import {DialogEditBookComponent} from './-shared/components/dialog-edit-book/dialog-edit-book.component';
 import {DialogAddBooksComponent} from './-shared/components/dialog-add-books/dialog-add-books.component';
 import {DialogEditLibraryComponent} from './-shared/components/dialog-library/dialog-edit-library.component';
-import {ServiceWorkerModule} from '@angular/service-worker';
 
 @NgModule({
   imports: [
@@ -60,8 +59,7 @@ import {ServiceWorkerModule} from '@angular/service-worker';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyACowu9N8Jla2TEL_bsn6h1zWJsJBA6Hic'
     }),
-
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production})
   ],
   declarations: [
     AppComponent,

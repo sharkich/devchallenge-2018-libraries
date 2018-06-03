@@ -22,12 +22,12 @@ export class DialogEditBookComponent implements OnInit {
   /**
    * Book
    */
-  private book: BooksModel;
+  public book: BooksModel;
 
   /**
    * Book in library (if present)
    */
-  private book2library: Books2librariesModel;
+  public book2library: Books2librariesModel;
 
   /**
    * Form with book data

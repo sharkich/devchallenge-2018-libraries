@@ -19,7 +19,7 @@ export class DialogEditLibraryComponent implements OnInit {
   /**
    * Library
    */
-  private library: LibrariesModel;
+  public library: LibrariesModel;
 
   /**
    * Form for edit library
