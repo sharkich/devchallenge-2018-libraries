@@ -2,7 +2,13 @@
 
   <h2>
 
-    Libraries
+    <span *ngIf="!libraries.length">Libraries</span>
+    <span
+      *ngIf="libraries.length"
+      [matBadge]="libraries.length"
+      matBadgeOverlap="false">
+      Libraries
+    </span>
 
     <mat-button-toggle-group
       #view="matButtonToggleGroup"

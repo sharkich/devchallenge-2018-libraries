@@ -1,11 +1,23 @@
 <div class="app-books">
 
   <h2>
-    <span>
+    <span *ngIf="!books.length">Books</span>
+    <span
+      *ngIf="books.length"
+      [matBadge]="books.length"
+      matBadgeOverlap="false">
       Books
     </span>
+
     <button
-      *ngIf="isLogin()"
+      *ngIf="!isShowAll"
+      (click)="isShowAll = true"
+      mat-raised-button>
+      Show all books
+    </button>
+
+    <button
+      *ngIf="isShowAll && isLogin()"
       (click)="onAddNewBook()"
       mat-raised-button
       color="accent">
@@ -13,6 +25,7 @@
     </button>
     <div class="space"></div>
     <button
+      *ngIf="isShowAll"
       (click)="onToggleView()"
       mat-raised-button>
       <i
@@ -29,6 +42,7 @@
   </h2>
 
   <div
+    *ngIf="isShowAll"
     [ngClass]="{'list-view': isListView, 'grid-view': !isListView}"
     class="books">
 

@@ -18,6 +18,12 @@ const COMPONENT_KEY = APP_CONFIG.localStorage['app-popular-books'];
 export class BooksComponent implements OnInit {
 
   /**
+   * Is show all books view
+   * @type {boolean}
+   */
+  public isShowAll = false;
+
+  /**
    * All book in DB
    * @type {any[]}
    */

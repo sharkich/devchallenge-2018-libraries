@@ -1,5 +1,5 @@
 import {
-  MatAutocompleteModule,
+  MatAutocompleteModule, MatBadgeModule,
   MatButtonModule, MatButtonToggleModule,
   MatCardModule, MatDialogModule,
   MatExpansionModule,
@@ -34,18 +34,6 @@ import {DialogAddBooksComponent} from './-shared/components/dialog-add-books/dia
 import {DialogEditLibraryComponent} from './-shared/components/dialog-library/dialog-edit-library.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    BookComponent,
-    BooksComponent,
-    LibrariesComponent,
-    DialogLoginComponent,
-    SearchBooksComponent,
-    DialogBookingComponent,
-    DialogAddBooksComponent,
-    DialogEditBookComponent,
-    DialogEditLibraryComponent
-  ],
   imports: [
     HttpModule,
     FormsModule,
@@ -57,6 +45,7 @@ import {DialogEditLibraryComponent} from './-shared/components/dialog-library/di
     MatListModule,
     MatMenuModule,
     MatInputModule,
+    MatBadgeModule,
     MatButtonModule,
     MatDialogModule,
     MatToolbarModule,
@@ -68,6 +57,18 @@ import {DialogEditLibraryComponent} from './-shared/components/dialog-library/di
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyACowu9N8Jla2TEL_bsn6h1zWJsJBA6Hic'
     })
+  ],
+  declarations: [
+    AppComponent,
+    BookComponent,
+    BooksComponent,
+    LibrariesComponent,
+    DialogLoginComponent,
+    SearchBooksComponent,
+    DialogBookingComponent,
+    DialogAddBooksComponent,
+    DialogEditBookComponent,
+    DialogEditLibraryComponent
   ],
   providers: [
     DbService,
