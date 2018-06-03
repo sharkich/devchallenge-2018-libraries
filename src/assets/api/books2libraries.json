@@ -1,19 +1,137 @@
 [
   {
+    "_isNew": false,
+    "id": 1,
     "bookId": "id-book-1",
     "libraryId": "id-lib-1",
     "status": "FREE",
     "rentTime": ""
   },
   {
+    "_isNew": false,
+    "id": 2,
     "bookId": "id-book-1",
     "libraryId": "id-lib-1",
     "status": "FREE",
     "rentTime": ""
   },
   {
+    "_isNew": false,
+    "id": 3,
     "bookId": "id-book-3",
     "libraryId": "id-lib-3",
+    "status": "FREE",
+    "rentTime": ""
+  },
+  {
+    "_isNew": false,
+    "id": 4,
+    "bookId": "id-book-1",
+    "libraryId": "id-lib-5",
+    "status": "FREE",
+    "rentTime": ""
+  },
+  {
+    "_isNew": false,
+    "id": 5,
+    "bookId": "id-book-10",
+    "libraryId": "id-lib-5",
+    "status": "FREE",
+    "rentTime": ""
+  },
+  {
+    "_isNew": false,
+    "id": 6,
+    "bookId": "id-book-11",
+    "libraryId": "id-lib-5",
+    "status": "FREE",
+    "rentTime": ""
+  },
+  {
+    "_isNew": false,
+    "id": 7,
+    "bookId": "id-book-12",
+    "libraryId": "id-lib-5",
+    "status": "FREE",
+    "rentTime": ""
+  },
+  {
+    "_isNew": false,
+    "id": 8,
+    "bookId": "id-book-13",
+    "libraryId": "id-lib-5",
+    "status": "FREE",
+    "rentTime": ""
+  },
+  {
+    "_isNew": false,
+    "id": 9,
+    "bookId": "id-book-2",
+    "libraryId": "id-lib-4",
+    "status": "FREE",
+    "rentTime": ""
+  },
+  {
+    "_isNew": false,
+    "id": 10,
+    "bookId": "id-book-7",
+    "libraryId": "id-lib-3",
+    "status": "FREE",
+    "rentTime": ""
+  },
+  {
+    "_isNew": false,
+    "id": 11,
+    "bookId": "id-book-8",
+    "libraryId": "id-lib-3",
+    "status": "FREE",
+    "rentTime": ""
+  },
+  {
+    "_isNew": false,
+    "id": 12,
+    "bookId": "id-book-1",
+    "libraryId": "id-lib-2",
+    "status": "FREE",
+    "rentTime": ""
+  },
+  {
+    "_isNew": false,
+    "id": 13,
+    "bookId": "id-book-10",
+    "libraryId": "id-lib-2",
+    "status": "FREE",
+    "rentTime": ""
+  },
+  {
+    "_isNew": false,
+    "id": 14,
+    "bookId": "id-book-11",
+    "libraryId": "id-lib-2",
+    "status": "FREE",
+    "rentTime": ""
+  },
+  {
+    "_isNew": false,
+    "id": 15,
+    "bookId": "id-book-4",
+    "libraryId": "id-lib-2",
+    "status": "FREE",
+    "rentTime": ""
+  },
+  {
+    "_isNew": false,
+    "id": 16,
+    "bookId": "id-book-6",
+    "libraryId": "id-lib-1",
+    "status": "FREE",
+    "rentTime": ""
+  },
+  {
+    "_isNew": false,
+    "id": 17,
+    "bookId": "id-book-7",
+    "libraryId": "id-lib-1",
     "status": "FREE",
     "rentTime": ""
   }

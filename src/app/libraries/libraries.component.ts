@@ -8,11 +8,8 @@ import {ChangesService} from '../-shared/services/changes.service';
 import {LibrariesService} from '../-shared/services/libraries.service';
 import {Books2librariesModel} from '../-shared/models/books2libraries.model';
 import {GeolocationService, IPoint} from '../-shared/services/geolocation.service';
-import {GoogleMapsAPIWrapper, AgmMap, LatLngBounds, LatLngBoundsLiteral} from '@agm/core';
 import {DialogAddBooksComponent} from '../-shared/components/dialog-add-books/dialog-add-books.component';
 import {DialogEditLibraryComponent} from '../-shared/components/dialog-library/dialog-edit-library.component';
-
-declare var google: any;
 
 @Component({
   selector: 'app-libraries',
@@ -42,11 +39,6 @@ export class LibrariesComponent implements OnInit {
    * Current user position
    */
   public currentPosition: IPoint;
-
-  /**
-   * Map element
-   */
-  @ViewChild('AgmMap') agmMap: AgmMap;
 
   /**
    * Toggle buttons element

@@ -47,6 +47,7 @@
 
           <agm-map
             #AgmMap
+            [zoom]="12"
             [latitude]="currentPosition.latitude"
             [longitude]="currentPosition.longitude">
 
@@ -78,7 +79,14 @@
         hideToggle="true">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{library.name}}
+
+            <span
+              [matBadge]="library.book2library.length"
+              matBadgeColor="accent"
+              matBadgeSize="small">
+              {{library.name}}
+            </span>
+
           </mat-panel-title>
           <mat-panel-description>
             {{library.address}}

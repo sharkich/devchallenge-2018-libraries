@@ -8,6 +8,9 @@
     .mat-expansion-panel-header-title {
       font-weight: bold;
       font-size: 12pt;
+      .mat-badge {
+        position: absolute;
+      }
     }
     .mat-expansion-panel-header-description {
       justify-content: space-between;

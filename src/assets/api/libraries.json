@@ -1,47 +1,57 @@
 [
   {
+    "_isNew": false,
+    "geo": {
+      "latitude": 50.4611511,
+      "longitude": 30.5078766
+    },
+    "book2library": [],
     "id": "id-lib-1",
     "name": "BOtaN",
-    "address": "ул. Воздвиженская, 9-19",
-    "geo": {
-      "latitude": "50.4611511",
-      "longitude": "30.5078766"
-    }
+    "address": "ул. Воздвиженская, 9-19"
   },
   {
+    "_isNew": false,
+    "geo": {
+      "latitude": 50.4654933,
+      "longitude": 30.5204219
+    },
+    "book2library": [],
     "id": "id-lib-2",
     "name": "Американская библиотека",
-    "address": "ул. Волошская, 8/5",
-    "geo": {
-      "latitude": "50.4654933",
-      "longitude": "30.5204219"
-    }
+    "address": "ул. Волошская, 8/5"
   },
   {
+    "_isNew": false,
+    "geo": {
+      "latitude": 50.4663128,
+      "longitude": 30.5191532
+    },
+    "book2library": [],
     "id": "id-lib-3",
     "name": "Библиотека Гете-института",
-    "address": "ул. Волошская, 12/4",
-    "geo": {
-      "latitude": "50.4663128",
-      "longitude": "30.5191532"
-    }
+    "address": "ул. Волошская, 12/4"
   },
   {
+    "_isNew": false,
+    "geo": {
+      "latitude": 50.4483397,
+      "longitude": 30.4946964
+    },
+    "book2library": [],
     "id": "id-lib-4",
     "name": "Библиотека Французского института",
-    "address": "ул. Гончара, 84",
-    "geo": {
-      "latitude": "50.4483397",
-      "longitude": "30.4946964"
-    }
+    "address": "ул. Гончара, 84"
   },
   {
+    "_isNew": false,
+    "geo": {
+      "latitude": 50.4560424,
+      "longitude": 30.486695
+    },
+    "book2library": [],
     "id": "id-lib-5",
     "name": "Публичная библиотека им. Леси Украинки",
-    "address": "ул. Тургеневская, 83-85",
-    "geo": {
-      "latitude": "50.4560424",
-      "longitude": "30.486695"
-    }
+    "address": "ул. Тургеневская, 83-85"
   }
 ]
