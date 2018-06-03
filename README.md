@@ -2,9 +2,13 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.5.
 
-## Admin:
+## Admin user:
 * Login: admin
 * Password: admin
+
+## Environment
+* node - 8.11.2
+* npm - 6.1.0
 
 ## Development server
 
@@ -19,3 +23,7 @@ Run `npm run build` to build the project. The build artifacts will be stored in 
 For launching built version use some simple web-server. For example:
 `cd dist/devchallenge2018libraries`
 `python -m SimpleHTTPServer 8000` or `http-server --gzip`
+
+## Functionality
+* Login as admin/admin, Logoff
+* Search 

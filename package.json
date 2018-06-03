@@ -1,6 +1,10 @@
 {
   "name": "devchallenge2018libraries",
   "version": "0.0.0",
+  "engines": {
+    "node": "8.11.2",
+    "npm": "6.1.0"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
