@@ -57,6 +57,26 @@
 
     </div>
 
+    <div *ngIf="!libraries.free.length && libraries.rented.length">
+      <hr>
+      <p><i>All books are rented.</i></p>
+    </div>
+
+    <div *ngIf="libraries.rented.length">
+      <p><b>Book rented in libraries:</b></p>
+      <mat-nav-list>
+        <mat-list-item
+          *ngFor="let library of libraries.rented">
+          <a matLine>
+            <b>{{library.name}}</b>
+          </a>
+          <i class="nobr">
+            {{getMinDiffTime(library)}}
+          </i>
+        </mat-list-item>
+      </mat-nav-list>
+    </div>
+
   </div>
 
   <div mat-dialog-actions>

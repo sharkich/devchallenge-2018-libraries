@@ -138,4 +138,13 @@ export class DialogBookingComponent implements OnInit {
       END_TIME: this.book2library.rentTime
     });
   }
+
+  /**
+   * Min time of rented in library
+   * @param {LibrariesModel} library
+   * @return {string}
+   */
+  public getMinDiffTime(library: LibrariesModel): string {
+    return this.librariesService.getMinDiffTime(this.book, library);
+  }
 }

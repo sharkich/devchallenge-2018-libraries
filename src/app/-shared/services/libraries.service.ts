@@ -299,6 +299,31 @@ export class LibrariesService {
   }
 
   /**
+   * Get min diff time of book in library
+   * @param {BooksModel} book
+   * @param {LibrariesModel} library
+   * @return {string}
+   */
+  public getMinDiffTime(book: BooksModel, library: LibrariesModel): string {
+
+    const book2libraries: Books2librariesModel[] = library.book2library
+      .filter((book2library) => book2library.bookId === book.id && this.isBookRented(book2library));
+
+    let minBooks2librariesModel: Books2librariesModel = book2libraries[0];
+
+    book2libraries.reduce((min, book2library) => {
+      const current = this.bookRentedTimeDiff(book2library);
+      if (current < min) {
+        minBooks2librariesModel = book2library;
+        return current;
+      }
+      return min;
+    }, 0);
+
+    return minBooks2librariesModel ? this.bookRentedTimeDiffString(minBooks2librariesModel) : '';
+  }
+
+  /**
    * Get libraries where book present with some status
    * @param {BooksModel} book
    * @param {LibrariesModel[]} libraries
