@@ -124,6 +124,16 @@ export class BookComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Handle click event on delete button
+   */
+  public onRemoveBook() {
+    this.librariesService.removeBook(this.book2library)
+      .then(() => {
+        this.changesService.libraries.emit();
+      });
+  }
+
+  /**
    * Handle click on booking button
    */
   public onBookBook() {

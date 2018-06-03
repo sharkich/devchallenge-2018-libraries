@@ -71,5 +71,13 @@
       <i class="material-icons">edit</i>
     </button>
 
+    <button
+      *ngIf="isLogin() && book2library"
+      (click)="onRemoveBook()"
+      mat-raised-button
+      color="accent">
+      <i class="material-icons">delete</i>
+    </button>
+
   </mat-card-actions>
 </mat-card>
