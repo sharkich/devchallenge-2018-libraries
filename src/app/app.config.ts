@@ -4,9 +4,9 @@
 export const APP_CONFIG = {
   bookingMinutes: 5,
   url: {
-    books: '/assets/api/books.json',
-    libraries: '/assets/api/libraries.json',
-    books2libraries: '/assets/api/books2libraries.json'
+    books: './assets/api/books.json',
+    libraries: './assets/api/libraries.json',
+    books2libraries: './assets/api/books2libraries.json'
   },
   db: {
     name: 'KL_UA',

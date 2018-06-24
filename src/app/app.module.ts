@@ -59,7 +59,7 @@ import {DialogEditLibraryComponent} from './-shared/components/dialog-library/di
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyACowu9N8Jla2TEL_bsn6h1zWJsJBA6Hic'
     }),
-    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production})
+    ServiceWorkerModule.register('./ngsw-worker.js', {enabled: environment.production})
   ],
   declarations: [
     AppComponent,
